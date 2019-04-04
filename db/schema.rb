@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_04_012912) do
+ActiveRecord::Schema.define(version: 2019_04_04_025546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_04_04_012912) do
   create_table "orders", force: :cascade do |t|
     t.boolean "current"
     t.text "ticket"
-    t.date "orderDate"
+    t.date "order_date"
     t.bigint "user_id"
     t.bigint "restaurant_id"
     t.datetime "created_at", null: false
