@@ -8,6 +8,7 @@ import { Switch, Route, } from 'react-router-dom';
 import { Container, } from "semantic-ui-react";
 import FetchUser from './components/FetchUser';
 import ProtectedRoute from './components/ProtectedRoute';
+import OrderFormAdin from './components/orders/OrderFormAdmin';
 
 
 const App = () => (
@@ -18,6 +19,7 @@ const App = () => (
       <Switch>
         <ProtectedRoute exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/new_order" component={OrderFormAdin} />
         <Route exact path="/register" component={Register} />
         <Route component={NoMatch} />
       </Switch>
