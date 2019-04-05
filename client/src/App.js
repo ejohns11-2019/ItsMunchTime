@@ -1,13 +1,13 @@
 import React, { Fragment, } from 'react';
-import Home from './components/Home';
-import NoMatch from './components/NoMatch';
-import Navbar from './components/Navbar';
-import Login from './components/Login';
-import Register from './components/Register';
+import Home from './components/home/Home';
+import NoMatch from './noMatch/NoMatch';
+import Navbar from './shared/Navbar';
+import Login from './shared/Login';
+import Register from './shared/Register';
 import { Switch, Route, } from 'react-router-dom';
 import { Container, } from "semantic-ui-react";
-import FetchUser from './components/FetchUser';
-import ProtectedRoute from './components/ProtectedRoute';
+import FetchUser from './shared/FetchUser';
+import ProtectedRoute from './shared/ProtectedRoute';
 
 
 const App = () => (

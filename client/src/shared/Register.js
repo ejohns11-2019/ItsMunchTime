@@ -7,8 +7,8 @@ import { Button, Form, Segment, Header, Dropdown, Checkbox } from 'semantic-ui-r
 class Register extends React.Component {
   state = { email: '', password: '', passwordConfirmation: '', first_name: '', last_name: '', group: '', allergies: '', exceptions: ''};
 
-  
-  
+
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions } = this.state;
@@ -19,30 +19,30 @@ class Register extends React.Component {
     else
       alert('Passwords Do Not Match!')
   }
-  
+
   handleChange = (e) => {
     const { name, value, } = e.target;
     this.setState({ [name]: value, });
   }
-  
+
   render() {
     const { email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions } = this.state;
-    
+
     const groupOptions = [
       {
         key: 'Full-Time Crew',
         text: 'Full-Time Crew',
         value:{group},
-        
+
       },
-    
+
       {
         key: 'After-Hours Crew',
         text: 'After-Hours Crew',
         value:{group},
-        
+
       },
-    
+
     ]
 
     // const allergies = [
@@ -111,20 +111,20 @@ class Register extends React.Component {
             options={groupOptions}
             onChange={this.handleChange}
             />
-            <Form.TextArea 
+            <Form.TextArea
             label='Do you have any allergies?'
             name='allergies'
             value={allergies}
             onChange={this.handleChange}
             />
-            <Form.TextArea 
+            <Form.TextArea
             label='Any foods you dislike?'
             name='exceptions'
             value={exceptions}
             onChange={this.handleChange}
             />
-            
-            
+
+
           <Segment textAlign='center' basic>
             <Button primary type='submit'>Submit</Button>
           </Segment>
