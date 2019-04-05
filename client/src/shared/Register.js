@@ -7,8 +7,8 @@ import { Button, Form, Segment, Header, Select} from 'semantic-ui-react';
 class Register extends React.Component {
   state = { email: '', password: '', passwordConfirmation: '', first_name: '', last_name: '', group: 'DevPoint Crew', allergies: '', exceptions: ''};
 
-  
-  
+
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions } = this.state;
@@ -19,12 +19,12 @@ class Register extends React.Component {
     else
       alert('Passwords Do Not Match!')
   }
-  
+
   handleChange = (e) => {
     const { name, value, } = e.target;
     this.setState({ [name]: value, });
   }
-  
+
   render() {
     const { email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions } = this.state;
     
@@ -127,14 +127,14 @@ class Register extends React.Component {
             value={allergies}
             onChange={this.handleChange}
             />
-            <Form.TextArea 
+            <Form.TextArea
             label='Any foods you dislike?'
             name='exceptions'
             value={exceptions}
             onChange={this.handleChange}
             />
-            
-            
+
+
           <Segment textAlign='center' basic>
             <Button primary type='submit'>Submit</Button>
           </Segment>
