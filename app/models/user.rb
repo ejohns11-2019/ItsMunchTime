@@ -10,10 +10,10 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :restaurants, through: :orders
 
-  validates :first_name, length: { minimum: 2 }, presence: true, on: :create
-  validates :last_name, length: { minimum: 2 }, presence: true, on: :create
+  # validates :first_name, length: { minimum: 2 }, presence: true, on: :create
+  # validates :last_name, length: { minimum: 2 }, presence: true, on: :create
   validates :email, uniqueness: true, on: :create
   validates :password, length: { in: 8..30 }
-  validates :allergies, allow_nil: true, length: { in: 1..100 }
-  validates :exceptions, allow_blank: true, length: { maximum: 500 }
+  # validates :allergies, allow_nil: true, length: { in: 1..100 }
+  # validates :exceptions, allow_blank: true, length: { maximum: 500 }
 end
