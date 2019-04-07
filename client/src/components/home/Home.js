@@ -1,8 +1,13 @@
 import React from 'react';
-import { Header, } from 'semantic-ui-react';
+import { Header, Container, } from 'semantic-ui-react';
+import OrderList from '../Order/OrderList';
 
 const Home = () => (
-  <Header as="h3" textAlign="center">Devise Auth App</Header>
+  <Container>
+  <Header as="h1" textAlign="center">Welcome to MunchTime!</Header>
+  
+  <OrderList />
+  </Container>
 )
 
 export default Home;
