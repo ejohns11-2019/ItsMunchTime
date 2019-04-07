@@ -3,6 +3,8 @@ import axios from 'axios';
 // import { Link } from 'react-router-dom';
 import { Header, } from 'semantic-ui-react';
 import Restaurant from './Restaurant';
+import RestaurantForm from "./RestaurantForm";
+import { RestaurantConsumer, } from "../../providers/RestaurantProvider";
 
 class Restaurants extends React.Component {
   state = { restaurants: [], };
@@ -15,18 +17,23 @@ class Restaurants extends React.Component {
   render() {
     const { restaurants, } = this.state
     return (
-      <div>
-        <Header as='h1'>Restaurants</Header>
-        <>
-          { restaurants.map( restaurant =>
-            < Restaurant
-              key={restaurant.id}
-              {...restaurant}
-            />
-            )
-          }
-        </>
-      </div>
+      <RestaurantConsumer>
+        { value => (
+        <div>
+          <Header as='h1'>Restaurants</Header>
+          <>
+            { restaurants.map( restaurant =>
+              < Restaurant
+                key={restaurant.id}
+                {...restaurant}
+              />
+              )
+            }
+          </>
+          <RestaurantForm />
+        </div>
+        )}
+      </RestaurantConsumer>
     )
   }
 }

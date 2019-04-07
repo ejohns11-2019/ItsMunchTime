@@ -6,9 +6,9 @@ export const RestaurantConsumer = RestaurantContext.Consumer;
 
 class RestaurantProvider extends React.Component {
   state = {
-    name: "Cafe Rio",
-    address: "unknown",
-    phone: "unknown",
+    name: "",
+    address: "",
+    phone: "",
     menu: "",
     updateRestaurant: (restaurant) => this.updateRestaurant(restaurant),
   };
