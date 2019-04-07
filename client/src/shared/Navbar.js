@@ -2,6 +2,7 @@ import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Menu, } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
+// import { RestaurantConsumer, } from "../providers/RestaurantProvider";
 
 class Navbar extends React.Component {
 
