@@ -9,6 +9,7 @@ import { Container, } from "semantic-ui-react";
 import FetchUser from './shared/FetchUser';
 import ProtectedRoute from './shared/ProtectedRoute';
 import Restaurants from "./components/restaurants/Restaurants"
+import OrderFormAdmin from "./components/orders/OrderFormAdmin"
 
 
 const App = () => (
@@ -19,6 +20,7 @@ const App = () => (
       <Switch>
         <ProtectedRoute exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/new_order" component={OrderFormAdmin} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/restaurants" component={Restaurants} />
         <Route component={NoMatch} />
