@@ -3,7 +3,7 @@ import { Form, } from "semantic-ui-react";
 
 class OrderFormAdin extends Component {
 
-  state = {current: "true"};
+  state = {order_date: "" };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -15,19 +15,10 @@ class OrderFormAdin extends Component {
     this.setState({ [e.target.name]: e.target.value, });
   }
 
-  const 
-
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group widths="equal">
-          {/* <Form.Input
-            placeholder="Restaurant"
-            label="Restaurant"
-            name="restaurant"
-            onChange={this.handleChange}
-            value={this.state.title}
-          /> */}
           <Form.Input
             placeholder="Order Date"
             label="Order Date"
@@ -35,13 +26,13 @@ class OrderFormAdin extends Component {
             onChange={this.handleChange}
             value={this.state.orderDate}
           />
-          <Form.Input
+          <Form.Select
             placeholder="Select Restaurant"
             label="Restaurant"
             fluid
             selection
             required
-            options={groupOptions}
+            options={restaurants}
             onChange={this.handleChange}
           />
            <Form.Select
@@ -52,10 +43,11 @@ class OrderFormAdin extends Component {
             required
             options={groupOptions}
             />
-          <Form.Button color="green">Create Order</Form.Button>
+          <Form.Button color="blue">Create Order</Form.Button>
         </Form.Group>
       </Form>
     )
   }
 }
 export default OrderFormAdin;
+
