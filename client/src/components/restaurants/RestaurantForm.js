@@ -1,21 +1,35 @@
 import React from "react";
 import { Form, } from "semantic-ui-react";
-import { RestaurantConsumer, } from "../../providers/RestaurantProvider";
 
 class RestaurantForm extends React.Component {
   state = {
-    name: this.props.name,
-    address: this.props.address,
-    phone: this.props.phone,
-    menu: this.props.menu,
+    name: "",
+    address: "",
+    phone: "",
+    menu: "",
   };
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value, });
+  componentDidMount() {
+    if (this.props.id) {
+      const { name, address, phone, menu, id } = this.props
+      this.setState({ name, phone, address, menu, id })
+    }
+  }
+
+  handleChange = (e) => {
+    const { name, value } = e.target
+    this.setState({ [name]: value })
+  }
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    const restaurant = { ...this.state, };
-    this.props.updateRestaurant(restaurant);
+    e.preventDefault()
+    if (this.props.id) {
+      this.props.editRestaurant(this.state)
+      this.props.toggleEdit()
+    } else {
+      this.props.addRestaurant(this.state)
+    }
+    this.setState({ name: '', address: '', phone: '', menu: '', })
   }
 
   render() {
@@ -28,6 +42,7 @@ class RestaurantForm extends React.Component {
           name="name"
           value={name}
           onChange={this.handleChange}
+          required
         />
         <Form.Input
           label="RestaurantAddress"
@@ -50,27 +65,10 @@ class RestaurantForm extends React.Component {
           value={menu}
           onChange={this.handleChange}
         />
-        <Form.Button color="blue">Save</Form.Button>
+        <Form.Button type="submit" color="blue">Save</Form.Button>
       </Form>
     )
   }
 }
 
-const ConnectedRestaurantForm = (props) => {
-  return (
-    <RestaurantConsumer>
-      { value => (
-        <RestaurantForm
-          { ...props }
-          name={value.name}
-          address={value.address}
-          phone={value.phone}
-          menu={value.menu}
-          updateRestaurant={value.updateRestaurant}
-        />
-      )}
-    </RestaurantConsumer>
-  )
-}
-
-export default ConnectedRestaurantForm;
+export default RestaurantForm;
