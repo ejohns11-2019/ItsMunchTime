@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Form, } from "semantic-ui-react";
 
 class OrderFormAdin extends Component {
-
-  state = {restaurant :'', current: true, order_date: '', ticket: ''};
+  
+  state = {restaurant :'', current: true, orderDate: '', ticket: '',};
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.add(this.state);
-    this.setState();
+    this.setState({ orderDate: '', restaurant: '' });
   }
 
   handleChange = (e) => {
@@ -19,28 +19,22 @@ class OrderFormAdin extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group widths="equal">
-          <Form.Input
-            placeholder="Order Date"
-            label="Order Date"
-            name="orderDate"
-            onChange={this.handleChange}
-            value={this.state.orderDate}
-          />
-          <Form.Input
+        <Form.Input
             placeholder="Restaurant"
             label="Restaurant"
             name="restaurant"
             onChange={this.handleChange}
             value={this.state.restaurant}
-          />
-           <Form.Select
-            label='Select Group'
-            placeholder='Select Group'
-            fluid
-            selection
             required
-            options={groupOptions}
-            />
+          />
+          <Form.Input
+            label="Order Date"
+            name="orderDate"
+            type="date"
+            onChange={this.handleChange}
+            value={this.state.orderDate}
+            required
+          />
           <Form.Button color="blue">Create Order</Form.Button>
         </Form.Group>
       </Form>

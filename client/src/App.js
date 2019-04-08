@@ -1,14 +1,15 @@
 import React, { Fragment, } from 'react';
-import Home from './components/Home';
-import NoMatch from './components/NoMatch';
-import Navbar from './components/Navbar';
-import Login from './components/Login';
-import Register from './components/Register';
+import Home from './components/home/Home';
+import NoMatch from './noMatch/NoMatch';
+import Navbar from './shared/Navbar';
+import Login from './shared/Login';
+import Register from './shared/Register';
 import { Switch, Route, } from 'react-router-dom';
 import { Container, } from "semantic-ui-react";
-import FetchUser from './components/FetchUser';
-import ProtectedRoute from './components/ProtectedRoute';
-import OrderFormAdin from './components/orders/OrderFormAdmin';
+import FetchUser from './shared/FetchUser';
+import ProtectedRoute from './shared/ProtectedRoute';
+import Restaurants from "./components/restaurants/Restaurants"
+import OrderFormAdmin from "./components/orders/OrderFormAdmin"
 
 
 const App = () => (
@@ -19,8 +20,9 @@ const App = () => (
       <Switch>
         <ProtectedRoute exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/new_order" component={OrderFormAdin} />
+        <Route exact path="/new_order" component={OrderFormAdmin} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/restaurants" component={Restaurants} />
         <Route component={NoMatch} />
       </Switch>
     </Container>

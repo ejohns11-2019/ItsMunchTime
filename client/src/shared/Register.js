@@ -1,49 +1,34 @@
 import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Button, Form, Segment, Header, Dropdown, Checkbox } from 'semantic-ui-react';
+import { Button, Form, Segment, Header, Select} from 'semantic-ui-react';
 
 
 
 class Register extends React.Component {
-  state = { email: '', password: '', passwordConfirmation: '', first_name: '', last_name: '', group: '', allergies: '', exceptions: ''};
+  state = { email: '', password: '', passwordConfirmation: '', first_name: '', last_name: '', group: 'DevPoint Crew', allergies: '', exceptions: '', admin: false};
 
-  
-  
+
+
   handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions } = this.state;
+    const { email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions, admin } = this.state;
     const { auth: { handleRegister, }, history, } = this.props;
 
     if (password === passwordConfirmation)
-      handleRegister({ email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions}, history);
+      handleRegister({ email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions, admin}, history);
     else
       alert('Passwords Do Not Match!')
   }
-  
+
   handleChange = (e) => {
     const { name, value, } = e.target;
     this.setState({ [name]: value, });
   }
-  
+
   render() {
-    const { email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions } = this.state;
+    const { email, password, passwordConfirmation, first_name, last_name, group, allergies, exceptions, admin } = this.state;
     
-    const groupOptions = [
-      {
-        key: 'Full-Time Crew',
-        text: 'Full-Time Crew',
-        value:{group},
-        
-      },
     
-      {
-        key: 'After-Hours Crew',
-        text: 'After-Hours Crew',
-        value:{group},
-        
-      },
-    
-    ]
 
     // const allergies = [
 
@@ -101,30 +86,55 @@ class Register extends React.Component {
             type='password'
             onChange={this.handleChange}
           />
-          {/* <p><strong>Select your Group:</strong></p> */}
-          <Form.Select
+          {/* <Form.Select
+            required
             label='Select Group'
-            placeholder='Select Group'
+            placeholder='Group'
             fluid
             selection
-            required
-            options={groupOptions}
+            name='group'
+            value={group}
             onChange={this.handleChange}
-            />
+            options={groupOptions}
+            /> */}
+            {/* <Form.Group>
+              <label>Select your Group:</label>
+              <Form.Radio
+                label='Full-Time Crew'
+                name='group' 
+                value={group}
+                checked={{group} === 'Full-Time Crew'}
+                onChange={this.handleChange}
+              />
+              <Form.Radio
+                label='After-Hours Crew'
+                name='group' 
+                value={group}
+                checked={{group} === 'After-Hours Crew'}
+                onChange={this.handleChange}
+              />
+            </Form.Group> */}
+            {/* <Form.Input 
+              label="Group"
+              required
+              name='group'
+              defaultValue={group}
+              onChange={this.handleChange}
+            /> */}
             <Form.TextArea 
             label='Do you have any allergies?'
             name='allergies'
             value={allergies}
             onChange={this.handleChange}
             />
-            <Form.TextArea 
+            <Form.TextArea
             label='Any foods you dislike?'
             name='exceptions'
             value={exceptions}
             onChange={this.handleChange}
             />
-            
-            
+
+
           <Segment textAlign='center' basic>
             <Button primary type='submit'>Submit</Button>
           </Segment>
@@ -133,6 +143,22 @@ class Register extends React.Component {
     )
   }
 }
+const groupOptions = [
+  {
+    key: 'f',
+    text: 'Full-Time Crew',
+    value: 'Full-Time Crew',
+    
+  },
+
+  {
+    key: 'a',
+    text: 'After-Hours Crew',
+    value: 'After-Hours Crew',
+    
+  },
+
+]
 
 
 
