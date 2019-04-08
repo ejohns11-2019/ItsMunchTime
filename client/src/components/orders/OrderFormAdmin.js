@@ -3,7 +3,7 @@ import { Form, } from "semantic-ui-react";
 
 class OrderFormAdin extends Component {
 
-  state = {order_date: "" };
+  state = {restaurant :'', current: true, order_date: '', ticket: ''};
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -26,14 +26,12 @@ class OrderFormAdin extends Component {
             onChange={this.handleChange}
             value={this.state.orderDate}
           />
-          <Form.Select
-            placeholder="Select Restaurant"
+          <Form.Input
+            placeholder="Restaurant"
             label="Restaurant"
-            fluid
-            selection
-            required
-            options={restaurants}
+            name="restaurant"
             onChange={this.handleChange}
+            value={this.state.restaurant}
           />
            <Form.Select
             label='Select Group'
