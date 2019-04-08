@@ -20,8 +20,8 @@ class Register extends React.Component {
       alert('Passwords Do Not Match!')
   }
 
-  handleChange = (e) => {
-    const { name, value, } = e.target;
+  handleChange = (e, {name, value}) => {
+    // const { name, value, } = e.target;
     this.setState({ [name]: value, });
   }
 
@@ -86,7 +86,7 @@ class Register extends React.Component {
             type='password'
             onChange={this.handleChange}
           />
-          {/* <Form.Select
+           <Form.Select
             required
             label='Select Group'
             placeholder='Group'
@@ -96,7 +96,7 @@ class Register extends React.Component {
             value={group}
             onChange={this.handleChange}
             options={groupOptions}
-            /> */}
+            /> 
             {/* <Form.Group>
               <label>Select your Group:</label>
               <Form.Radio
@@ -113,14 +113,15 @@ class Register extends React.Component {
                 checked={{group} === 'After-Hours Crew'}
                 onChange={this.handleChange}
               />
-            </Form.Group> */}
-            {/* <Form.Input 
+            </Form.Group>  */}
+             {/* <Form.Input 
               label="Group"
               required
               name='group'
+              value={group}
               defaultValue={group}
               onChange={this.handleChange}
-            /> */}
+            />  */}
             <Form.TextArea 
             label='Do you have any allergies?'
             name='allergies'
