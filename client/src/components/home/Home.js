@@ -6,7 +6,6 @@ import OrderList from '../orders/OrderGroupList';
 const Home = () => (
   <Container>
   <Header as="h1" textAlign="center">Welcome to MunchTime!</Header>
-  <Restaurants/>
   <OrderList />
   </Container>
 )

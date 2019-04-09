@@ -11,8 +11,8 @@ class RestaurantForm extends React.Component {
 
   componentDidMount() {
     if (this.props.id) {
-      const { name, address, phone, menu, id } = this.props
-      this.setState({ name, phone, address, menu, id })
+      const { name, address, phone, menu } = this.props
+      this.setState({ name, phone, address, menu })
     }
   }
 
@@ -25,7 +25,7 @@ class RestaurantForm extends React.Component {
     e.preventDefault()
     if (this.props.id) {
       this.props.editRestaurant(this.state)
-      this.props.toggleEdit()
+      //this.props.toggleEdit()
     } else {
       this.props.addRestaurant(this.state)
     }
