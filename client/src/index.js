@@ -17,6 +17,3 @@ ReactDOM.render(
   </AuthProvider>,
   document.getElementById('root')
 );
-
-
-
