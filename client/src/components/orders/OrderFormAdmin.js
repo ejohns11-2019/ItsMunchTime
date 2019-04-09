@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Form, } from "semantic-ui-react";
+import { Form, Dropdown } from "semantic-ui-react";
+import axios from 'axios';
+
 
 class OrderFormAdin extends Component {
-  
-  state = {restaurant :'', current: true, orderDate: '', ticket: '',};
+
+  state = { current: true, orderDate: '', ticket: '', restaurants: [], };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -11,21 +13,48 @@ class OrderFormAdin extends Component {
     this.setState({ orderDate: '', restaurant: '' });
   }
 
+  // handleRestarants = (e) => {
+  //   if (this.state.restaurants.length ==0) {
+  //     alert("No restaurants")
+  //   } else {
+  //   this.handleChange
+  //   }
+  // }
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value, });
+  }
+
+  componentDidMount() {
+    axios.get('/api/restaurants')
+       .then( res => {
+         this.setState({ restaurants: res.data })
+       })
+      .catch( err => {
+        console.log(err)
+      })
   }
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group widths="equal">
-        <Form.Input
+          {/* <Form.Select
             placeholder="Restaurant"
             label="Restaurant"
             name="restaurant"
             onChange={this.handleChange}
-            value={this.state.restaurant}
+            options={this.restaurants}
             required
+          /> */}
+          <Form.Dropdown
+            placeholder='Select Restaurant'
+            label="Restaurant"
+            fluid
+            search
+            selection
+            options={this.state.restaurants}
+            onChange={this.handleChange}
           />
           <Form.Input
             label="Order Date"
