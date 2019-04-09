@@ -48,11 +48,28 @@ class Restaurants extends React.Component {
   }
 
   render() {
+    const { restaurants, } = this.state
     return (
+      // <AuthConsumer>
+      // { auth =>
+
         <div>
           <Header as='h1'>Restaurants</Header>
-            { this.displayRestaurant() }
-            <RestaurantForm addRestaurant={this.addRestaurant} editRestaurant={this.editRestaurant} />
+
+        <ul>
+        <Header as='h1'>Restaurant List</Header>
+          {
+            restaurants.map( (r, i) => {
+            return(
+              <Restaurant
+                key={r.id}
+                {...r}
+              />
+              )
+            })
+          }
+        </ul>
+          <RestaurantForm addRestaurant={this.addRestaurant} editRestaurant={this.editRestaurant} />
         </div>
     )
   }

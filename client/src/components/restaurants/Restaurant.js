@@ -1,31 +1,23 @@
-import React, { Fragment, } from "react";
-import RestaurantForm from "./RestaurantForm";
+import React from "react";
 import { Card, } from "semantic-ui-react";
-import axios from 'axios';
 
-class Restaurant extends React.Component {
-    state = { restaurants: [] }
+const Restaurant = ({name, address, phone, menu}) => (
 
-    render() {
-      const { name, address, phone, menu } = this.props
-        return (
-          <>
-            <Card>
-              <Card.Content>
-                <Card.Header>{name}</Card.Header>
-                <Card.Description>
-                  Address: {address}
-                  Phone:  {phone}
-                </Card.Description>
-                <Card.Meta>
-                  Menu: {menu}
-                </Card.Meta>
-              </Card.Content>
-            </Card>
-            <RestaurantForm />
-          </>
-        )
-    }
-}
+      <>
+        <Card>
+          <Card.Content>
+            <Card.Header>{name}</Card.Header>
+            <Card.Description>
+              Address: { address }
+              Phone:  { phone }
+            </Card.Description>
+            <Card.Meta>
+              Menu: { menu }
+            </Card.Meta>
+          </Card.Content>
+        </Card>
+      </>
+
+)
 
 export default Restaurant;
