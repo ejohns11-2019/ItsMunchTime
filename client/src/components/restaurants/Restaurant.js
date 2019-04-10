@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card, Button, Icon } from "semantic-ui-react";
 
 const Restaurant = ({name, address, phone, menu, id, deleteRestaurant }) => (
@@ -9,7 +9,7 @@ const Restaurant = ({name, address, phone, menu, id, deleteRestaurant }) => (
           <Card.Content>
             <Card.Header>{name}</Card.Header>
             <Card.Description>
-              Address: { address }
+              Address: { address }<br/>
               Phone:  { phone }
             </Card.Description>
             <Card.Meta>

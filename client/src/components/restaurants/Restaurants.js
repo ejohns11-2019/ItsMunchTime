@@ -21,10 +21,10 @@ class Restaurants extends React.Component {
     axios.delete(`/api/restaurants/${id}`)
       .then( res => {
         const { restaurants } = this.state;
-        this.setState({ restaurants: restaurants.filter( r => r.id != id ) })
+        this.setState({ restaurants: restaurants.filter( r => r.id !== id ) })
       })
       .catch( err => {
-        console.log(err)
+        alert(err.response.data.message)
       })
   }
 
@@ -39,22 +39,23 @@ class Restaurants extends React.Component {
       this.setState({ restaurants: [...restaurants, res.data] })
     })
     .catch( err => {
-      console.log(err)
+      alert(err.response.data.message)
     })
   }
 
   editRestaurant = (restaurant) => {
     axios.put(`/api/restaurants/${restaurant.id}`, { restaurant } )
       .then( res => {
-        const restaurants = this.state.departments.map( d => {
-          if (d.id === restaurant.id)
+        const restaurants = this.state
+        restaurants.map( r => {
+          if (r.id === restaurant.id)
             return res.data
-          return d
+          return r
         })
         this.setState({ restaurant })
       })
       .catch( err => {
-        console.log(err)
+        console.log(err.response.data.errors)
       })
   }
 
