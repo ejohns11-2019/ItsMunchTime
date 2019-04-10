@@ -39,6 +39,17 @@ export class AuthProvider extends React.Component {
         console.log(res);
       })
   }
+
+  updateUser = (id, user) => {
+    let data = new FormData();
+    axios.put(`/api/users/${id}?first_name=${user.first_name}
+    &last_name=${user.last_name}
+    &email=${user.email}
+    &group=${user.group}
+    &allergies=${user.allergies}
+    &exceptions=${user.exceptions}`, data)
+      .then( res => this.setState({ user: res.data, }) )
+  }
   
   render() {
     return (
@@ -49,6 +60,7 @@ export class AuthProvider extends React.Component {
         handleLogin: this.handleLogin,
         handleLogout: this.handleLogout,
         setUser: (user) => this.setState({ user, }),
+        updateUser: this.updateUser,
       }}>
         { this.props.children }
       </AuthContext.Provider>
