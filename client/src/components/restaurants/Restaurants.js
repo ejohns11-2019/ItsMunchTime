@@ -44,7 +44,7 @@ class Restaurants extends React.Component {
   }
 
   editRestaurant = (restaurant) => {
-    axios.put(`/api/restaurants/${restaurant.id}`, { restaurant } )
+    axios.put(`/api/restaurants/${restaurant.id}`, )
       .then( res => {
         const restaurants = this.state
         restaurants.map( r => {
@@ -52,13 +52,14 @@ class Restaurants extends React.Component {
             return res.data
           return r
         })
-        this.setState({ restaurant })
+        this.setState({ restaurants, })
       })
       .catch( err => {
         console.log(err.response.data.errors)
       })
   }
 
+//if click blue pencil button by rest. want to render RestForm for edit
   render() {
     const { restaurants, } = this.state
     return (
@@ -74,12 +75,14 @@ class Restaurants extends React.Component {
                 key={r.id}
                 {...r}
                 deleteRestaurant={this.deleteRestaurant}
+                editRestaurant={this.editRestaurant}
+                addRestaurant={this.addRestaurant}
               />
               )
             })
           }
         </ul>
-          <RestaurantForm addRestaurant={this.addRestaurant} editRestaurant={this.editRestaurant} />
+          <RestaurantForm addRestaurant={this.addRestaurant} />
         </div>
     )
   }
