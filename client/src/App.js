@@ -25,7 +25,7 @@ const App = () => (
         <ProtectedRoute exact path="/new_order" component={OrderFormAdmin} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        
+
         <Route component={NoMatch} />
       </Switch>
     </Container>
