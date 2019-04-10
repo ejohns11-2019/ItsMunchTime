@@ -17,6 +17,17 @@ class Restaurants extends React.Component {
       })
   }
 
+  deleteRestaurant = (id) => {
+    axios.delete(`/api/restaurants/${id}`)
+      .then( res => {
+        const { restaurants } = this.state;
+        this.setState({ restaurants: restaurants.filter( r => r.id !== id ) })
+      })
+      .catch( err => {
+        alert(err.response.data.message)
+      })
+  }
+
   displayRestaurant = () => {
     return this.state.restaurants.map ( r => <Restaurant key={r.id} {...r} />)
   }
@@ -28,31 +39,29 @@ class Restaurants extends React.Component {
       this.setState({ restaurants: [...restaurants, res.data] })
     })
     .catch( err => {
-      console.log(err)
+      alert(err.response.data.message)
     })
   }
 
   editRestaurant = (restaurant) => {
     axios.put(`/api/restaurants/${restaurant.id}`, { restaurant } )
       .then( res => {
-        const restaurants = this.state.departments.map( d => {
-          if (d.id === restaurant.id)
+        const restaurants = this.state
+        restaurants.map( r => {
+          if (r.id === restaurant.id)
             return res.data
-          return d
+          return r
         })
         this.setState({ restaurant })
       })
       .catch( err => {
-        console.log(err)
+        console.log(err.response.data.errors)
       })
   }
 
   render() {
     const { restaurants, } = this.state
     return (
-      // <AuthConsumer>
-      // { auth =>
-
         <div>
           <Header as='h1'>Restaurants</Header>
 
@@ -64,6 +73,7 @@ class Restaurants extends React.Component {
               <Restaurant
                 key={r.id}
                 {...r}
+                deleteRestaurant={this.deleteRestaurant}
               />
               )
             })

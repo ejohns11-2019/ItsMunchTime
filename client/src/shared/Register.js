@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Button, Form, Segment, Header, Select} from 'semantic-ui-react';
+import { Button, Form, Segment, Header} from 'semantic-ui-react';
 
 
 
@@ -97,31 +97,6 @@ class Register extends React.Component {
             onChange={this.handleChange}
             options={groupOptions}
             /> 
-            {/* <Form.Group>
-              <label>Select your Group:</label>
-              <Form.Radio
-                label='Full-Time Crew'
-                name='group' 
-                value={group}
-                checked={{group} === 'Full-Time Crew'}
-                onChange={this.handleChange}
-              />
-              <Form.Radio
-                label='After-Hours Crew'
-                name='group' 
-                value={group}
-                checked={{group} === 'After-Hours Crew'}
-                onChange={this.handleChange}
-              />
-            </Form.Group>  */}
-             {/* <Form.Input 
-              label="Group"
-              required
-              name='group'
-              value={group}
-              defaultValue={group}
-              onChange={this.handleChange}
-            />  */}
             <Form.TextArea 
             label='Do you have any allergies?'
             name='allergies'

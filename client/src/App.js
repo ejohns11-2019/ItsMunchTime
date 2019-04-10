@@ -10,6 +10,7 @@ import FetchUser from './shared/FetchUser';
 import ProtectedRoute from './shared/ProtectedRoute';
 import Restaurants from "./components/restaurants/Restaurants"
 import OrderFormAdmin from "./components/orders/OrderFormAdmin"
+import Profile from './components/profile/Profile';
 
 
 const App = () => (
@@ -19,10 +20,12 @@ const App = () => (
     <Container>
       <Switch>
         <ProtectedRoute exact path="/" component={Home} />
+        <ProtectedRoute exact path="/profile" component={Profile} />
+        <ProtectedRoute exact path="/restaurants" component={Restaurants} />
+        <ProtectedRoute exact path="/new_order" component={OrderFormAdmin} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/new_order" component={OrderFormAdmin} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/restaurants" component={Restaurants} />
+
         <Route component={NoMatch} />
       </Switch>
     </Container>

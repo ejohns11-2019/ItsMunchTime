@@ -2,7 +2,6 @@ import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Menu, } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
-// import { RestaurantConsumer, } from "../providers/RestaurantProvider";
 
 class Navbar extends React.Component {
 
@@ -12,10 +11,22 @@ class Navbar extends React.Component {
     if (user) {
       return (
         <Menu.Menu position='right'>
+          <Link to='/profile'>
+          <Menu.Item
+            name='profile'
+            active={this.props.location.pathname === '/'}
+          />
+          </Link>
           <Menu.Item
             name='logout'
             onClick={ () => handleLogout(this.props.history) }
           />
+          <Link to='/restaurants'>
+          <Menu.Item
+            name='Restaurants'
+            active={this.props.location.pathname === '/restaurants'}
+          />
+          </Link>
         </Menu.Menu>
       )
     } else {
