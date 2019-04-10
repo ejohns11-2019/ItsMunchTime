@@ -13,7 +13,7 @@ class Navbar extends React.Component {
       return (
         <Menu.Menu position='right'>
           <Link to='/profile'>
-          <Menu.Item 
+          <Menu.Item
             name='profile'
             active={this.props.location.pathname === '/'}
           />
@@ -22,6 +22,12 @@ class Navbar extends React.Component {
             name='logout'
             onClick={ () => handleLogout(this.props.history) }
           />
+          <Link to='/restaurants'>
+          <Menu.Item
+            name='restaurants'
+            active={this.props.location.pathname === '/restaurants'}
+          />
+          </Link>
         </Menu.Menu>
       )
     } else {
