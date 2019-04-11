@@ -13,12 +13,8 @@ class OrderFormAdin extends Component {
     this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [] });
   }
 
-  // handleChange = (e) => { 
-  //   const { name, value } = e.target
-  //   this.setState({ [name]: value });
-  // }
+
   handleChange = (e, {name, value}) => {
-    // const { name, value, } = e.target;
     this.setState({ [name]: value, });
   }
 
@@ -46,7 +42,6 @@ class OrderFormAdin extends Component {
   render() {
 
     const {restaurantData, orderDate, restaurant} = this.state
-    // const {handleChange, handleSubmit, handleSelect} = this
 
     return (
       <Form onSubmit={this.handleSubmit}>
