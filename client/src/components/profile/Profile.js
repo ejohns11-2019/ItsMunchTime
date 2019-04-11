@@ -18,8 +18,8 @@ class Profile extends Component {
     })
   }
   
-  handleChange = (e) => {
-    const { name, value, } = e.target;
+  handleChange = (e, {name, value}) => {
+    // const { name, value, } = e.target;
     this.setState({
       formValues: {
         ...this.state.formValues,
