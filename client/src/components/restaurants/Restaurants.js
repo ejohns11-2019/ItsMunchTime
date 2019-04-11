@@ -17,6 +17,7 @@ class Restaurants extends React.Component {
       })
   }
 
+
   deleteRestaurant = (id) => {
     axios.delete(`/api/restaurants/${id}`)
       .then( res => {
@@ -42,20 +43,19 @@ class Restaurants extends React.Component {
       alert(err.response.data.message)
     })
   }
-
+ 
   editRestaurant = (restaurant) => {
-    axios.put(`/api/restaurants/${restaurant.id}`, )
+    axios.put(`/api/restaurants/${restaurant.id}`, restaurant )
       .then( res => {
-        const restaurants = this.state
-        restaurants.map( r => {
+        const restaurants = this.state.restaurants.map( r => {
           if (r.id === restaurant.id)
             return res.data
-          return r
+          return r;
         })
         this.setState({ restaurants, })
       })
       .catch( err => {
-        console.log(err.response.data.errors)
+        console.log(err)
       })
   }
 
