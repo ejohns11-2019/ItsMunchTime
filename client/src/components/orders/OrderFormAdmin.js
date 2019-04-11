@@ -18,9 +18,8 @@ class OrderFormAdin extends Component {
     this.setState({ [name]: value, });
   }
 
-  handleSelect = (e) => { 
-    const { innerText } = e.target
-    this.setState({ restaurant: innerText });
+  handleSelect = (e, data) => { 
+    this.setState({ restaurant: data.value });
   }
 
   componentDidMount() {
@@ -30,7 +29,7 @@ class OrderFormAdin extends Component {
           const { restaurants, restaurantData} = this.state
           restaurants.map( r => {
             var temp = restaurantData;
-            temp.push({ key: r.id, text: r.name, values: r.name})
+            temp.push({ key: r.id, text: r.name, value: r.name})
             this.setState({restaurantData: temp})
           })
        })
@@ -48,15 +47,15 @@ class OrderFormAdin extends Component {
         <Form.Group widths="equal">
           <Form.Dropdown
             label='Select Restaurant'
-            placeholder="Restaurant"
+            placeholder="Restaurants"
             required
             fluid
-            search
+            // search
             selection
             name='restaurant'
             value={restaurant}
             options={restaurantData}
-            onChange={this.handleChange}
+            onChange={this.handleSelect}
           />
           <Form.Input
             label="Order Date"
