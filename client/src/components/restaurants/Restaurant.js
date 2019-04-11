@@ -3,7 +3,7 @@ import { Card, Button, Icon, } from "semantic-ui-react";
 import RestaurantForm from './RestaurantForm'
 
 class Restaurant extends React.Component {
-  state = { restaurant: {editing: false, }, }
+  state = {restaurant: {editing: false, }, }
 //const Restaurant = ({ id, name, address, phone, menu, editRestaurant, deleteRestaurant }) => (
   toggleEdit = () => {
     this.setState( state => {
@@ -34,7 +34,10 @@ class Restaurant extends React.Component {
   restaurantEdit = () => {
     const { restaurant, } = this.props;
       return (
-        <RestaurantForm />
+        <RestaurantForm id={this.props.id} name={this.props.name} address={this.props.address} phone={this.props.address} menu={this.props.menu} editRestaurant={this.props.editRestaurant}
+        addRestaurant={this.props.addRestaurant}
+        toggleEdit={this.toggleEdit}
+        />
       )
     }
 
