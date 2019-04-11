@@ -5,21 +5,37 @@ import axios from 'axios';
 
 class OrderFormAdin extends Component {
 
-  state = { current: true, orderDate: '', ticket: '', restaurants: [], restaurantData: [], restaurant: '' };
+  state = { current: true, orderDate: '', ticket: '', restaurants: [], restaurantData: [], restaurant: '', r_id: ''};
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.add(this.state);
-    this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [] });
-  }
+    
+    const { current, orderDate, ticket, r_id }  = this.state
 
+    const order_date = orderDate
+    const restaurant_id = r_id
+
+    axios.post('/api/orders', {current, order_date, ticket, restaurant_id})
+      .then(res => {
+        this.props.history.push("/new_order")
+      })
+      .catch( err => {
+        console.log(err);
+      })
+    this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '' });
+  }
 
   handleChange = (e, {name, value}) => {
     this.setState({ [name]: value, });
   }
 
   handleSelect = (e, data) => { 
-    this.setState({ restaurant: data.value });
+   
+    this.setState({ restaurant: data.value, r_id: data.key });
+    this.state.restaurantData.map(rd => {
+      if (rd.value == data.value) 
+        this.setState({r_id: rd.key})
+    })
   }
 
   componentDidMount() {
@@ -50,7 +66,7 @@ class OrderFormAdin extends Component {
             placeholder="Restaurants"
             required
             fluid
-            // search
+            search
             selection
             name='restaurant'
             value={restaurant}
