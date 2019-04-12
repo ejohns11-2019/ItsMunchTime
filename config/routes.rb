@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: :update
   resources :restaurants
   resources :orders
+  get 'users/:id/orders', to: 'users#userhistory'
 
   end
 end

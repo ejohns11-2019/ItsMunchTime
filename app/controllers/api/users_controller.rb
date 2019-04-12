@@ -18,4 +18,13 @@ class Api::UsersController < ApplicationController
     end
 
   end
+
+  def userhistory
+    @user= Order.find_by(user_id: current_user.id, current: true)
+    if @user.current == true
+      render json: @user
+    else
+      render json: { errors: @user.errors.full_message }, status: 422
+    end
+  end
 end
