@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
 
-  resources :users, only: :update
-  resources :restaurants
-  resources :orders
-
+    resources :users, only: :update
+    resources :restaurants
+    resources :orders
+    get 'restaurant_history', to: 'orders#restaurant_history'
   end
 end

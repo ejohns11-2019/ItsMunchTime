@@ -11,6 +11,7 @@ import ProtectedRoute from './shared/ProtectedRoute';
 import Restaurants from "./components/restaurants/Restaurants"
 import OrderFormAdmin from "./components/orders/OrderFormAdmin"
 import Profile from './components/profile/Profile';
+import RestaurantHistory from './components/restaurants/RestaurantHistory';
 
 
 const App = () => (
@@ -23,7 +24,9 @@ const App = () => (
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/restaurants" component={Restaurants} />
         <ProtectedRoute exact path="/new_order" component={OrderFormAdmin} />
+
         <Route exact path="/login" component={Login} />
+        <Route exact path="/restaurant_history" component={RestaurantHistory} />
         <Route exact path="/register" component={Register} />
 
         <Route component={NoMatch} />

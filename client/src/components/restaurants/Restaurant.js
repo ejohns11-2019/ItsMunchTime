@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, Button, Icon, } from "semantic-ui-react";
 import RestaurantForm from './RestaurantForm'
+import RestaurantHistory from "./RestaurantHistory";
+import {Link } from 'react-router-dom';
 
 class Restaurant extends React.Component {
   state = {restaurant: {editing: false, }, }
@@ -65,6 +67,15 @@ class Restaurant extends React.Component {
         >
           <Icon name ="trash" />
         </Button>
+        <Link 
+          
+          color="red"
+          style={{ marginLeft: "15px", }}
+          to={{
+            pathname: "/restaurant_history",
+            state: {restId: this.props.id}
+          }}
+        >History</Link>
       </>
     )
   }
