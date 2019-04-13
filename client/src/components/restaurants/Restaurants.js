@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Header, } from 'semantic-ui-react';
 import Restaurant from './Restaurant';
 import RestaurantForm from "./RestaurantForm";
-import { Link, } from 'react-router-dom';
+//import { Link, } from 'react-router-dom';
 
 class Restaurants extends React.Component {
   state = { restaurants: [], };
@@ -68,22 +68,20 @@ class Restaurants extends React.Component {
           <Header as='h1'>Restaurants</Header>
 
         <ul>
-        <Header as='h1'>Restaurant List</Header>
+        <Header as='h1'>List of All Restaurants</Header>
           {
             restaurants.map( (r, i) => {
             return(
               <>
                 <br />
-                <Link to="`/restaurants/${restaurant_id}`" >
-                  <Restaurant
-                    key={r.id}
-                    {...r}
-                    deleteRestaurant={this.deleteRestaurant}
-                    editRestaurant={this.editRestaurant}
-                    addRestaurant={this.addRestaurant}
-                  />
-                </Link>
                 <br />
+                <Restaurant
+                  key={r.id}
+                  {...r}
+                  deleteRestaurant={this.deleteRestaurant}
+                  editRestaurant={this.editRestaurant}
+                  addRestaurant={this.addRestaurant}
+                />
               </>
               )
             })
