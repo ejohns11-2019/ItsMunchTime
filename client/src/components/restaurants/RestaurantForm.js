@@ -38,7 +38,7 @@ class RestaurantForm extends React.Component {
     const { auth: { user, } } = this.props
     const { name, address, phone, menu } = this.state;
 
-    if (user.admin == true) {
+    if (user.admin === true) {
       return (
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
