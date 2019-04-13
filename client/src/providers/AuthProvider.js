@@ -17,7 +17,7 @@ export class AuthProvider extends React.Component {
       console.log(res);
     })
   }
-  
+
   handleLogin = (user, history) => {
     axios.post("/api/auth/sign_in", user)
       .then( res => {
@@ -28,7 +28,7 @@ export class AuthProvider extends React.Component {
         console.log(res);
       })
   }
-  
+
   handleLogout = (history) => {
     axios.delete("/api/auth/sign_out")
       .then( res => {
@@ -47,7 +47,8 @@ export class AuthProvider extends React.Component {
     &email=${user.email}
     &group=${user.group}
     &allergies=${user.allergies}
-    &exceptions=${user.exceptions}`, data)
+    &exceptions=${user.exceptions}
+    &admin=${user.admin}`, data)
       .then( res => this.setState({ user: res.data, }) )
   }
 
@@ -72,7 +73,7 @@ export class AuthProvider extends React.Component {
         console.log(err);
       })
   }
-  
+
   render() {
     return (
       <AuthContext.Provider value={{

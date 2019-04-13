@@ -14,7 +14,7 @@ class Restaurant extends React.Component {
   }
 
   restaurantView = () => {
-    const { restaurant, } = this.props
+    //const { restaurant, } = this.props
     return (
       <>
         <Card>
@@ -34,7 +34,7 @@ class Restaurant extends React.Component {
   }
 
   restaurantEdit = () => {
-    const { restaurant, } = this.props;
+    //const { restaurant, } = this.props;
       return (
         <RestaurantForm id={this.props.id} name={this.props.name} address={this.props.address} phone={this.props.address} menu={this.props.menu} editRestaurant={this.props.editRestaurant}
         addRestaurant={this.props.addRestaurant}
@@ -44,9 +44,9 @@ class Restaurant extends React.Component {
     }
 
   adminCheck = () => {
-    const { restaurant, auth: { user, } } = this.props
+    const { auth: { user, } } = this.props
 
-    if (user.admin == true) {
+    if (user.admin === true) {
       return (
         <>
           { this.state.editing ? this.restaurantEdit() : this.restaurantView() }
@@ -74,7 +74,7 @@ class Restaurant extends React.Component {
       )
     } else {
       return(
-        this.restaurantView() 
+        this.restaurantView()
       )
     }
   }

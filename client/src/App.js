@@ -12,8 +12,6 @@ import Restaurants from "./components/restaurants/Restaurants"
 import OrderFormAdmin from "./components/orders/OrderFormAdmin"
 import Profile from './components/profile/Profile';
 import Order from './components/orders/Order';
-import Restaurant from './components/restaurants/Restaurant';
-
 
 const App = () => (
   <Fragment>
@@ -26,10 +24,8 @@ const App = () => (
         <ProtectedRoute exact path="/restaurants" component={Restaurants} />
         <ProtectedRoute exact path="/new_order" component={OrderFormAdmin} />
         <ProtectedRoute exact path="/order" component={Order} />
-        <ProtectedRoute exact path="`restaurants/${restaurant_id}`" component={Restaurant} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-
         <Route component={NoMatch} />
       </Switch>
     </Container>
