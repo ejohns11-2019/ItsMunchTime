@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.first_name = params[:first_name] ? params[:first_name] : user.first_name
-    user.last_name = params[:name] ? params[:name] : user.last_name
+    user.last_name = params[:last_name] ? params[:last_name] : user.last_name
     user.email = params[:email] ? params[:email] : user.email
     user.group = params[:group] ? params[:group] : user.group
     user.allergies = params[:allergies] ? params[:allergies] : user.allergies
