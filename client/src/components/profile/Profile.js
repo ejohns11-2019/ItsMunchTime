@@ -44,6 +44,7 @@ class Profile extends Component {
 
   profileView = () => {
     const { auth: { user }, } = this.props;
+    const is_admin = String(user.admin)
     return (
       <Fragment>
         <Grid.Column width={4}>
@@ -52,7 +53,8 @@ class Profile extends Component {
         <Grid.Column width={8}>
           <Header as="h2"
             content='Name:'
-            subheader={user.first_name + ' ' + user.last_name} />
+            subheader={user.first_name + ' ' + user.last_name} 
+            />
             <Header as="h2"
             content='Email:'
             subheader={user.email} />
@@ -67,7 +69,8 @@ class Profile extends Component {
             subheader={user.exceptions} />
             <Header as="h2"
             content='Administrator:'
-            subheader={user.admin} />
+            subheader={is_admin}
+            />
 
         </Grid.Column>
       </Fragment>
