@@ -1,23 +1,28 @@
 import React, { Fragment, Component } from 'react';
 import { AuthConsumer, } from '../../providers/AuthProvider';
 import { Form, Grid, Image, Container, Divider, Header, Button, Segment } from 'semantic-ui-react';
+import Dropzone from 'react-dropzone';
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
-class Profile extends Component {
-  state = { editing: false, formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '' }, };
-  
+class MyProfile extends Component {
+  state = { editing: false, formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '', image: '', }, };
+
   componentDidMount() {
     const { auth: { user: { first_name, last_name, email, group, allergies, exceptions, admin }, }, } = this.props;
     this.setState({ formValues: { first_name, last_name, email, group, allergies, exceptions, admin }, });
   }
-  
+
+  onDrop = (files) => {
+    this.setState({ formValues: { ...this.state.formValues, image: files[0] } })
+  }
+
   toggleEdit = () => {
     this.setState( state => {
       return { editing: !state.editing, };
     })
   }
-  
+
   handleChange = (e, {name, value}) => {
     // const { name, value, } = e.target;
     this.setState({
@@ -30,20 +35,21 @@ class Profile extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { formValues: { first_name, last_name, email, group, allergies, exceptions }, } = this.state;
+    const { formValues: { first_name, last_name, email, group, allergies, exceptions, admin, image }, } = this.state;
     const { auth: { user, updateUser, }, } = this.props;
-    updateUser(user.id, { first_name, last_name, email, group, allergies, exceptions });
+    updateUser(user.id, { first_name, last_name, email, group, allergies, exceptions, admin, image });
     this.setState({
       editing: false,
       formValues: {
         ...this.state.formValues,
-        file: "",
+        image: "",
       },
     });
   }
-  
+
   profileView = () => {
     const { auth: { user }, } = this.props;
+    const is_admin = String(user.admin)
     return (
       <Fragment>
         <Grid.Column width={4}>
@@ -52,7 +58,8 @@ class Profile extends Component {
         <Grid.Column width={8}>
           <Header as="h2"
             content='Name:'
-            subheader={user.first_name + ' ' + user.last_name} />
+            subheader={user.first_name + ' ' + user.last_name}
+            />
             <Header as="h2"
             content='Email:'
             subheader={user.email} />
@@ -67,18 +74,41 @@ class Profile extends Component {
             subheader={user.exceptions} />
             <Header as="h2"
             content='Administrator:'
-            subheader={user.admin} />
-          
+            subheader={is_admin}
+            />
+
         </Grid.Column>
       </Fragment>
     )
   }
-  
+
   editView = () => {
-    const { auth: { user }, } = this.props;
-    const { formValues: { first_name, last_name, email, group, allergies, exceptions } } = this.state;
+    //const { auth: { user }, } = this.props;
+    const { formValues: { first_name, last_name, email, group, allergies, exceptions, image, } } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
+        <Dropzone
+          onDrop={this.onDrop}
+          multiple={false}
+        >
+          {({ getRootProps, getInputProps, isDragActive }) => {
+            return(
+              <div
+                {...getRootProps()}
+                style={styles.dropzone}
+              >
+                <input {...getInputProps()}/>
+                {
+                  isDragActive ?
+                    <p>Drop Profile Picture here...</p>
+                    :
+                    <p>Try dropping a Profile Picture here, or click to select a file to upload </p>
+                }
+              </div>
+            )
+          }}
+        </Dropzone>
+        <br />
         <Form.Input
             label="First Name"
             required
@@ -114,8 +144,8 @@ class Profile extends Component {
             value={group}
             onChange={this.handleChange}
             options={groupOptions}
-            /> 
-            <Form.TextArea 
+            />
+            <Form.TextArea
             label='Do you have any allergies?'
             name='allergies'
             value={allergies}
@@ -135,7 +165,42 @@ class Profile extends Component {
         </Form>
     )
   }
-  
+
+  adminCheck = () => {
+    const { auth: { user }, } = this.props;
+    const { formValues: { admin, } } = this.state;
+
+    if (user.admin === true) {
+      return(
+        <>
+          { this.editView() }
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Select
+             required
+             label='Role'
+             placeholder=''
+             fluid
+             selection
+             name='admin'
+             value={admin}
+             onChange={this.handleChange}
+             options={adminOptions}
+             />
+          </Form>
+          <Segment textAlign='center' basic>
+            <Button type='submit' color='yellow'>Change Administrator Status</Button>
+          </Segment>
+        </>
+      )
+    } else {
+      return (
+        <div>
+          { this.editView() }
+        </div>
+      )
+    }
+  }
+
   render() {
     const { editing, } = this.state;
     return (
@@ -143,7 +208,7 @@ class Profile extends Component {
         <Divider hidden />
         <Grid>
           <Grid.Row>
-            { editing ? this.editView() : this.profileView()}
+            { editing ? this.adminCheck() : this.profileView()}
             <Grid.Column>
               <Button onClick={this.toggleEdit}>{editing ? 'Cancel' : 'Edit'}</Button>
             </Grid.Column>
@@ -159,22 +224,47 @@ const groupOptions = [
     key: 'f',
     text: 'Full-Time Crew',
     value: 'Full-Time Crew',
-    
+
   },
 
   {
     key: 'a',
     text: 'After-Hours Crew',
     value: 'After-Hours Crew',
-    
+
   },
 
 ]
 
+const adminOptions = [
+  {
+    key: 't',
+    text: 'Administrator',
+    value: true,
+  },
+  {
+    key: 'f',
+    text: 'Not Administrator',
+    value: false,
+  },
+]
+
+const styles={
+  dropzone: {
+    height: "150px",
+    width: "150px",
+    border: "1px dashed black",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "center",
+    padding: "10px",
+  },
+}
+
 const ConnectedProfile = (props) => (
   <AuthConsumer>
-    { auth => 
-      <Profile { ...props } auth={auth} />
+    { auth =>
+      <MyProfile { ...props } auth={auth} />
     }
   </AuthConsumer>
 )

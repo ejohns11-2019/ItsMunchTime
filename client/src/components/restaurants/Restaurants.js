@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Header, } from 'semantic-ui-react';
 import Restaurant from './Restaurant';
 import RestaurantForm from "./RestaurantForm";
+//import { Link, } from 'react-router-dom';
 
 class Restaurants extends React.Component {
   state = { restaurants: [], };
@@ -16,6 +17,7 @@ class Restaurants extends React.Component {
         console.log(err)
       })
   }
+
 
   deleteRestaurant = (id) => {
     axios.delete(`/api/restaurants/${id}`)
@@ -44,18 +46,17 @@ class Restaurants extends React.Component {
   }
 
   editRestaurant = (restaurant) => {
-    axios.put(`/api/restaurants/${restaurant.id}`, )
+    axios.put(`/api/restaurants/${restaurant.id}`, restaurant )
       .then( res => {
-        const restaurants = this.state
-        restaurants.map( r => {
+        const restaurants = this.state.restaurants.map( r => {
           if (r.id === restaurant.id)
             return res.data
-          return r
+          return r;
         })
         this.setState({ restaurants, })
       })
       .catch( err => {
-        console.log(err.response.data.errors)
+        console.log(err)
       })
   }
 
@@ -67,22 +68,29 @@ class Restaurants extends React.Component {
           <Header as='h1'>Restaurants</Header>
 
         <ul>
-        <Header as='h1'>Restaurant List</Header>
+        <Header as='h1'>List of All Restaurants</Header>
           {
             restaurants.map( (r, i) => {
             return(
-              <Restaurant
-                key={r.id}
-                {...r}
-                deleteRestaurant={this.deleteRestaurant}
-                editRestaurant={this.editRestaurant}
-                addRestaurant={this.addRestaurant}
-              />
+              <>
+                <br />
+                <br />
+                <Restaurant
+                  key={r.id}
+                  {...r}
+                  deleteRestaurant={this.deleteRestaurant}
+                  editRestaurant={this.editRestaurant}
+                  addRestaurant={this.addRestaurant}
+                />
+              </>
               )
             })
           }
         </ul>
+          <hr/>
+          <h1>Add a New Restaurant</h1>
           <RestaurantForm addRestaurant={this.addRestaurant} />
+          <hr />
         </div>
     )
   }
