@@ -3,6 +3,8 @@ import { Card, Button, Icon, } from "semantic-ui-react";
 import RestaurantForm from './RestaurantForm'
 import RestaurantHistory from "./RestaurantHistory";
 import {Link } from 'react-router-dom';
+import { AuthConsumer, } from "../../providers/AuthProvider";
+import { withRouter, } from 'react-router-dom';
 
 class Restaurant extends React.Component {
   state = {restaurant: {editing: false, }, }
@@ -14,7 +16,7 @@ class Restaurant extends React.Component {
   }
 
   restaurantView = () => {
-    const { restaurant, } = this.props
+    //const { restaurant, } = this.props
     return (
       <>
         <Card>
@@ -34,7 +36,7 @@ class Restaurant extends React.Component {
   }
 
   restaurantEdit = () => {
-    const { restaurant, } = this.props;
+    //const { restaurant, } = this.props;
       return (
         <RestaurantForm id={this.props.id} name={this.props.name} address={this.props.address} phone={this.props.address} menu={this.props.menu} editRestaurant={this.props.editRestaurant}
         addRestaurant={this.props.addRestaurant}
@@ -42,6 +44,42 @@ class Restaurant extends React.Component {
         />
       )
     }
+
+  adminCheck = () => {
+    const { auth: { user, } } = this.props
+
+    if (user.admin === true) {
+      return (
+        <>
+          { this.state.editing ? this.restaurantEdit() : this.restaurantView() }
+          <Button
+            icon
+            color="blue"
+            size="tiny"
+            onClick={() => this.toggleEdit(this.props.id)}
+          >
+            { this.state.editing ? 'Cancel'
+            :
+            <Icon name="pencil" />
+            }
+          </Button>
+          <Button
+            icon
+            color="red"
+            size="tiny"
+            onClick={ () => this.props.deleteRestaurant(this.props.id) }
+            style={{ marginLeft: "15px", }}
+          >
+            <Icon name ="trash" />
+          </Button>
+        </>
+      )
+    } else {
+      return(
+        this.restaurantView()
+      )
+    }
+  }
 
   render() {
     return (
@@ -77,10 +115,26 @@ class Restaurant extends React.Component {
           }}
         >History</Link>
       </>
+
+    return(
+      <div>
+        { this.adminCheck() }
+      </div>
+
     )
   }
 }
 
-  //onclick of blue pencil want to render form where can edit!
+export class ConnectedRestaurant extends React.Component {
+  render() {
+    return(
+      <AuthConsumer>
+        { auth =>
+            <Restaurant {... this.props } {...this.state} auth={auth} />
+        }
+      </AuthConsumer>
+    )
+  }
+}
 
-export default Restaurant;
+export default withRouter(ConnectedRestaurant);

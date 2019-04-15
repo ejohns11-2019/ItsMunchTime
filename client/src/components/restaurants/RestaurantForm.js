@@ -1,5 +1,7 @@
 import React from "react";
 import { Form, } from "semantic-ui-react";
+import { AuthConsumer, } from "../../providers/AuthProvider";
+import { withRouter, } from 'react-router-dom';
 
 class RestaurantForm extends React.Component {
   state = {
@@ -32,43 +34,72 @@ class RestaurantForm extends React.Component {
     this.setState({ name: '', address: '', phone: '', menu: '', })
   }
 
+  adminDisplay = () => {
+    const { auth: { user, } } = this.props
+    const { name, address, phone, menu } = this.state;
+
+    if (user.admin === true) {
+      return (
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Input
+            label="RestaurantName"
+            type="text"
+            name="name"
+            value={name}
+            onChange={this.handleChange}
+            required
+          />
+          <Form.Input
+            label="RestaurantAddress"
+            type="text"
+            name="address"
+            value={address}
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            label="RestaurantPhone"
+            type="text"
+            name="phone"
+            value={phone}
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            label="RestaurantMenu"
+            type="text"
+            name="menu"
+            value={menu}
+            onChange={this.handleChange}
+          />
+          <Form.Button type="submit" color="blue">Save</Form.Button>
+        </Form>
+      )
+    } else {
+      return (
+        <div>
+        </div>
+      )
+    }
+  }
+
   render() {
-    const { name, address, phone, menu, } = this.state;
     return(
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Input
-          label="RestaurantName"
-          type="text"
-          name="name"
-          value={name}
-          onChange={this.handleChange}
-          required
-        />
-        <Form.Input
-          label="RestaurantAddress"
-          type="text"
-          name="address"
-          value={address}
-          onChange={this.handleChange}
-        />
-        <Form.Input
-          label="RestaurantPhone"
-          type="text"
-          name="phone"
-          value={phone}
-          onChange={this.handleChange}
-        />
-        <Form.Input
-          label="RestaurantMenu"
-          type="text"
-          name="menu"
-          value={menu}
-          onChange={this.handleChange}
-        />
-        <Form.Button type="submit" color="blue">Save</Form.Button>
-      </Form>
+      <div>
+        { this.adminDisplay() }
+      </div>
     )
   }
 }
 
-export default RestaurantForm;
+export class ConnectedRestaurantForm extends React.Component {
+  render() {
+    return(
+      <AuthConsumer>
+        { auth =>
+            <RestaurantForm {... this.props } {...this.state} auth={auth} />
+        }
+      </AuthConsumer>
+    )
+  }
+}
+
+export default withRouter(ConnectedRestaurantForm);

@@ -4,6 +4,10 @@ class Api::RestaurantsController < ApplicationController
   def index
     render json: Restaurant.all
   end
+
+  def show
+    render json: Restaurant.find(params[:id])
+  end
   
   def create
     if current_user.admin == true
