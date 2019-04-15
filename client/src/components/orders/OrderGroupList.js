@@ -9,7 +9,7 @@ class OrderList extends Component {
 
     return (
       <>
-      <h2>This is the OrderList Component</h2>
+      <h2>This is the Group's order</h2>
       <Order />
       </>
     )
