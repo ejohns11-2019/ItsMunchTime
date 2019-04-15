@@ -1,9 +1,9 @@
 import React from 'react';
-import Profile from './Profile';
+import MyProfile from './MyProfile';
 
 const ProfileList = () => {
   <>
-  <Profile />
+  <MyProfile />
   </>
 
 }
