@@ -34,6 +34,11 @@ class Api::OrdersController < ApplicationController
         render json: { message: 'Order was deleted deleted' }
       end
     end
+
+    def restaurant_history
+      # render json: Order.where(restaurant_id: params[:restaurant_id])
+      render json: Order.restaurant_history(params[:restaurant_id])
+    end
   
     private
       def order_params

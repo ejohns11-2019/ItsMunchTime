@@ -5,7 +5,15 @@ import axios from 'axios';
 
 class OrderFormAdin extends Component {
 
-  state = { current: true, orderDate: '', ticket: '', restaurants: [], restaurantData: [], restaurant: '', r_id: ''};
+  state = { 
+    current: true, 
+    orderDate: '', 
+    ticket: '', 
+    restaurants: [], 
+    restaurantData: [], 
+    restaurant: '', 
+    r_id: ''
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();

@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, Button, Icon, } from "semantic-ui-react";
 import RestaurantForm from './RestaurantForm'
+import RestaurantHistory from "./RestaurantHistory";
+import {Link } from 'react-router-dom';
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
 
@@ -80,10 +82,45 @@ class Restaurant extends React.Component {
   }
 
   render() {
+    return (
+      <>
+        { this.state.editing ? this.restaurantEdit() : this.restaurantView() }
+        <Button
+          icon
+          color="blue"
+          size="tiny"
+          onClick={() => this.toggleEdit(this.props.id)}
+        >
+          { this.state.editing ? 'Cancel'
+          :
+          <Icon name="pencil" />
+          }
+        </Button>
+        <Button
+          icon
+          color="red"
+          size="tiny"
+          onClick={ () => this.props.deleteRestaurant(this.props.id) }
+          style={{ marginLeft: "15px", }}
+        >
+          <Icon name ="trash" />
+        </Button>
+        <Link 
+          
+          color="red"
+          style={{ marginLeft: "15px", }}
+          to={{
+            pathname: "/restaurant_history",
+            state: {restId: this.props.id}
+          }}
+        >History</Link>
+      </>
+
     return(
       <div>
         { this.adminCheck() }
       </div>
+
     )
   }
 }
