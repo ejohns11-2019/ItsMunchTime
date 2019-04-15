@@ -1,11 +1,11 @@
 import React, { Fragment, Component } from 'react';
-import { Form, Grid, Image, Container, Divider, Header, Button, Segment, Divider } from 'semantic-ui-react';
+import { Form, Grid, Image, Container, Divider, Header, Button, Segment, } from 'semantic-ui-react';
 import Dropzone from 'react-dropzone';
 import EditProfile from './EditProfile';
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
-class Profile extends Component {
+class UserProfile extends Component {
   state = { editing: false, };
   
   toggleEdit = () => {
@@ -55,7 +55,7 @@ class Profile extends Component {
         </Fragment>
         </Grid.Row>
         <Grid.Row>
-        { editing ? <EditProfile id={this.props.id} {...this.props} /> : null }
+        { editing ? <EditProfile id={this.props.id} {...this.props} toggleEdit={this.toggleEdit}  /> : null }
         </Grid.Row>
         <Divider />
         </Grid>
@@ -66,4 +66,4 @@ class Profile extends Component {
 
 
 
-export default Profile;
+export default UserProfile;
