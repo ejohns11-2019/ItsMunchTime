@@ -1,9 +1,9 @@
 import React, { Fragment, Component } from 'react';
 import { AuthConsumer, } from '../../providers/AuthProvider';
-import { Form, Grid, Image, Container, Divider, Header, Button, Segment } from 'semantic-ui-react';
+import { Form, Grid, Image, Container, Header, Button, Segment } from 'semantic-ui-react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
-import Profile from './Profile';
+import UserProfile from './UserProfile';
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
@@ -19,6 +19,7 @@ class Profiles extends Component {
         console.log(err)
       })
   }
+  
   render() {
     const { users, } = this.state
     return (
@@ -31,9 +32,10 @@ class Profiles extends Component {
               <>
                 <br />
                 <br />
-                <Profile
+                <UserProfile
                   key={u.id}
                   {...u}
+                  {...this.state.users}
                 />
               </>
               )

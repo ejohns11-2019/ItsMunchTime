@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, Grid, Image, Container, Divider, Header, Button, Segment } from 'semantic-ui-react';
+import { Form, Button, Segment } from 'semantic-ui-react';
 import Dropzone from 'react-dropzone';
-
+import { AuthConsumer, } from '../../providers/AuthProvider';
 
 class EditProfile extends React.Component {
   state = {formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '', image: '', },}
@@ -11,6 +11,37 @@ class EditProfile extends React.Component {
     this.setState({ formValues: { first_name, last_name, email, group, allergies, exceptions, admin }, });
   }
   
+  handleChange = (e, {name, value}) => {
+    this.setState({
+      formValues: {
+        ...this.state.formValues,
+        [name]: value,
+      }
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { formValues: { first_name, last_name, email, group, allergies, exceptions, admin, image }, } = this.state;
+    const { auth: { updateUser, }, } = this.props;
+    updateUser(this.props.id, { first_name, last_name, email, group, allergies, exceptions, admin, image });
+    this.setState({
+      // editing: false,
+      formValues: {
+        ...this.state.formValues,
+        image: "",
+      },
+    });
+    // this.props.updateProfiles({
+    //   formValues: {
+    //     ...this.state.formValues,
+    //     image: "",
+    //   },
+    // });
+    this.props.toggleEdit();
+  }
+
+
   render() {
   const { formValues: { first_name, last_name, email, group, allergies, exceptions, image, } } = this.state;
   const styles={
@@ -134,5 +165,12 @@ class EditProfile extends React.Component {
   )
   }
 }
+const ConnectedEditProfile = (props) => (
+  <AuthConsumer>
+    { auth =>
+      <EditProfile { ...props } auth={auth} />
+    }
+  </AuthConsumer>
+)
 
-export default EditProfile;
+export default ConnectedEditProfile;
