@@ -13,6 +13,7 @@ import OrderFormAdmin from "./components/orders/OrderFormAdmin"
 import MyProfile from './components/profile/MyProfile';
 import Profiles from './components/profile/Profiles';
 import Order from './components/orders/Order';
+import Footer from './shared/Footer';
 
 const App = () => (
   <Fragment>
@@ -32,6 +33,7 @@ const App = () => (
       </Switch>
     </Container>
     </FetchUser>
+    <Footer />
   </Fragment>
 )
 
