@@ -1,22 +1,13 @@
 import React, { Fragment, Component } from 'react';
-import { Form, Grid, Image, Container, Divider, Header, Button, Segment } from 'semantic-ui-react';
+import { Form, Grid, Image, Container, Divider, Header, Button, Segment, Divider } from 'semantic-ui-react';
 import Dropzone from 'react-dropzone';
-import axios from 'axios';
+import EditProfile from './EditProfile';
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class Profile extends Component {
-  state = { user: [], editing: false, };
+  state = { editing: false, };
   
-  // componentDidMount(id) {
-  //   axios.get(`/api/users/${id}`)
-  //      .then( res => {
-  //        this.setState({ user: res.data })
-  //      })
-  //     .catch( err => {
-  //       console.log(err)
-  //     })
-  // }
   toggleEdit = () => {
     this.setState( state => {
       return { editing: !state.editing, };
@@ -24,7 +15,7 @@ class Profile extends Component {
   }
 
   render(){
-    const {user, editing,} = this.state
+    const {editing,} = this.state
     const is_admin = String(this.props.admin)
     return(
       <Container>
@@ -59,9 +50,14 @@ class Profile extends Component {
         </Grid.Column>
         <Grid.Column>
           <Button onClick={this.toggleEdit}>{editing ? 'Cancel' : 'Edit'}</Button>
+          
         </Grid.Column>
         </Fragment>
         </Grid.Row>
+        <Grid.Row>
+        { editing ? <EditProfile id={this.props.id} {...this.props} /> : null }
+        </Grid.Row>
+        <Divider />
         </Grid>
         </Container>
     )
