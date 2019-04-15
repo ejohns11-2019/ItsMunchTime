@@ -13,20 +13,27 @@ class Navbar extends React.Component {
         <Menu.Menu position='right'>
           <Link to='/profile'>
           <Menu.Item
-            name='profile'
-            active={this.props.location.pathname === '/'}
+            name='My Profile'
+            active={this.props.location.pathname === '/profile'}
           />
           </Link>
+          <Link to='/profiles'>
           <Menu.Item
-            name='logout'
-            onClick={ () => handleLogout(this.props.history) }
+            name='All User Profiles'
+            active={this.props.location.pathname === '/profiles'}
           />
+          </Link>
           <Link to='/restaurants'>
           <Menu.Item
             name='Restaurants'
             active={this.props.location.pathname === '/restaurants'}
           />
           </Link>
+          <Menu.Item
+            name='logout'
+            onClick={ () => handleLogout(this.props.history) }
+          />
+          
         </Menu.Menu>
       )
     } else {
