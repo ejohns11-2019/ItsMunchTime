@@ -42,13 +42,15 @@ export class AuthProvider extends React.Component {
 
   updateUser = (id, user) => {
     let data = new FormData();
+    data.append('image', user.image);
     axios.put(`/api/users/${id}?first_name=${user.first_name}
     &last_name=${user.last_name}
     &email=${user.email}
     &group=${user.group}
     &allergies=${user.allergies}
     &exceptions=${user.exceptions}
-    &admin=${user.admin}`, data)
+    &admin=${user.admin}
+    &image=${user.image}`, data)
       .then( res => this.setState({ user: res.data, }) )
   }
 

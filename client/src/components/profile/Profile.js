@@ -1,15 +1,20 @@
 import React, { Fragment, Component } from 'react';
 import { AuthConsumer, } from '../../providers/AuthProvider';
 import { Form, Grid, Image, Container, Divider, Header, Button, Segment } from 'semantic-ui-react';
+import Dropzone from 'react-dropzone';
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class Profile extends Component {
-  state = { editing: false, formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '' }, };
+  state = { editing: false, formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '', image: '', }, };
 
   componentDidMount() {
     const { auth: { user: { first_name, last_name, email, group, allergies, exceptions, admin }, }, } = this.props;
     this.setState({ formValues: { first_name, last_name, email, group, allergies, exceptions, admin }, });
+  }
+
+  onDrop = (files) => {
+    this.setState({ formValues: { ...this.state.formValues, image: files[0] } })
   }
 
   toggleEdit = () => {
@@ -30,14 +35,14 @@ class Profile extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { formValues: { first_name, last_name, email, group, allergies, exceptions, admin }, } = this.state;
+    const { formValues: { first_name, last_name, email, group, allergies, exceptions, admin, image }, } = this.state;
     const { auth: { user, updateUser, }, } = this.props;
-    updateUser(user.id, { first_name, last_name, email, group, allergies, exceptions, admin });
+    updateUser(user.id, { first_name, last_name, email, group, allergies, exceptions, admin, image });
     this.setState({
       editing: false,
       formValues: {
         ...this.state.formValues,
-        file: "",
+        image: "",
       },
     });
   }
@@ -53,7 +58,7 @@ class Profile extends Component {
         <Grid.Column width={8}>
           <Header as="h2"
             content='Name:'
-            subheader={user.first_name + ' ' + user.last_name} 
+            subheader={user.first_name + ' ' + user.last_name}
             />
             <Header as="h2"
             content='Email:'
@@ -79,9 +84,31 @@ class Profile extends Component {
 
   editView = () => {
     //const { auth: { user }, } = this.props;
-    const { formValues: { first_name, last_name, email, group, allergies, exceptions, } } = this.state;
+    const { formValues: { first_name, last_name, email, group, allergies, exceptions, image, } } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
+        <Dropzone
+          onDrop={this.onDrop}
+          multiple={false}
+        >
+          {({ getRootProps, getInputProps, isDragActive }) => {
+            return(
+              <div
+                {...getRootProps()}
+                style={styles.dropzone}
+              >
+                <input {...getInputProps()}/>
+                {
+                  isDragActive ?
+                    <p>Drop Profile Picture here...</p>
+                    :
+                    <p>Try dropping a Profile Picture here, or click to select a file to upload </p>
+                }
+              </div>
+            )
+          }}
+        </Dropzone>
+        <br />
         <Form.Input
             label="First Name"
             required
@@ -221,6 +248,18 @@ const adminOptions = [
     value: false,
   },
 ]
+
+const styles={
+  dropzone: {
+    height: "150px",
+    width: "150px",
+    border: "1px dashed black",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "center",
+    padding: "10px",
+  },
+}
 
 const ConnectedProfile = (props) => (
   <AuthConsumer>
