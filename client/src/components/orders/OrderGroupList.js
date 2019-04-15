@@ -8,6 +8,7 @@ import { Header, } from 'semantic-ui-react';
 class OrderList extends React.Component{
   state = {orders:[],}
 
+
   componentDidMount() {
     axios.get('/api/orders')
       .then( res => {
@@ -35,6 +36,7 @@ class OrderList extends React.Component{
           }
         </ul>
     </>
+
     )
   }
 }
