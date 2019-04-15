@@ -5,7 +5,7 @@ import Dropzone from 'react-dropzone';
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
-class Profile extends Component {
+class MyProfile extends Component {
   state = { editing: false, formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '', image: '', }, };
 
   componentDidMount() {
@@ -264,7 +264,7 @@ const styles={
 const ConnectedProfile = (props) => (
   <AuthConsumer>
     { auth =>
-      <Profile { ...props } auth={auth} />
+      <MyProfile { ...props } auth={auth} />
     }
   </AuthConsumer>
 )

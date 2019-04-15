@@ -10,9 +10,11 @@ import FetchUser from './shared/FetchUser';
 import ProtectedRoute from './shared/ProtectedRoute';
 import Restaurants from "./components/restaurants/Restaurants"
 import OrderFormAdmin from "./components/orders/OrderFormAdmin"
-import Profile from './components/profile/Profile';
 import RestaurantHistory from './components/restaurants/RestaurantHistory';
+import MyProfile from './components/profile/MyProfile';
+import Profiles from './components/profile/Profiles';
 import Order from './components/orders/Order';
+import Footer from './shared/Footer';
 
 const App = () => (
   <Fragment>
@@ -21,7 +23,8 @@ const App = () => (
     <Container>
       <Switch>
         <ProtectedRoute exact path="/" component={Home} />
-        <ProtectedRoute exact path="/profile" component={Profile} />
+        <ProtectedRoute exact path="/profile" component={MyProfile} />
+        <ProtectedRoute exact path="/profiles" component={Profiles} />
         <ProtectedRoute exact path="/restaurants" component={Restaurants} />
         <ProtectedRoute exact path="/new_order" component={OrderFormAdmin} />
         <ProtectedRoute exact path="/order" component={Order} />
@@ -32,6 +35,7 @@ const App = () => (
       </Switch>
     </Container>
     </FetchUser>
+    <Footer />
   </Fragment>
 )
 
