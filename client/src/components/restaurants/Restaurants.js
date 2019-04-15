@@ -87,7 +87,10 @@ class Restaurants extends React.Component {
             })
           }
         </ul>
+          <hr/>
+          <h1>Add a New Restaurant</h1>
           <RestaurantForm addRestaurant={this.addRestaurant} />
+          <hr />
         </div>
     )
   }
