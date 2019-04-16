@@ -31,6 +31,7 @@ const App = () => (
         <ProtectedRoute exact path="/order" component={Order} />
         <ProtectedRoute exact path="/restaurant_history" component={RestaurantHistory} />
         <ProtectedRoute exact path="/restaurant_details" component={RestaurantDetails} />
+        <ProtectedRoute exact path="/order" component={Order} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route component={NoMatch} />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Button, } from "semantic-ui-react";
-import axios from 'axios';
+import { Form, } from "semantic-ui-react";
+//import axios from 'axios';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
 
@@ -12,40 +12,32 @@ import { withRouter, } from 'react-router-dom';
 //then in this form allow the user to edit it.
 
 class OrderFormUser extends Component {
-  state = { formValues: { ticket: '', }, };
+  state = {
+    ticket: "",
+  };
 
 componentDidMount() {
-  const { order: { current, ticket, order_date, restaurant_id, user_id } } = this.props;
-  this.setState({ formValues: { ticket }, });
+  const { id, current, ticket, order_date, restaurant_id, user_id } = this.props;
+  this.setState({ id, ticket, current, order_date, restaurant_id, user_id, });
 }
 
-handleChange = (e, {name, value}) => {
-  // const { name, value, } = e.target;
-  this.setState({
-    formValues: {
-      ...this.state.formValues,
-      [name]: value,
-    }
-  })
+handleChange = (e) => {
+  const { name, value } = e.target
+  this.setState({ [name]: value })
 }
 
 handleSubmit = (e) => {
   e.preventDefault()
   this.props.editOrder(this.state) //create editOrder function
   this.props.toggleEdit() //create toggleEdit function
-  this.setState({
-    formValues: {
-    ...this.state.formValues,
-    ticket: '',
-    },
-  })
+  this.setState({ ticket: '', })
 }
 
 //create restriction so edit toggle option where this component displays
   //only appears if user === user.id or user.admin == true.
 
   editView = () => {
-    const { order, auth: { user, }, } = this.props
+    //const { order, auth: { user, }, } = this.props
     const { ticket, } = this.state;
 
     return (
