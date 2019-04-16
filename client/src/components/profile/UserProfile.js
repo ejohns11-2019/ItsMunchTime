@@ -1,7 +1,8 @@
 import React, { Fragment, Component } from 'react';
-import { Form, Grid, Image, Container, Divider, Header, Button, Segment, } from 'semantic-ui-react';
+import { Grid, Image, Container, Divider, Header, Button, Icon, } from 'semantic-ui-react';
 import Dropzone from 'react-dropzone';
 import EditProfile from './EditProfile';
+import { AuthConsumer, } from '../../providers/AuthProvider';
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
@@ -17,6 +18,7 @@ class UserProfile extends Component {
   render(){
     const {editing,} = this.state
     const is_admin = String(this.props.admin)
+    const { auth: { deleteUser, }, } = this.props;
     return(
       <Container>
         <Grid>
@@ -49,8 +51,26 @@ class UserProfile extends Component {
 
         </Grid.Column>
         <Grid.Column>
-          <Button onClick={this.toggleEdit}>{editing ? 'Cancel' : 'Edit'}</Button>
-          
+          <Button
+          icon
+          color="blue"
+          size="tiny"
+          onClick={this.toggleEdit}
+        >
+          { this.state.editing ? 'Cancel'
+          :
+          <Icon name="pencil" />
+          }
+        </Button>
+        <Button
+          icon
+          color="red"
+          size="tiny"
+          onClick={ () => deleteUser(this.props.id, this.props.u) }
+          style={{ marginTop: "15px", }}
+        >
+          <Icon name ="trash" />
+        </Button>
         </Grid.Column>
         </Fragment>
         </Grid.Row>
@@ -65,5 +85,13 @@ class UserProfile extends Component {
 }
 
 
+const ConnectedUserProfile = (props) => (
+  <AuthConsumer>
+    { auth =>
+      <UserProfile { ...props } auth={auth} />
+    }
+  </AuthConsumer>
+)
 
-export default UserProfile;
+export default ConnectedUserProfile;
+// export default UserProfile;
