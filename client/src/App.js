@@ -27,7 +27,7 @@ const App = () => (
         <ProtectedRoute exact path="/profiles" component={Profiles} />
         <ProtectedRoute exact path="/restaurants" component={Restaurants} />
         <ProtectedRoute exact path="/new_order" component={OrderFormAdmin} />
-        <ProtectedRoute exact path="/order" component={Order} />
+        // <ProtectedRoute exact path="/order" component={Order} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/restaurant_history" component={RestaurantHistory} />
         <Route exact path="/register" component={Register} />
