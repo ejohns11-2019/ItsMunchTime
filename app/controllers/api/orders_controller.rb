@@ -36,8 +36,11 @@ class Api::OrdersController < ApplicationController
     end
 
     def restaurant_history
-      # render json: Order.where(restaurant_id: params[:restaurant_id])
       render json: Order.restaurant_history(params[:restaurant_id])
+    end
+
+    def restaurant_visit_counter
+      render json: Order.restaurant_visit_counter(params[:restaurant_id])
     end
   
     private
