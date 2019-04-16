@@ -130,7 +130,7 @@ export class ConnectedRestaurant extends React.Component {
     return(
       <AuthConsumer>
         { auth =>
-            <Restaurant {... this.props } {...this.state} auth={auth} />
+            <Restaurant {...this.props } {...this.state} auth={auth} />
         }
       </AuthConsumer>
     )
