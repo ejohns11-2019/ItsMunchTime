@@ -105,8 +105,8 @@ class Restaurant extends React.Component {
         >
           <Icon name ="trash" />
         </Button>
-        <Link 
-          
+        <Link
+
           color="red"
           style={{ marginLeft: "15px", }}
           to={{

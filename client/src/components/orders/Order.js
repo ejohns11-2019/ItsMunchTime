@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Item, Icon, Image, Button } from 'semantic-ui-react';
+import { Item, Icon, Button } from 'semantic-ui-react';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import axios from 'axios';
 import OrderFormUser from './OrderFormUser';
@@ -8,16 +8,7 @@ import { withRouter } from 'react-router-dom';
 
 
 class Order extends Component {
-  state = { editing: false, loading: false, formValues: { user: {id: '', first_name: '',}, restaurant: {id: '', name:''}, order: {id: '', restaurant_id: '', user_id: '', ticket: '', current: '', order_date: '',}}}
-
-  toggleLoaded = () => {
-    this.setState({ loading: true})
-  }
-
-  componentDidMount() {
-    const { user, restaurant, order, getOrders, setRestaurant} = this.props.auth
-    this.setState({ formValues: {...user}, order: getOrders(user.id, this.toggleLoaded,), restaurant, })
-  }
+  state = { order: {}, editing: false, }
 
   toggleEdit = () => {
     this.setState( state => {
@@ -25,52 +16,52 @@ class Order extends Component {
     })
   }
 
-  // deleteOrder = (id) => {
-  //   axios.delete(`/api/orders/${id}`)
-  //     .then( res => {
-  //       const { orders } = this.state;
-  //       this.setState({ orders: orders.filter( o => o.id !== id ) })
-  //     })
-  //     .catch( err => {
-  //       alert(err.response.data.message)
-  //     })
-  // }
+  deleteOrder = (id) => {
+    axios.delete(`/api/orders/${id}`)
+      .then( res => {
+        const { orders } = this.state;
+        this.setState({ orders: orders.filter( o => o.id !== id ) })
+      })
+      .catch( err => {
+        alert(err.response.data.message)
+      })
+  }
 
   displayOrder = () => {
-    const {user, order} = this.props.auth
+    //const {user, order} = this.props.auth
 
-    if (this.state.loading) {
-      return (
-        <>
+    return (
+      <>
         <Item.Group>
           <Item>
-            <Item.Image size='tiny' src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Food_font_awesome.svg/600px-Food_font_awesome.svg.png' />
+            <Item.Image size='tiny'
+              src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Food_font_awesome.svg/600px-Food_font_awesome.svg.png'
+            />
             <Item.Content>
-                <Item.Header as='a'>{user.first_name}</Item.Header>
-                {/* <Item.Meta>{order.ticket}</Item.Meta> */}
-                <Item.Description>
-                  <Image size='small' src='https://www.publicdomainpictures.net/pictures/50000/nahled/letterhead-silhouette.jpg' />
-                </Item.Description>
-                <Item.Extra>Additional Details</Item.Extra>
+                <Item.Header as='a'>{this.props.user_id}</Item.Header>
+                <Item.Meta>{this.props.ticket}</Item.Meta>
+                {/* <Item.Description> */}
+                  {/* <Image size='small' src='https://www.publicdomainpictures.net/pictures/50000/nahled/letterhead-silhouette.jpg' /> */}
+                {/* </Item.Description> */}
+                {/* <Item.Extra>Additional Details</Item.Extra> */}
               </Item.Content>
           </Item>
         </Item.Group>
-        </>
+      </>
       )
-    }
-    return(
-      <p>Loading</p>
-    )
   }
 
   orderEditView = () => {
       return (
-        <OrderFormUser user_id={this.props.user_id}
+        <OrderFormUser
+          id={this.props.id}
+          user_id={this.props.user_id}
           ticket={this.props.ticket}
           restaurant_id={this.props.restaurant_id}
           order_date={this.props.order_date}
           current={this.props.current}
           editOrder={this.editOrder}
+          toggleEdit={this.toggleEdit}
         />
       )
     }
@@ -78,12 +69,8 @@ class Order extends Component {
   editOrder = (order) => {
     axios.put(`/api/orders/${order.id}`, order )
       .then( res => {
-        const orders = this.state.restaurants.map( o => {
-          if (o.id === order.id)
-            return res.data
-          return o;
-        })
-        this.setState({ orders, })
+        this.setState({ order: res.data })
+        window.location.href = '/'
       })
       .catch( err => {
         console.log(err)
@@ -93,7 +80,7 @@ class Order extends Component {
   identityCheck = () => {
     const { auth: { user, } } = this.props
 
-    if (user.admin === true || user.id === user.id) {
+    if (user.admin === true || user.id === this.order.user_id) {
       return (
         <>
           { this.state.editing ? this.orderEditView() : this.displayOrder() }
@@ -101,7 +88,7 @@ class Order extends Component {
             icon
             color="blue"
             size="tiny"
-            onClick={() => this.toggleEdit(this.props.id)}
+            onClick={() => this.toggleEdit()}
           >
             { this.state.editing ? 'Cancel'
             :
@@ -112,7 +99,7 @@ class Order extends Component {
             icon
             color="red"
             size="tiny"
-            onClick={ () => this.props.deleteOrder(this.props.id) }
+            onClick={ () => this.deleteOrder(this.props.id) }
             style={{ marginLeft: "15px", }}
           >
             <Icon name ="trash" />
@@ -127,7 +114,7 @@ class Order extends Component {
   }
 
   render() {
-    const { orders, } = this.state
+    //const { orders, } = this.state
     return (
       <div>
         { this.identityCheck() }
