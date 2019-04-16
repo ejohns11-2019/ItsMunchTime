@@ -28,26 +28,31 @@ class Order extends Component {
   }
 
   displayOrder = () => {
-    //const {user, order} = this.props.auth
 
-    return (
-      <>
-        <Item.Group>
-          <Item>
-            <Item.Image size='tiny'
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Food_font_awesome.svg/600px-Food_font_awesome.svg.png'
-            />
-            <Item.Content>
-                <Item.Header as='a'>{this.props.user_id}</Item.Header>
-                <Item.Meta>{this.props.ticket}</Item.Meta>
-                {/* <Item.Description> */}
-                  {/* <Image size='small' src='https://www.publicdomainpictures.net/pictures/50000/nahled/letterhead-silhouette.jpg' /> */}
-                {/* </Item.Description> */}
-                {/* <Item.Extra>Additional Details</Item.Extra> */}
-              </Item.Content>
-          </Item>
-        </Item.Group>
-      </>
+    const {user, order} = this.props.auth
+
+    if (this.state.loading) {
+      return (  
+          <>
+          
+
+    
+
+  <Item.Group>
+    <Item>
+      <Item.Image size='tiny' src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Food_font_awesome.svg/600px-Food_font_awesome.svg.png' />
+      <Item.Content>
+      <Item.Header as='a'>{user.first_name}</Item.Header>
+      <Item.Meta>{order.ticket}</Item.Meta>
+      <Item.Description>
+            <Image size='small' src='https://www.publicdomainpictures.net/pictures/50000/nahled/letterhead-silhouette.jpg' />
+          </Item.Description>
+        </Item.Content>
+    </Item>
+  </Item.Group>
+  
+    </>
+
       )
   }
 
