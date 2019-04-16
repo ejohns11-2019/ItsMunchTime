@@ -4,46 +4,54 @@ import Dropzone from 'react-dropzone';
 import { AuthConsumer, } from '../../providers/AuthProvider';
 
 class EditProfile extends React.Component {
-  state = {formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '', image: '', },}
+  state = { 
+    first_name: '', 
+    last_Name: '', 
+    email: '', 
+    group: '', 
+    allergies: '', 
+    exceptions: '', 
+    admin: '', 
+    image: '',
+    profile: [],
+    profileData: [], 
+    p_id: '',}
 
   componentDidMount() {
     const { first_name, last_name, email, group, allergies, exceptions, admin } = this.props;
-    this.setState({ formValues: { first_name, last_name, email, group, allergies, exceptions, admin }, });
+    this.setState({ first_name, last_name, email, group, allergies, exceptions, admin, profile: {...this.props} });
+    const {profile, profileData} = this.state
+    profile.map( p => {
+      var temp = profileData;
+      temp.push({ key: p.id, text: p.name, value: p.name})
+      this.setState({profileData: temp})
+    })
   }
   
   handleChange = (e, {name, value}) => {
     this.setState({
-      formValues: {
-        ...this.state.formValues,
+        ...this.state,
         [name]: value,
-      }
     })
   }
-
+ 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { formValues: { first_name, last_name, email, group, allergies, exceptions, admin, image }, } = this.state;
+    const {  first_name, last_name, email, group, allergies, exceptions, admin, image  } = this.state;
     const { auth: { updateUser, }, } = this.props;
     updateUser(this.props.id, { first_name, last_name, email, group, allergies, exceptions, admin, image });
     this.setState({
-      // editing: false,
       formValues: {
         ...this.state.formValues,
         image: "",
       },
     });
-    // this.props.updateProfiles({
-    //   formValues: {
-    //     ...this.state.formValues,
-    //     image: "",
-    //   },
-    // });
     this.props.toggleEdit();
   }
 
 
   render() {
-  const { formValues: { first_name, last_name, email, group, allergies, exceptions, image, } } = this.state;
+  const { first_name, last_name, email, group, allergies, exceptions, image, admin } = this.state;
   const styles={
     dropzone: {
       height: "150px",
@@ -156,8 +164,17 @@ class EditProfile extends React.Component {
           value={exceptions}
           onChange={this.handleChange}
           />
-
-
+          <Form.Select
+            required
+            label='Role'
+            placeholder='role'
+            fluid
+            selection
+            name='admin'
+            value={admin}
+            onChange={this.handleChange}
+            options={adminOptions}
+            />
         <Segment textAlign='center' basic>
           <Button primary type='submit'>Submit</Button>
         </Segment>
