@@ -17,6 +17,7 @@ class Api::UsersController < ApplicationController
     user.group = params[:group] ? params[:group] : user.group
     user.allergies = params[:allergies] ? params[:allergies] : user.allergies
     user.exceptions = params[:exceptions] ? params[:exceptions] : user.exceptions
+    user.admin = params[:admin] ? params[:admin] : user.admin
 
     #image = params[:image]
 

@@ -12,7 +12,6 @@ class RestaurantHistory extends Component {
   componentDidMount() {
     axios.get('/api/restaurant_history', { params: { restaurant_id: this.props.location.state.restId } })
       .then(res => {
-         debugger
         this.setState({ orders: res.data })
       })
       .catch(err => {

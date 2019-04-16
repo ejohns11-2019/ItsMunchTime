@@ -11,6 +11,7 @@ import ProtectedRoute from './shared/ProtectedRoute';
 import Restaurants from "./components/restaurants/Restaurants"
 import OrderFormAdmin from "./components/orders/OrderFormAdmin"
 import RestaurantHistory from './components/restaurants/RestaurantHistory';
+import RestaurantDetails from './components/restaurants/RestaurantDetails';
 import MyProfile from './components/profile/MyProfile';
 import Profiles from './components/profile/Profiles';
 import Order from './components/orders/Order';
@@ -28,8 +29,10 @@ const App = () => (
         <ProtectedRoute exact path="/restaurants" component={Restaurants} />
         <ProtectedRoute exact path="/new_order" component={OrderFormAdmin} />
         <ProtectedRoute exact path="/order" component={Order} />
+        <ProtectedRoute exact path="/restaurant_history" component={RestaurantHistory} />
+        <ProtectedRoute exact path="/restaurant_details" component={RestaurantDetails} />
+        <ProtectedRoute exact path="/order" component={Order} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/restaurant_history" component={RestaurantHistory} />
         <Route exact path="/register" component={Register} />
         <Route component={NoMatch} />
       </Switch>

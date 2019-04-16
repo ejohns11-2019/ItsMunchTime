@@ -22,9 +22,11 @@ class Order < ApplicationRecord
     ")
   end
 
-
-  # Client.all(:joins => 'LEFT OUTER JOIN addresses ON addresses.client_id = clients.id')
-# Client.count(:conditions => "clients.first_name = 'Ryan' AND orders.status = 'received'", :include => "orders")
-
-
+  def self.restaurant_visit_counter(id)
+    Order.find_by_sql("
+      SELECT COUNT (*)
+      FROM orders 
+      WHERE orders.restaurant_id = #{id}
+    ")
+  end
 end
