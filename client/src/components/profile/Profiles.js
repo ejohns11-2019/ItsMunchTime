@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { AuthConsumer, } from '../../providers/AuthProvider';
 import { Form, Grid, Image, Container, Header, Button, Segment } from 'semantic-ui-react';
-import Dropzone from 'react-dropzone';
+// import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import UserProfile from './UserProfile';
 

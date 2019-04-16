@@ -115,7 +115,7 @@ class Restaurant extends React.Component {
           }}
         >History</Link>
       </>
-
+    )
     return(
       <div>
         { this.adminCheck() }
