@@ -60,8 +60,25 @@ export class AuthProvider extends React.Component {
       })
      .catch( err => {
        console.log(err)
-     })
+     })   
+  }
+
+  deleteUser = (id) => {
+    axios.get('/api/users')
+      .then( res => {
+        this.setState({ users: res.data }) 
+      })
       
+     .catch( err => {
+       console.log(err)
+     })  
+     axios.delete(`/api/users/${id}`)
+          .then( res => {
+            const { users } = this.state;
+            this.setState({ users: users.filter(u => u.id !== id) })
+            window.location.href = '/profiles'
+          })
+    
   }
 
   getOrders = (id, cb) => {
@@ -98,6 +115,7 @@ export class AuthProvider extends React.Component {
         updateUser: this.updateUser,
         getOrders: this.getOrders,
         setRestaurant: this.setRestaurant,
+        deleteUser: this.deleteUser,
       }}>
         { this.props.children }
       </AuthContext.Provider>
