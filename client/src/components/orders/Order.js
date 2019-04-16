@@ -55,6 +55,7 @@ class Order extends Component {
 
       )
   }
+}
 
   orderEditView = () => {
       return (
