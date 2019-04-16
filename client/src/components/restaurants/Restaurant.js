@@ -21,7 +21,20 @@ class Restaurant extends React.Component {
       <>
         <Card>
           <Card.Content>
-            <Card.Header>{ this.props.name }</Card.Header>
+            <Card.Header> 
+            <Link 
+              to={{
+                pathname: "/restaurant_details",
+                state: {restId: this.props.id, 
+                  name:  this.props.name,
+                  address: this.props.address, 
+                  phone: this.props.phone, 
+                  menu: this.props.menu 
+                }
+              }}
+            >
+            { this.props.name } </Link>
+            </Card.Header>
             <Card.Description>
               Address: { this.props.address }<br/>
               Phone:  { this.props.phone }
