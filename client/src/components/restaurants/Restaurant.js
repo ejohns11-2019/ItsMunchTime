@@ -105,8 +105,8 @@ class Restaurant extends React.Component {
         >
           <Icon name ="trash" />
         </Button>
-        <Link 
-          
+        <Link
+
           color="red"
           style={{ marginLeft: "15px", }}
           to={{
@@ -130,7 +130,7 @@ export class ConnectedRestaurant extends React.Component {
     return(
       <AuthConsumer>
         { auth =>
-            <Restaurant {... this.props } {...this.state} auth={auth} />
+            <Restaurant {...this.props } {...this.state} auth={auth} />
         }
       </AuthConsumer>
     )
