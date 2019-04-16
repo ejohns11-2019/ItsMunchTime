@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Item, Icon, Button } from 'semantic-ui-react';
+import { Item, Icon, Button, Image } from 'semantic-ui-react';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import axios from 'axios';
 import OrderFormUser from './OrderFormUser';
