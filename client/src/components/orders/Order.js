@@ -8,13 +8,11 @@ import { withRouter } from 'react-router-dom';
 
 
 class Order extends Component {
-  state = { order: {}, editing: false, }
+  state = { order: [], }
 
-  toggleEdit = () => {
-    this.setState( state => {
-      return { editing: !state.editing, };
-    })
-  }
+  componentDidMount(){
+    this.setState({order: {...this.props}})
+  } 
 
   deleteOrder = (id) => {
     axios.delete(`/api/orders/${id}`)
@@ -26,36 +24,6 @@ class Order extends Component {
         alert(err.response.data.message)
       })
   }
-
-  displayOrder = () => {
-
-    const {user, order} = this.props.auth
-
-    if (this.state.loading) {
-      return (  
-          <>
-          
-
-    
-
-  <Item.Group>
-    <Item>
-      <Item.Image size='tiny' src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Food_font_awesome.svg/600px-Food_font_awesome.svg.png' />
-      <Item.Content>
-      <Item.Header as='a'>{user.first_name}</Item.Header>
-      <Item.Meta>{order.ticket}</Item.Meta>
-      <Item.Description>
-            <Image size='small' src='https://www.publicdomainpictures.net/pictures/50000/nahled/letterhead-silhouette.jpg' />
-          </Item.Description>
-        </Item.Content>
-    </Item>
-  </Item.Group>
-  
-    </>
-
-      )
-  }
-}
 
   orderEditView = () => {
       return (
@@ -84,23 +52,25 @@ class Order extends Component {
   }
 
   identityCheck = () => {
-    const { auth: { user, } } = this.props
+    
+    
+}
 
-    if (user.admin === true) { //|| user.id === this.order.user_id) 
-      return (
-        <>
-          { this.state.editing ? this.orderEditView() : this.displayOrder() }
-          <Button
-            icon
-            color="blue"
-            size="tiny"
-            onClick={() => this.toggleEdit()}
-          >
-            { this.state.editing ? 'Cancel'
-            :
-            <Icon name="pencil" />
-            }
-          </Button>
+
+  render() {
+    const { auth: { user, } } = this.props
+    const { order } = this.state
+
+    
+
+    return (
+      <>
+        <h2>Order: {order.id}</h2>
+        <h2>User: {order.user_id}</h2>
+        <h2>CurrentUser: {user.id}</h2>
+              
+        <h2>Single Order</h2>
+        <OrderFormUser/>
           <Button
             icon
             color="red"
@@ -110,21 +80,8 @@ class Order extends Component {
           >
             <Icon name ="trash" />
           </Button>
-        </>
-      )
-    } else {
-      return(
-        this.displayOrder()
-      )
-    }
-  }
-
-  render() {
-    //const { orders, } = this.state
-    return (
-      <div>
-        { this.identityCheck() }
-      </div>
+             
+      </>
     )
   }
 }
