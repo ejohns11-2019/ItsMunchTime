@@ -86,7 +86,9 @@ class Order extends Component {
   identityCheck = () => {
     const { auth: { user, } } = this.props
 
-    if (user.admin === true) {
+
+    if (user.admin === true) { //|| user.id === this.order.user_id) 
+
       return (
         <>
           { this.state.editing ? this.orderEditView() : this.displayOrder() }

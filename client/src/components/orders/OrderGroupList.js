@@ -1,15 +1,45 @@
 import React from 'react';
+import { withRouter, } from 'react-router-dom';
 import Order from './Order'
 import axios from 'axios';
-import { Header, Grid, Table, Button, } from 'semantic-ui-react';
+import { AuthConsumer, } from "../../providers/AuthProvider";
+import { Header, Grid, Table, Button} from 'semantic-ui-react';
 import { useDropzone } from 'react-dropzone';
 import UserProfile from '../profile/UserProfile';
 import { AuthConsumer } from '../../providers/AuthProvider';
 
+
 //Logical component that will handle order display, and all order CRUD actions
 
 class OrderList extends React.Component{
+
   state = {orders:[], user: { id: ''}, order: { current: '', ticket: '', order_date: '', user_id: '', restaurtant_id: ''}}
+
+
+  toggleEdit = () => {
+    this.setState( state => {
+      return { editing: !state.editing, };
+    })
+  }
+
+  toggleReset = () => {
+    this.setState( state => {
+      return {orders: [], }
+    })
+  }
+
+  
+  adminReset = () => {
+    const { auth: { user, } } = this.props
+    
+    if (user.admin === true) {
+      return(
+        <>
+        <Button size="medium" color="red" onClick={this.toggleReset}>Done</Button>
+        </>
+      )
+    }
+  }
 
 
   componentDidMount() {
@@ -21,6 +51,7 @@ class OrderList extends React.Component{
         console.log(err)
       })
   }
+
 
   copyOrder = (id) => {
     // debugger
@@ -44,9 +75,10 @@ class OrderList extends React.Component{
   render(){
     const { orders, } = this.state
     
+
     return(
     <>
-      
+
 
       {/* <Grid>
         <Grid.Row>
@@ -83,18 +115,27 @@ class OrderList extends React.Component{
         </Grid.Row>
       </Grid> */}
           
+
     </>
 
     )
   }
 }
 
-const ConnectedOrderList = (props) => (
-  <AuthConsumer>
-    { auth =>
-      <OrderList { ...props } auth={auth} />
-    }
-  </AuthConsumer>
-)
 
-export default ConnectedOrderList;
+
+export class ConnectedOrderList extends React.Component {
+  render() {
+    return(
+      <AuthConsumer>
+        { auth =>
+            <OrderList {...this.props } {...this.state} auth={auth} />
+        }
+      </AuthConsumer>
+    )
+  }
+}
+
+export default withRouter(ConnectedOrderList);
+
+
