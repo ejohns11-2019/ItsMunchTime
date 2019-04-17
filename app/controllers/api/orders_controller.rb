@@ -8,12 +8,10 @@ class Api::OrdersController < ApplicationController
     def create
         users = User.all
         users.each do |user|
-          @order = user.orders.new(order_params)
-          if @order.save
-            render json: @order
-          else
-          render json: { errors: order.errors }, status: :unprocessable_entity 
+          order = user.orders.new(order_params)
+          render json: { errors: order.errors }, status: :unprocessable_entity unless order.save
         end
+       render json: Order.all
     end
 
     def update
