@@ -16,6 +16,7 @@ import MyProfile from './components/profile/MyProfile';
 import Profiles from './components/profile/Profiles';
 import Order from './components/orders/Order';
 import Footer from './shared/Footer';
+import OrderFormUser from './components/orders/OrderFormUser';
 
 const App = () => (
   <Fragment>
@@ -28,6 +29,7 @@ const App = () => (
         <ProtectedRoute exact path="/profiles" component={Profiles} />
         <ProtectedRoute exact path="/restaurants" component={Restaurants} />
         <ProtectedRoute exact path="/new_order" component={OrderFormAdmin} />
+        <ProtectedRoute exact path="/new_order_user" component={OrderFormUser} />
         <ProtectedRoute exact path="/order" component={Order} />
         <ProtectedRoute exact path="/restaurant_history" component={RestaurantHistory} />
         <ProtectedRoute exact path="/restaurant_details" component={RestaurantDetails} />
