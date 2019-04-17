@@ -8,7 +8,7 @@ import UserProfile from '../profile/UserProfile';
 //Logical component that will handle order display, and all order CRUD actions
 
 class OrderList extends React.Component{
-  state = {orders:[],}
+  state = { orders: [],}
 
 
   componentDidMount() {
@@ -31,7 +31,19 @@ class OrderList extends React.Component{
           <Grid.Column width={6} floated='right'> */}
           
           <Grid>
-            <Grid.Column floated='right' width={5}>
+            <Grid.Row>
+            <Grid.Column width={8}>
+             { 
+               orders.map( (o) => {
+        
+                return(
+                  <Order key={o.id} {...o}/>
+                )
+              
+               })
+            }
+            </Grid.Column>
+            <Grid.Column width={8}>
             <Table celled color="red"> 
               <Table.Header>
                 <Table.Row textAlign="center">
@@ -55,7 +67,9 @@ class OrderList extends React.Component{
                     })
                   }
                  </Table>
+                 {/* {this.adminReset()} */}
                  </Grid.Column>
+                 </Grid.Row>
                  </Grid>
                 
           {/* </Grid.Column>
