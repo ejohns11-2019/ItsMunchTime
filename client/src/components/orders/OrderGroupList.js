@@ -1,12 +1,39 @@
 import React from 'react';
+import { withRouter, } from 'react-router-dom';
 import Order from './Order'
 import axios from 'axios';
-import { Header, } from 'semantic-ui-react';
+import { AuthConsumer, } from "../../providers/AuthProvider";
+import { Header, Button, } from 'semantic-ui-react';
 
 //Logical component that will handle order display, and all order CRUD actions
 
 class OrderList extends React.Component{
-  state = {orders:[],}
+  state = {orders:[], editing: false, }
+
+  toggleEdit = () => {
+    this.setState( state => {
+      return { editing: !state.editing, };
+    })
+  }
+
+  toggleReset = () => {
+    this.setState( state => {
+      return {orders: [], }
+    })
+  }
+
+  
+  adminReset = () => {
+    const { auth: { user, } } = this.props
+    
+    if (user.admin === true) {
+      return(
+        <>
+        <Button size="medium" color="red" onClick={this.toggleReset}>Done</Button>
+        </>
+      )
+    }
+  }
 
 
   componentDidMount() {
@@ -18,12 +45,13 @@ class OrderList extends React.Component{
         console.log(err)
       })
   }
+
   render(){
-    const { orders,} = this.state
+    const { orders, } = this.state
     return(
     <>
       <ul>
-      <Header as='h1'>This is the OrderList Component</Header>
+      <Header as='h1'>Orders:</Header>
           {
             orders.map( (o, i) => {
             return(
@@ -35,10 +63,23 @@ class OrderList extends React.Component{
             })
           }
         </ul>
+        {this.adminReset()}
     </>
 
     )
   }
 }
 
-export default OrderList;
+export class ConnectedOrderList extends React.Component {
+  render() {
+    return(
+      <AuthConsumer>
+        { auth =>
+            <OrderList {...this.props } {...this.state} auth={auth} />
+        }
+      </AuthConsumer>
+    )
+  }
+}
+
+export default withRouter(ConnectedOrderList);
