@@ -18,7 +18,6 @@ class Home extends React.Component {
         <Container>
           <OrderList />
           <OrderHistory />
-          <Order />
           <Link to='/new_order'>
             <Button size='medium' color='blue'>New Order</Button>
           </Link>
@@ -29,7 +28,6 @@ class Home extends React.Component {
         <Container>
           <OrderList />
           <OrderHistory />
-          <Order />
         </Container>
       )
     }
