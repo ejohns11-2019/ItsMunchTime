@@ -26,7 +26,16 @@ class Order < ApplicationRecord
     Order.find_by_sql("
       SELECT COUNT (*)
       FROM orders 
-      WHERE orders.restaurant_id = #{id}
+      WHERE orders.restaurant_id = #{id};
+    ")
+  end
+
+  def self.current_orders
+    Order.find_by_sql("
+      SELECT orders.*, users.first_name, users.last_name
+      FROM orders 
+      JOIN users ON orders.user_id = users.id
+      WHERE orders.current = true;
     ")
   end
 end

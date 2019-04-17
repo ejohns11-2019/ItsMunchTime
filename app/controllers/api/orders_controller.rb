@@ -15,17 +15,21 @@ class Api::OrdersController < ApplicationController
     end
 
     def update
-      if current_user.admin == true
-        order = Order.find(params[:id])
-        order.update(order_params)
-        render json: order
-      else
-        #add logic for admin user to be able to update any users order
-        regular_user = User.find([params: user_id])
-        order = regular_user.orders.find(params[:id])
-        order.update(order_params)
-        render json: order
-      end
+        users = User.all
+        users.each do |user|
+          order = Order.where(params[:current] = true)
+          order.update(order_params)
+        end
+        render json: Order.all
+    end
+
+    def current_to_false
+        users = User.all
+        users.each do |user|
+          order = Order.where(params[:current] == true)
+          order.update(current: params[:current])
+        end
+        render json: Order.all
     end
 
     def destroy
@@ -41,6 +45,10 @@ class Api::OrdersController < ApplicationController
 
     def restaurant_visit_counter
       render json: Order.restaurant_visit_counter(params[:restaurant_id])
+    end
+
+    def current_orders
+      render json: Order.current_orders
     end
 
     private
