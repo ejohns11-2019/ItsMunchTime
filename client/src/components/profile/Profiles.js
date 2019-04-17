@@ -22,10 +22,11 @@ class Profiles extends Component {
   
   render() {
     const { users, } = this.state
+    const user_count = users.length
     return (
         <div>
           <Header as='h1'>All Users</Header>
-
+          <Header as='h2'>Viewing {user_count} users </Header>
           {
             users.map( (u, i) => {
             return(

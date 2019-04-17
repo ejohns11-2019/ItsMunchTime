@@ -5,7 +5,7 @@ const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
 
 export class AuthProvider extends React.Component {
-  state = { user: null, restaurant: null, order: null };
+  state = { user: null, restaurant: null, order: null, users: [] };
 
   handleRegister = (user, history) => {
     axios.post("/api/auth", user)
@@ -52,6 +52,33 @@ export class AuthProvider extends React.Component {
     &admin=${user.admin}
     &image=${user.image}`, data)
       .then( res => this.setState({ user: res.data, }) )
+      
+      axios.get('/api/users')
+      .then( res => {
+        this.setState({ users: res.data })
+        window.location.href = '/profiles'
+      })
+     .catch( err => {
+       console.log(err)
+     })   
+  }
+
+  deleteUser = (id) => {
+    axios.get('/api/users')
+      .then( res => {
+        this.setState({ users: res.data }) 
+      })
+      
+     .catch( err => {
+       console.log(err)
+     })  
+     axios.delete(`/api/users/${id}`)
+          .then( res => {
+            const { users } = this.state;
+            this.setState({ users: users.filter(u => u.id !== id) })
+            window.location.href = '/profiles'
+          })
+    
   }
 
   getOrders = (id, cb) => {
@@ -88,6 +115,7 @@ export class AuthProvider extends React.Component {
         updateUser: this.updateUser,
         getOrders: this.getOrders,
         setRestaurant: this.setRestaurant,
+        deleteUser: this.deleteUser,
       }}>
         { this.props.children }
       </AuthContext.Provider>

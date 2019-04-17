@@ -17,6 +17,7 @@ class Api::UsersController < ApplicationController
     user.group = params[:group] ? params[:group] : user.group
     user.allergies = params[:allergies] ? params[:allergies] : user.allergies
     user.exceptions = params[:exceptions] ? params[:exceptions] : user.exceptions
+    user.admin = params[:admin] ? params[:admin] : user.admin
 
     #image = params[:image]
 
@@ -38,8 +39,17 @@ class Api::UsersController < ApplicationController
 
   end
 
+  def destroy
+    if current_user.admin == true
+      User.find(params[:id]).destroy
+      render json: {message: "User Deleted"}
+    else
+      render json: {message: "Unauthorized Access"}, status: 401
+    end
+  end
+
   def userhistory
-    @user= Order.find_by(user_id: current_user.id, current: true)
+    @user = Order.find_by(user_id: current_user.id, current: true)
     if @user.current == true
       render json: @user
     else

@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :orders
     get 'users/:id/orders', to: 'users#userhistory'
     get 'restaurant_history', to: 'orders#restaurant_history'
+    get 'restaurant_visit_counter', to: 'orders#restaurant_visit_counter'
   end
 end
