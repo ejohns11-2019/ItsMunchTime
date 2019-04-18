@@ -36,7 +36,7 @@ class Api::OrdersController < ApplicationController
     def destroy
       if current_user.adimn == true
         User.each { |user|  user.ordres.find(params[:id]).destroy}
-        render json: { message: 'Order was deleted deleted' }
+        render json: { message: 'Order was deleted' }
       end
     end
 

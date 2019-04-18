@@ -28,10 +28,10 @@ handleChange = (e) => {
 
 handleSubmit = (e) => {
   e.preventDefault()
-  this.props.editOrder(this.state) 
-  this.props.toggleEdit() 
-  this.setState({ ticket: '', })
-}
+  this.props.editOrder(this.state)
+  this.props.setState({ ticket: '', })
+  
+  
 
 //create restriction so edit toggle option where this component displays
   //only appears if user === user.id or user.admin == true.
