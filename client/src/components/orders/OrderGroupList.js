@@ -14,7 +14,7 @@ import UserProfile from '../profile/UserProfile';
 
 class OrderList extends React.Component {
 
-  state = { orders: [], user: { id: '' }, order: {id: '', current: '', ticket: '', order_date: '', user_id: '', restaurant_id: ''} }
+  state = { orders: [], ticket: 'burrito', user: { id: '' }, order: { current: '', ticket: '', order_date: '', user_id: '', restaurtant_id: '' } }
 
   toggleEdit = () => {
     this.setState(state => {
@@ -26,6 +26,14 @@ class OrderList extends React.Component {
     axios.put('/api/current_to_false', { current: false })
       .then(res => {
         this.componentDidMount() 
+      })
+  }
+
+  updateTicket = (ticket, id) => {
+    this.setState({ticket: ticket})
+    axios.put(`/api/orders/${id}`, {ticket})
+      .then(res => {
+        this.componentDidMount()
       })
   }
 
@@ -88,7 +96,7 @@ class OrderList extends React.Component {
               {
                 orders.map((o) => {
                   return (
-                    <Order key={o.id} {...o} />
+                    <Order key={o.id} {...o} updateTicket={this.updateTicket} />
                   )
                 })
               }

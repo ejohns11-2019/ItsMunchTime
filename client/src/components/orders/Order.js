@@ -11,7 +11,9 @@ class Order extends Component {
   state = { order: [], }
 
   componentDidMount(){
+    
     this.setState({order: {...this.props}})
+    // debugger
   } 
 
   deleteOrder = (id) => {
@@ -71,7 +73,7 @@ class Order extends Component {
         <h2>CurrentUser: {user.id}</h2>
               
         <h2>Single Order</h2>
-        <OrderFormUser editOrder={this.editOrder} />
+        <OrderFormUser id={this.props.id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} />
           <Button
             icon
             color="red"

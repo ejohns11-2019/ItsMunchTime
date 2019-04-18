@@ -14,11 +14,14 @@ import { withRouter, } from 'react-router-dom';
 class OrderFormUser extends Component {
   state = {
     ticket: "",
+    id: "",
+    current: false,
+    ticket: ""
   };
 
 componentDidMount() {
   const { id, current, ticket, order_date, restaurant_id, user_id } = this.props;
-  this.setState({ id, ticket, current, order_date, restaurant_id, user_id, });
+  this.setState({...this.props });
 }
 
 handleChange = (e) => {
@@ -28,8 +31,9 @@ handleChange = (e) => {
 
 handleSubmit = (e) => {
   e.preventDefault()
-  this.props.editOrder(this.state)
-  this.props.setState({ ticket: '', })
+  // this.props.editOrder(this.state) //create editOrder function
+  this.props.updateTicket(this.state.ticket, this.props.id)
+  this.setState({ ticket: '', })
 }
 
 //create restriction so edit toggle option where this component displays
@@ -68,7 +72,7 @@ export class ConnectedOrderFormUser extends React.Component {
     return(
       <AuthConsumer>
         { auth =>
-            <OrderFormUser {... this.props } {...this.state} auth={auth} />
+            <OrderFormUser {...this.props } {...this.state} auth={auth} />
         }
       </AuthConsumer>
     )
