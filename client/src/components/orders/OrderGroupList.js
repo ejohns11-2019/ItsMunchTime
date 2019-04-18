@@ -24,16 +24,9 @@ class OrderList extends React.Component {
 
   toggleReset = () => {
     axios.put('/api/current_to_false', { current: false })
-
-    this.componentDidMount()
-  }
-
-  adminReset = () => {
-    const { auth: { user, } } = this.props
-
-    if (user.admin === true) {
-      this.setState({ visibility: true })
-    }
+      .then(res => {
+        this.componentDidMount() 
+      })
   }
 
   componentDidMount() {
@@ -44,7 +37,6 @@ class OrderList extends React.Component {
       .catch(err => {
         console.log(err)
       })
-    // this.adminReset()
   }
 
   copyOrder = (id) => {
