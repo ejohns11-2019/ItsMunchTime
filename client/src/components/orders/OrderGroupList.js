@@ -108,7 +108,7 @@ class OrderList extends React.Component {
               {
                 orders.map((o) => {
                   return (
-                    <Order key={o.id} {...o} updateTicket={this.updateTicket} />
+                    <Order key={o.id} {...o} user_id={o.user_id} updateTicket={this.updateTicket} />
                   )
                 })
               }
