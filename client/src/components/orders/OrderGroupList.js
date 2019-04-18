@@ -50,7 +50,6 @@ class OrderList extends React.Component {
  copyOrder = (a,b) => {
  axios.all([this.getOtherOrder(a), this.getUserOrder(b)])
     .then(axios.spread(function (otherOrder, userOrder) {
-      debugger
       axios.put(`/api/orders/${userOrder.data.id}?ticket=${otherOrder.data.ticket}`)
     }))}
 
