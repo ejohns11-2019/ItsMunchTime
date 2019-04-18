@@ -32,7 +32,7 @@ handleChange = (e) => {
 handleSubmit = (e) => {
   e.preventDefault()
   // this.props.editOrder(this.state) //create editOrder function
-  this.props.updateTicket(this.state.ticket, this.props.id)
+  this.props.updateTicket(this.state.ticket, this.props.id, this.props.user_id)
   this.setState({ ticket: '', })
 }
 

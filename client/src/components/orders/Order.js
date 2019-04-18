@@ -27,20 +27,20 @@ class Order extends Component {
       })
   }
 
-  orderEditView = () => {
-      return (
-        <OrderFormUser
-          id={this.props.id}
-          user_id={this.props.user_id}
-          ticket={this.props.ticket}
-          restaurant_id={this.props.restaurant_id}
-          order_date={this.props.order_date}
-          current={this.props.current}
-          editOrder={this.editOrder}
-          toggleEdit={this.toggleEdit}
-        />
-      )
-    }
+  // orderEditView = () => {
+  //     return (
+  //       <OrderFormUser
+  //         id={this.props.id}
+  //         user_id={this.props.user_id}
+  //         ticket={this.props.ticket}
+  //         restaurant_id={this.props.restaurant_id}
+  //         order_date={this.props.order_date}
+  //         current={this.props.current}
+  //         editOrder={this.editOrder}
+  //         toggleEdit={this.toggleEdit}
+  //       />
+  //     )
+  //   }
 
   editOrder = (order) => {
     axios.put(`/api/orders/${order.id}`, order )
@@ -73,7 +73,7 @@ class Order extends Component {
         <h2>CurrentUser: {user.id}</h2>
               
         <h2>Single Order</h2>
-        <OrderFormUser id={this.props.id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} />
+        <OrderFormUser id={this.props.id} user_id={this.props.user_id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} />
           <Button
             icon
             color="red"
