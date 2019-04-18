@@ -60,17 +60,18 @@ class Order extends Component {
   render() {
     const { auth: { user, } } = this.props
     const { order } = this.state
-
-    
-
+    if (order.user_id == user.id){
     return (
       <>
         <h2>Order: {order.id}</h2>
-        <h2>User: {order.user_id}</h2>
+        <h2>User: {order.first_name}</h2>
+        <h2>Restaurant: {order.rest_name}</h2>
+        <h2>Menu: <a href={order.menu}>{order.menu}</a></h2> 
+
         <h2>CurrentUser: {user.id}</h2>
               
         <h2>Single Order</h2>
-        <OrderFormUser/>
+        <OrderFormUser editOrder={this.editOrder} />
           <Button
             icon
             color="red"
@@ -82,7 +83,12 @@ class Order extends Component {
           </Button>
              
       </>
-    )
+    )}else{
+      return(
+        <div></div>
+        // <h1>No Match</h1>
+      )
+    }
   }
 }
 
