@@ -29,7 +29,7 @@ handleChange = (e) => {
 handleSubmit = (e) => {
   e.preventDefault()
   this.props.editOrder(this.state) //create editOrder function
-  this.props.toggleEdit() //create toggleEdit function
+  // this.props.toggleEdit() //create toggleEdit function
   this.setState({ ticket: '', })
 }
 
