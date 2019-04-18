@@ -33,9 +33,10 @@ class Order < ApplicationRecord
 
   def self.current_orders
     Order.find_by_sql("
-      SELECT orders.*, users.first_name, users.last_name
+      SELECT orders.*, users.first_name, users.last_name, restaurants.name AS rest_name, restaurants.menu
       FROM orders 
       JOIN users ON orders.user_id = users.id
+      JOIN restaurants ON restaurants.id = orders.restaurant_id
       WHERE orders.current = true;
     ")
   end
