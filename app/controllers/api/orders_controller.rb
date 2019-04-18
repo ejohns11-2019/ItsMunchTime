@@ -5,6 +5,10 @@ class Api::OrdersController < ApplicationController
       render json: Order.all
     end
 
+    def show
+      render json: Order.find(params[:id])
+    end
+
     def create
         users = User.all
         users.each do |user|
