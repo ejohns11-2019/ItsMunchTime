@@ -14,7 +14,17 @@ import UserProfile from '../profile/UserProfile';
 
 class OrderList extends React.Component {
 
-  state = { orders: [], ticket: 'burrito', user: { id: '' }, order: { current: '', ticket: '', order_date: '', user_id: '', restaurtant_id: '' } }
+  state = { orders: [], user: { id: '' }, order: { current: '', ticket: '', order_date: '', user_id: '', restaurtant_id: '' } }
+
+  componentDidMount() {
+    axios.get('/api/current_orders')
+      .then(res => {
+        this.setState({ orders: res.data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   toggleEdit = () => {
     this.setState(state => {
@@ -29,23 +39,25 @@ class OrderList extends React.Component {
       })
   }
 
-  updateTicket = (ticket, id) => {
-    this.setState({ticket: ticket})
-    axios.put(`/api/orders/${id}`, {ticket})
+  updateTicket = (updatedTicket, id, user_id) => {
+    const { orders, } = this.state
+    // debugger
+    orders.map((o) => {
+      if (o.user_id == user_id){
+        debugger
+        return(
+        this.setState({orders: [ {...o}, {ticket: updatedTicket}] })
+        )
+      }
+    })
+   
+    axios.put(`/api/orders/${id}`, {updatedTicket})
       .then(res => {
         this.componentDidMount()
       })
   }
 
-  componentDidMount() {
-    axios.get('/api/current_orders')
-      .then(res => {
-        this.setState({ orders: res.data })
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  
 
  getOtherOrder = (id) => {
    return axios.get(`/api/orders/${id}`)
