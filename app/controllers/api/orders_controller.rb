@@ -19,14 +19,11 @@ class Api::OrdersController < ApplicationController
     end
 
     def update
-        users = User.all
-        users.each do |user|
-          order = Order.where(params[:current] = true)
-          order.update(order_params)
-        end
-        render json: Order.all
+      order = Order.where({user_id: params[:user_id], current: true})
+      order.update(ticket: params[:ticket])
+      render json: order
     end
-
+ 
     def current_to_false 
         orders = Order.where(current: true)
         orders.each { |order| order.update(current: params[:current])}
