@@ -81,12 +81,13 @@ export class AuthProvider extends React.Component {
     
   }
 
-  getOrders = (id, cb) => {
+  getOrders = (id) => {
     axios.get(`/api/users/${id}/orders`)
     .then( res => {
+      // debugger
       this.setState({ order: res.data })
-      cb()
-      this.setRestaurant(res.data.restaurant_id)
+      // cb()
+      // this.setRestaurant(res.data.restaurant_id)
     })
     .catch( err => {
       console.log(err);

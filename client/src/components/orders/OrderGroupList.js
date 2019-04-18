@@ -30,7 +30,7 @@ class OrderList extends React.Component {
   }
 
   updateTicket = (ticket, id) => {
-    // this.setState(ticket)
+    this.setState({ticket: ticket})
     axios.put(`/api/orders/${id}`, {ticket})
       .then(res => {
         this.componentDidMount()
@@ -47,25 +47,41 @@ class OrderList extends React.Component {
       })
   }
 
-  copyOrder = (id) => {
-    // debugger
-    axios.get(`/api/orders/${id}`)
-      .then(res => {
-        const { order: { ticket, order_date, restaurant_id } } = this.state
-        const { user: { id } } = this.props.auth
-        this.setState({ order: res.data })
-        axios.post('/api/orders', {
-          current: true,
-          ticket: { ticket },
-          order_date: { order_date },
-          user_id: { id },
-          restaurant_id: { restaurant_id }
-        })
-          .catch(err => {
-            console.log(err)
-          })
-      })
-  }
+ getOtherOrder = (id) => {
+   return axios.get(`/api/orders/${id}`)
+ }
+
+ getUserOrder = (id) => {
+    return axios.get(`/api/users/${id}/orders`)
+ }
+
+ copyOrder = (a,b) => {
+ axios.all([this.getOtherOrder(a), this.getUserOrder(b)])
+    .then(axios.spread(function (otherOrder, userOrder) {
+      axios.put(`/api/orders/${userOrder.data.id}?ticket=${otherOrder.data.ticket}`)
+    }))}
+
+  
+  // copyOrder = (id) => {
+  //   // debugger
+  //   const {user} = this.props.auth
+  //   this.getOrders(user.id)
+  //   axios.get(`/api/orders/${id}`)
+  //     .then(res => {
+  //       const {order } = this.state
+  //       debugger
+  //       axios.put(`/api/orders/${order.id}?ticket=${res.data.ticket}`)
+  //         .then( res => {
+  //           console.log('The Order updated successfully')
+  //         })
+  //         .catch(err => {
+  //           console.log(err)
+  //         })
+  //     })
+  //     .catch( err => {
+  //       console.log(err)
+  //     })
+  // }
 
 
   render() {
@@ -101,7 +117,7 @@ class OrderList extends React.Component {
                         <Table.Row>
                           <Table.Cell>{o.last_name} </Table.Cell>
                           <Table.Cell>{o.ticket}</Table.Cell>
-                          <Table.Cell><Button onClick={() => this.copyOrder(o.id)}>Click Here</Button></Table.Cell>
+                          <Table.Cell><Button onClick={() => this.copyOrder(o.id, user.id)}>Click Here</Button></Table.Cell>
                         </Table.Row>
                       </Table.Body>
                     )
