@@ -25,9 +25,9 @@ class OrderFormAdin extends Component {
 
     axios.post('/api/orders', {current, order_date, ticket, restaurant_id})
       .then(res => {
-        this.props.history.push("/new_order")
+        this.props.history.push("/")
         alert("Order has been created successfully");
-        this.componentDidMount()
+        // this.componentDidMount()
       })
       .catch( err => {
         console.log(err);
