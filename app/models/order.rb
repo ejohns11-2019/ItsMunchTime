@@ -18,6 +18,7 @@ class Order < ApplicationRecord
       FROM orders 
       JOIN users ON users.id = orders.user_id
       WHERE orders.restaurant_id = #{id}
+      AND orders.current = false
       ORDER BY orders.created_at DESC;
     ")
   end

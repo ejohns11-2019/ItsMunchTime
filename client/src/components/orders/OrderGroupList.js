@@ -11,7 +11,7 @@ import UserProfile from '../profile/UserProfile';
 //Logical component that will handle order display, and all order CRUD actions
 
 class OrderList extends React.Component {
-  state = { orders: [], editing: false, }
+  state = { orders: [], editing: false, visibility: false}
 
   toggleEdit = () => {
     this.setState(state => {
@@ -22,23 +22,16 @@ class OrderList extends React.Component {
   toggleReset = () => {
     axios.put('/api/current_to_false', {current: false})
 
-    // this.setState( state => {
-    //   return {orders: [], }
-    // })
+    this.componentDidMount()
   }
 
   adminReset = () => {
     const { auth: { user, } } = this.props
 
     if (user.admin === true) {
-      return (
-        <>
-          <Button size="medium" color="red" onClick={this.toggleReset}>Done</Button>
-        </>
-      )
+      this.setState({visibility: true})
     }
   }
-
 
   componentDidMount() {
     axios.get('/api/current_orders')
@@ -48,18 +41,15 @@ class OrderList extends React.Component {
       .catch(err => {
         console.log(err)
       })
+      // this.adminReset()
   }
 
   render() {
     const { orders, } = this.state
+    const { auth: { user, } } = this.props
+    
     return (
       <>
-
-
-        {/* <Grid>
-        <Grid.Row>
-          <Grid.Column width={6} floated='right'> */}
-
         <Grid>
           <Grid.Column floated='right' width={5}>
             <Table celled color="red">
@@ -78,26 +68,17 @@ class OrderList extends React.Component {
                         <Table.Cell>{o.ticket}</Table.Cell>
                       </Table.Row>
                     </Table.Body>
-
                   )
                 })
               }
             </Table>
-            {this.adminReset()}
+             {user.admin && <Button size="medium" color="red" onClick={this.toggleReset}>Done</Button>}
           </Grid.Column>
         </Grid>
-
-        {/* </Grid.Column>
-        </Grid.Row>
-      </Grid> */}
-
-
       </>
-
     )
   }
 }
-
 
 export class ConnectedOrderList extends React.Component {
   render() {

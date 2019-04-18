@@ -23,12 +23,9 @@ class Api::OrdersController < ApplicationController
         render json: Order.all
     end
 
-    def current_to_false
-        users = User.all
-        users.each do |user|
-          order = Order.where(params[:current] == true)
-          order.update(current: params[:current])
-        end
+    def current_to_false 
+        orders = Order.where(current: true)
+        orders.each { |order| order.update(current: params[:current])}
         render json: Order.all
     end
 
