@@ -18,8 +18,8 @@ class OrderFormAdin extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    if ( this.props.auth.restaurant !== null ) {
+ const { auth: { restaurant, } } = this.props
+    if ( restaurant !== null ) {
       alert('Order in Progress')
     } else {
       const { current, orderDate, ticket, r_id }  = this.state
