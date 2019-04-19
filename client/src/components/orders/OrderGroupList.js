@@ -42,7 +42,8 @@ class OrderList extends React.Component {
     orders.map((o) => {
       if (o.user_id == user_id){
         return(
-        this.setState({orders: [ {...o}, {ticket: updatedTicket}] })
+        this.setState({orders: [ {...o}, {ticket: updatedTicket}],})
+       
         )
       }
     })
@@ -80,7 +81,7 @@ class OrderList extends React.Component {
               {
                 orders.map((o) => {
                   return (
-                    <Order key={o.id} {...o} user_id={o.user_id} updateTicket={this.updateTicket} />
+                    <Order key={o.id} {...o} user_id={o.user_id} ticket={o.ticket} updateTicket={this.updateTicket} />
                   )
                 })
               }
