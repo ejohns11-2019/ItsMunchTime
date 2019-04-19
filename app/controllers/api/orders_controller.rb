@@ -19,7 +19,7 @@ class Api::OrdersController < ApplicationController
     end
 
     def update
-      order = Order.where({user_id: params[:user_id], current: true})
+      order = Order.where({id: params[:id]})
       order.update(ticket: params[:ticket])
       render json: order
     end
