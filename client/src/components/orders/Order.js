@@ -12,15 +12,22 @@ class Order extends Component {
     this.setState({order: {...this.props}, ticket: this.props.ticket})
   } 
 
-  deleteOrder = (id) => {
-    axios.delete(`/api/orders/${id}`)
-      .then( res => {
-        const { orders } = this.state;
-        this.setState({ orders: orders.filter( o => o.id !== id ) })
-      })
-      .catch( err => {
-        alert(err.response.data.message)
-      })
+  // deleteOrder = (id) => {
+  //   axios.delete(`/api/orders/${id}`)
+  //     .then( res => {
+  //       const { orders } = this.state;
+  //       this.setState({ orders: orders.filter( o => o.id !== id ) })
+  //     })
+  //     .catch( err => {
+  //       alert(err.response.data.message)
+  //     })
+  // }
+
+  clearOrder = () => {
+    this.props.updateTicket('', this.props.id, this.props.user_id)
+  }
+  absentOrder = () => {
+    this.props.updateTicket('N/A', this.props.id, this.props.user_id)
   }
 
   editOrder = (order) => {
@@ -69,17 +76,26 @@ class Order extends Component {
         >
           { this.state.editing ? 'Cancel'
           :
-          <Icon name="pencil" />
-          }
+          <Icon name='pencil' />}
+          
+        </Button>
+        <Button
+          icon
+          color="yellow"
+          size="tiny"
+          onClick={ () => this.clearOrder() }
+          style={{ marginLeft: "15px", }}
+        >
+          Clear Order <Icon name ="eraser" />
         </Button>
         <Button
           icon
           color="red"
           size="tiny"
-          onClick={ () => this.props.deleteRestaurant(this.props.id) }
+          onClick={ () => this.absentOrder() }
           style={{ marginLeft: "15px", }}
         >
-          <Icon name ="trash" />
+          Mark absent <Icon name ="calendar times" />
         </Button>
         </Form>
             
