@@ -33,6 +33,7 @@ handleSubmit = (e) => {
   e.preventDefault()
   this.props.updateTicket(this.state.ticket, this.props.id, this.props.user_id)
   this.setState({ ticket: '', })
+  this.props.toggleEdit()
 }
 
 //create restriction so edit toggle option where this component displays
