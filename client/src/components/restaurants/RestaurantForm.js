@@ -42,7 +42,7 @@ class RestaurantForm extends React.Component {
       return (
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
-            label="RestaurantName"
+            label="Name"
             type="text"
             name="name"
             value={name}
@@ -50,25 +50,28 @@ class RestaurantForm extends React.Component {
             required
           />
           <Form.Input
-            label="RestaurantAddress"
+            label="Address"
             type="text"
             name="address"
             value={address}
             onChange={this.handleChange}
+            required
           />
           <Form.Input
-            label="RestaurantPhone"
+            label="Phone"
             type="text"
             name="phone"
             value={phone}
             onChange={this.handleChange}
+            required
           />
           <Form.Input
-            label="RestaurantMenu"
+            label="Menu"
             type="text"
             name="menu"
             value={menu}
             onChange={this.handleChange}
+            required
           />
           <Form.Button type="submit" color="blue">Save</Form.Button>
         </Form>

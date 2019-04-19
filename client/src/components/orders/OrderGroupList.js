@@ -15,6 +15,7 @@ class OrderList extends React.Component {
     axios.get('/api/current_orders')
       .then(res => {
         this.setState({ orders: res.data })
+        this.props.auth.setRestaurant(res.data[0].restaurant_id)
       })
       .catch(err => {
         console.log(err)
@@ -31,6 +32,7 @@ class OrderList extends React.Component {
     axios.put('/api/current_to_false', { current: false })
       .then(res => {
         this.componentDidMount() 
+        this.props.auth.setRestaurant(null)
       })
   }
 
