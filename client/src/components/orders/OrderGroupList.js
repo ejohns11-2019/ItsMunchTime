@@ -6,6 +6,7 @@ import { AuthConsumer, } from "../../providers/AuthProvider";
 import { Header, Grid, Table, Button } from 'semantic-ui-react';
 import { useDropzone } from 'react-dropzone';
 import UserProfile from '../profile/UserProfile';
+import OrderFormUser from './OrderFormUser';
 
 
 
@@ -51,7 +52,7 @@ class OrderList extends React.Component {
       }
     })
    
-    axios.put(`/api/orders/${id}`, {updatedTicket})
+    axios.put(`/api/orders/${id}`, {ticket: updatedTicket})
       .then(res => {
         this.componentDidMount()
       })
