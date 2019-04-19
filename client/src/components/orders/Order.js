@@ -6,7 +6,7 @@ import OrderFormUser from './OrderFormUser';
 import { withRouter } from 'react-router-dom';
 
 class Order extends Component {
-  state = { order: [], editing: false }
+  state = { order: [], editing: true, ticket: '' }
 
   componentDidMount(){
     this.setState({order: {...this.props}, ticket: this.props.ticket})
