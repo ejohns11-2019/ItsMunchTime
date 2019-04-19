@@ -29,11 +29,13 @@ class OrderList extends React.Component {
   }
 
   toggleReset = () => {
+    const { auth: { clearRestaurant }, } = this.props;
     axios.put('/api/current_to_false', { current: false })
       .then(res => {
         this.componentDidMount() 
-        this.props.auth.setRestaurant(null)
+        
       })
+      clearRestaurant()
   }
 
   updateTicket = (updatedTicket, id, user_id) => {

@@ -103,6 +103,10 @@ export class AuthProvider extends React.Component {
         console.log(err);
       })
   }
+  
+  clearRestaurant = () => {
+    this.setState({restaurant: null})
+  }
 
   render() {
     return (
@@ -117,6 +121,7 @@ export class AuthProvider extends React.Component {
         getOrders: this.getOrders,
         setRestaurant: this.setRestaurant,
         deleteUser: this.deleteUser,
+        clearRestaurant: this.clearRestaurant
       }}>
         { this.props.children }
       </AuthContext.Provider>
