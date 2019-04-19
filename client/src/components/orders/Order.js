@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Icon, Button, } from 'semantic-ui-react';
+import { Icon, Button, Form } from 'semantic-ui-react';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import axios from 'axios';
 import OrderFormUser from './OrderFormUser';
@@ -9,7 +9,7 @@ class Order extends Component {
   state = { order: [], }
 
   componentDidMount(){
-    this.setState({order: {...this.props}})
+    this.setState({order: {...this.props}, ticket: this.props.ticket})
   } 
 
   deleteOrder = (id) => {
@@ -41,23 +41,12 @@ class Order extends Component {
     return (
       <>
         <h2>Order Number: {order.id}</h2>
-        {/* <h2>First Name: {order.first_name}</h2> */}
         <h2>Restaurant: {order.rest_name}</h2>
         <h2>View Menu: <a href={order.menu} target="_blank">{order.menu}</a></h2> 
-        {/* <h2>CurrentUser: {user.id}</h2> */}
-            
+        <h2>Current Order Ticket: {this.props.ticket}</h2>
+        
         <h2>Submit your order below:</h2>
-        <OrderFormUser id={this.props.id} user_id={this.props.user_id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} />
-          <Button
-            icon
-            color="red"
-            size="tiny"
-            onClick={ () => this.deleteOrder(this.props.id) }
-            style={{ marginLeft: "15px", }}
-          >
-            <Icon name ="trash" />
-          </Button>
-             
+        <OrderFormUser id={this.props.id} user_id={this.props.user_id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} />      
       </>
     )}else{
       return(

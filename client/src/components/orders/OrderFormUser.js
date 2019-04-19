@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, } from "semantic-ui-react";
+import { Form, Icon } from "semantic-ui-react";
 //import axios from 'axios';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
@@ -31,7 +31,6 @@ handleChange = (e) => {
 
 handleSubmit = (e) => {
   e.preventDefault()
-  // this.props.editOrder(this.state) //create editOrder function
   this.props.updateTicket(this.state.ticket, this.props.id, this.props.user_id)
   this.setState({ ticket: '', })
 }
@@ -54,6 +53,7 @@ handleSubmit = (e) => {
             required
           />
           <Form.Button type="submit" color="blue">Save</Form.Button>
+          
         </Form>
       )
   }
