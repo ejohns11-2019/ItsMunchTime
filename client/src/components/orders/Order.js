@@ -76,7 +76,8 @@ class Order extends Component {
         >
           { this.state.editing ? 'Cancel'
           :
-          <Icon name='pencil' />}
+          <div>Edit &#160; <Icon name='pencil' /></div>
+          }
           
         </Button>
         <Button
