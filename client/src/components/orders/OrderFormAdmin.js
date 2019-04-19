@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from "semantic-ui-react";
+import { AuthConsumer, } from "../../providers/AuthProvider";
 import axios from 'axios';
 
 
@@ -17,22 +18,26 @@ class OrderFormAdin extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    
-    const { current, orderDate, ticket, r_id }  = this.state
 
-    const order_date = orderDate
-    const restaurant_id = r_id
-
-    axios.post('/api/orders', {current, order_date, ticket, restaurant_id})
-      .then(res => {
-        this.props.history.push("/")
-        alert("Order has been created successfully");
-        // this.componentDidMount()
-      })
-      .catch( err => {
-        console.log(err);
-      })
-    this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '' })
+    if ( this.props.auth.restaurant !== null ) {
+      alert('Order in Progress')
+    } else {
+      const { current, orderDate, ticket, r_id }  = this.state
+  
+      const order_date = orderDate
+      const restaurant_id = r_id
+  
+      axios.post('/api/orders', {current, order_date, ticket, restaurant_id})
+        .then(res => {
+          this.props.history.push("/")
+          alert("Order has been created successfully");
+          // this.componentDidMount()
+        })
+        .catch( err => {
+          console.log(err);
+        })
+      this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '' })
+    }  
   }
 
   handleChange = (e, {name, value}) => {
@@ -97,5 +102,18 @@ class OrderFormAdin extends Component {
     )
   }
 }
-export default OrderFormAdin;
+
+export class ConnectedOrderFormAdin extends React.Component {
+  render() {
+    return (
+      <AuthConsumer>
+        { auth =>
+          <OrderFormAdin { ...this.props } auth={auth} />
+        }
+      </AuthConsumer>
+    )
+  }
+}
+
+export default ConnectedOrderFormAdin;
 
