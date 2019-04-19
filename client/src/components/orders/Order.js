@@ -6,7 +6,7 @@ import OrderFormUser from './OrderFormUser';
 import { withRouter } from 'react-router-dom';
 
 class Order extends Component {
-  state = { order: [], }
+  state = { order: [], editing: false }
 
   componentDidMount(){
     this.setState({order: {...this.props}, ticket: this.props.ticket})
@@ -34,6 +34,21 @@ class Order extends Component {
       })
   }
 
+  toggleEdit = () => {
+    this.setState( state => {
+      return { editing: !state.editing, };
+    })
+  }
+
+  orderForm = () =>{
+    return(
+    <>
+      <h2>Submit your order below:</h2>
+      <OrderFormUser id={this.props.id} user_id={this.props.user_id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} toggleEdit={this.toggleEdit} />  
+    </>
+    )
+  }
+
   render() {
     const { auth: { user, } } = this.props
     const { order } = this.state
@@ -42,11 +57,32 @@ class Order extends Component {
       <>
         <h2>Order Number: {order.id}</h2>
         <h2>Restaurant: {order.rest_name}</h2>
-        <h2>View Menu: <a href={order.menu} target="_blank">{order.menu}</a></h2> 
+        <a href={order.menu} target="_blank"><h2>View Menu</h2> </a> 
         <h2>Current Order Ticket: {this.props.ticket}</h2>
-        
-        <h2>Submit your order below:</h2>
-        <OrderFormUser id={this.props.id} user_id={this.props.user_id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} />      
+        <Form>
+        { this.state.editing ? this.orderForm() : <div></div> }
+        <Button
+          icon
+          color="blue"
+          size="tiny"
+          onClick={() => this.toggleEdit()}
+        >
+          { this.state.editing ? 'Cancel'
+          :
+          <Icon name="pencil" />
+          }
+        </Button>
+        <Button
+          icon
+          color="red"
+          size="tiny"
+          onClick={ () => this.props.deleteRestaurant(this.props.id) }
+          style={{ marginLeft: "15px", }}
+        >
+          <Icon name ="trash" />
+        </Button>
+        </Form>
+            
       </>
     )}else{
       return(
