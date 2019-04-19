@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Order from './Order'
 import axios from 'axios';
 import { AuthConsumer, } from "../../providers/AuthProvider";
@@ -109,6 +109,9 @@ class OrderList extends React.Component {
                 }
               </Table>
               {user.admin && <Button size="medium" color="red" onClick={this.toggleReset}>Done</Button>}
+              <Link to='/new_order'>
+                <Button size='medium' color='blue'>New Order</Button>
+              </Link> 
             </Grid.Column>
           </Grid.Row>
         </Grid>

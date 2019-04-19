@@ -18,9 +18,6 @@ class Home extends React.Component {
         <Container>
           <OrderList />
           <OrderHistory />
-          <Link to='/new_order'>
-            <Button size='medium' color='blue'>New Order</Button>
-          </Link>
         </Container>
       )
     } else {
