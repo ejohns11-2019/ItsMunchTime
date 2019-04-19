@@ -65,6 +65,9 @@ class Order extends Component {
         <h2>Order Number: {order.id}</h2>
         <h2>Restaurant: {order.rest_name}</h2>
         <a href={order.menu} target="_blank"><h2>View Menu</h2> </a> 
+        <iframe src={order.menu} width="500" height="400">
+          <a href={order.menu} target="_blank"><h2>View Menu</h2> </a> 
+        </iframe>
         <h2>Current Order Ticket: {this.props.ticket}</h2>
         <Form>
         { this.state.editing ? this.orderForm() : <div></div> }
