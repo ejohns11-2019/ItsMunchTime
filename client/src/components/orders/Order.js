@@ -1,19 +1,15 @@
 import React, {Component} from 'react';
-import { Item, Icon, Button, Image } from 'semantic-ui-react';
+import { Icon, Button, } from 'semantic-ui-react';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import axios from 'axios';
 import OrderFormUser from './OrderFormUser';
 import { withRouter } from 'react-router-dom';
 
-
-
 class Order extends Component {
   state = { order: [], }
 
   componentDidMount(){
-    
     this.setState({order: {...this.props}})
-    // debugger
   } 
 
   deleteOrder = (id) => {
@@ -27,21 +23,6 @@ class Order extends Component {
       })
   }
 
-  // orderEditView = () => {
-  //     return (
-  //       <OrderFormUser
-  //         id={this.props.id}
-  //         user_id={this.props.user_id}
-  //         ticket={this.props.ticket}
-  //         restaurant_id={this.props.restaurant_id}
-  //         order_date={this.props.order_date}
-  //         current={this.props.current}
-  //         editOrder={this.editOrder}
-  //         toggleEdit={this.toggleEdit}
-  //       />
-  //     )
-  //   }
-
   editOrder = (order) => {
     axios.put(`/api/orders/${order.id}`, order )
       .then( res => {
@@ -53,26 +34,19 @@ class Order extends Component {
       })
   }
 
-  identityCheck = () => {
-    
-    
-}
-
-
   render() {
     const { auth: { user, } } = this.props
     const { order } = this.state
     if (order.user_id == user.id){
     return (
       <>
-        <h2>Order: {order.id}</h2>
-        <h2>User: {order.first_name}</h2>
+        <h2>Order Number: {order.id}</h2>
+        {/* <h2>First Name: {order.first_name}</h2> */}
         <h2>Restaurant: {order.rest_name}</h2>
-        <h2>Menu: <a href={order.menu}>{order.menu}</a></h2> 
-
-        <h2>CurrentUser: {user.id}</h2>
-              
-        <h2>Single Order</h2>
+        <h2>View Menu: <a href={order.menu} target="_blank">{order.menu}</a></h2> 
+        {/* <h2>CurrentUser: {user.id}</h2> */}
+            
+        <h2>Submit your order below:</h2>
         <OrderFormUser id={this.props.id} user_id={this.props.user_id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} />
           <Button
             icon
@@ -87,8 +61,10 @@ class Order extends Component {
       </>
     )}else{
       return(
-        <div></div>
-        // <h1>No Match</h1>
+        <div>
+          {/* No Match */}
+        </div>
+        
       )
     }
   }
