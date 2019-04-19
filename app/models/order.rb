@@ -40,4 +40,15 @@ class Order < ApplicationRecord
       WHERE orders.current = true;
     ")
   end
+
+  def self.user_history(id)
+    Order.find_by_sql("
+      SELECT orders.*, restaurants.name AS rest_name
+      FROM orders 
+      JOIN restaurants ON restaurants.id = orders.restaurant_id
+      WHERE orders.current = false
+      AND orders.user_id = #{id}
+      ORDER BY order_date DESC;
+    ")
+  end
 end

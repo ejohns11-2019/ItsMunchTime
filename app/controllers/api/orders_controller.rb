@@ -49,6 +49,11 @@ class Api::OrdersController < ApplicationController
       render json: Order.current_orders
     end
 
+    def user_history
+      id = current_user.id 
+      render json: Order.user_history(id)
+    end
+
     private
       def order_params
         params.require(:order).permit(:user_id, :ticket, :restaurant_id, :current, :order_date)

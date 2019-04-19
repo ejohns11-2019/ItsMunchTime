@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get 'restaurant_history', to: 'orders#restaurant_history'
     get 'restaurant_visit_counter', to: 'orders#restaurant_visit_counter'
     get 'current_orders', to: 'orders#current_orders'
+    get 'user_history', to: 'orders#user_history'
     put 'current_to_false', to: 'orders#current_to_false'
   end
 end
