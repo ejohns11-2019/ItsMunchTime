@@ -33,6 +33,7 @@ gem 'api-pagination'
 #gem 'cloudinary'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'pry'
 end
 
