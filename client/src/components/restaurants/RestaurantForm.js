@@ -40,6 +40,8 @@ class RestaurantForm extends React.Component {
 
     if (user.admin === true) {
       return (
+      <>
+        <h1>Add a New Restaurant</h1>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
             label="Name"
@@ -75,6 +77,7 @@ class RestaurantForm extends React.Component {
           />
           <Form.Button type="submit" color="blue">Save</Form.Button>
         </Form>
+      </>
       )
     } else {
       return (

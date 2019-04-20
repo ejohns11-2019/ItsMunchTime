@@ -60,7 +60,6 @@ class Restaurants extends React.Component {
       })
   }
 
-//if click blue pencil button by rest. want to render RestForm for edit
   render() {
     const { restaurants, } = this.state
     return (
@@ -68,12 +67,11 @@ class Restaurants extends React.Component {
           <Header as='h1'>Restaurants</Header>
 
         <ul>
-        <Header as='h1'>List of All Restaurants</Header>
+        <Header as='h1'>List of All Restaurants:</Header>
           {
             restaurants.map( (r, i) => {
             return(
               <>
-                <br />
                 <br />
                 <Restaurant
                   key={r.id}
@@ -88,7 +86,6 @@ class Restaurants extends React.Component {
           }
         </ul>
           <hr/>
-          <h1>Add a New Restaurant</h1>
           <RestaurantForm addRestaurant={this.addRestaurant} />
           <hr />
         </div>
