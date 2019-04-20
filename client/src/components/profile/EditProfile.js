@@ -4,22 +4,22 @@ import Dropzone from 'react-dropzone';
 import { AuthConsumer, } from '../../providers/AuthProvider';
 
 class EditProfile extends React.Component {
-  state = { 
-    first_name: '', 
-    last_Name: '', 
-    email: '', 
-    group: '', 
-    allergies: '', 
-    exceptions: '', 
-    admin: '', 
+  state = {
+    first_name: '',
+    last_Name: '',
+    email: '',
+    group: '',
+    allergies: '',
+    exceptions: '',
+    admin: '',
     image: '',
     profile: [],
-    profileData: [], 
+    profileData: [],
     p_id: '',}
 
   componentDidMount() {
-    const { first_name, last_name, email, group, allergies, exceptions, admin } = this.props;
-    this.setState({ first_name, last_name, email, group, allergies, exceptions, admin, profile: {...this.props} });
+    const { first_name, last_name, email, group, allergies, exceptions, admin, image } = this.props;
+    this.setState({ first_name, last_name, email, group, allergies, exceptions, admin, image, profile: {...this.props} });
     const {profile, profileData} = this.state
     profile.map( p => {
       var temp = profileData;
@@ -27,14 +27,14 @@ class EditProfile extends React.Component {
       this.setState({profileData: temp})
     })
   }
-  
+
   handleChange = (e, {name, value}) => {
     this.setState({
         ...this.state,
         [name]: value,
     })
   }
- 
+
   handleSubmit = (e) => {
     e.preventDefault();
     const {  first_name, last_name, email, group, allergies, exceptions, admin, image  } = this.state;
@@ -51,7 +51,7 @@ class EditProfile extends React.Component {
 
 
   render() {
-  const { first_name, last_name, email, group, allergies, exceptions, image, admin } = this.state;
+  const { first_name, last_name, email, group, allergies, exceptions, admin } = this.state;
   const styles={
     dropzone: {
       height: "150px",
@@ -68,18 +68,18 @@ class EditProfile extends React.Component {
       key: 'f',
       text: 'Full-Time Crew',
       value: 'Full-Time Crew',
-  
+
     },
-  
+
     {
       key: 'a',
       text: 'After-Hours Crew',
       value: 'After-Hours Crew',
-  
+
     },
-  
+
   ]
-  
+
   const adminOptions = [
     {
       key: 't',
@@ -104,7 +104,7 @@ class EditProfile extends React.Component {
               {...getRootProps()}
               style={styles.dropzone}
             >
-              <input {...getInputProps()}/>
+              <input type="file" {...getInputProps()}/>
               {
                 isDragActive ?
                   <p>Drop Profile Picture here...</p>

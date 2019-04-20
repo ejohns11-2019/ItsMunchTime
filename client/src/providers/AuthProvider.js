@@ -49,10 +49,9 @@ export class AuthProvider extends React.Component {
     &group=${user.group}
     &allergies=${user.allergies}
     &exceptions=${user.exceptions}
-    &admin=${user.admin}
-    &image=${user.image}`, data)
+    &admin=${user.admin}`, data)
       .then( res => this.setState({ user: res.data, }) )
-      
+
       axios.get('/api/users')
       .then( res => {
         this.setState({ users: res.data })
@@ -60,25 +59,25 @@ export class AuthProvider extends React.Component {
       })
      .catch( err => {
        console.log(err)
-     })   
+     })
   }
 
   deleteUser = (id) => {
     axios.get('/api/users')
       .then( res => {
-        this.setState({ users: res.data }) 
+        this.setState({ users: res.data })
       })
-      
+
      .catch( err => {
        console.log(err)
-     })  
+     })
      axios.delete(`/api/users/${id}`)
           .then( res => {
             const { users } = this.state;
             this.setState({ users: users.filter(u => u.id !== id) })
             window.location.href = '/profiles'
           })
-    
+
   }
 
   getOrders = (id) => {
@@ -103,7 +102,7 @@ export class AuthProvider extends React.Component {
         console.log(err);
       })
   }
-  
+
   clearRestaurant = () => {
     this.setState({restaurant: null})
   }

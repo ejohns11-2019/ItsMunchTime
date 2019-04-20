@@ -9,12 +9,12 @@ class MyProfile extends Component {
   state = { editing: false, formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '', image: '', }, };
 
   componentDidMount() {
-    const { auth: { user: { first_name, last_name, email, group, allergies, exceptions, admin }, }, } = this.props;
-    this.setState({ formValues: { first_name, last_name, email, group, allergies, exceptions, admin }, });
+    const { auth: { user: { first_name, last_name, email, group, allergies, exceptions, admin, image }, }, } = this.props;
+    this.setState({ formValues: { first_name, last_name, email, group, allergies, exceptions, admin, image }, });
   }
 
-  onDrop = (files) => {
-    this.setState({ formValues: { ...this.state.formValues, image: files[0] } })
+  onDrop = (images) => {
+    this.setState({ formValues: { ...this.state.formValues, image: images[0] } })
   }
 
   toggleEdit = () => {
