@@ -6,15 +6,15 @@ import Dropzone from 'react-dropzone';
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class MyProfile extends Component {
-  state = { editing: false, formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '', image: '', }, };
+  state = { editing: false, formValues: { first_name: '', last_Name: '', email: '', group: '', allergies: '', exceptions: '', admin: '', file: '', }, };
 
   componentDidMount() {
-    const { auth: { user: { first_name, last_name, email, group, allergies, exceptions, admin, image }, }, } = this.props;
-    this.setState({ formValues: { first_name, last_name, email, group, allergies, exceptions, admin, image }, });
+    const { auth: { user: { first_name, last_name, email, group, allergies, exceptions, admin, }, }, } = this.props;
+    this.setState({ formValues: { first_name, last_name, email, group, allergies, exceptions, admin, }, });
   }
 
-  onDrop = (images) => {
-    this.setState({ formValues: { ...this.state.formValues, image: images[0] } })
+  onDrop = (files) => {
+    this.setState({ formValues: { ...this.state.formValues, file: files[0] } })
   }
 
   toggleEdit = () => {
@@ -35,14 +35,14 @@ class MyProfile extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { formValues: { first_name, last_name, email, group, allergies, exceptions, admin, image }, } = this.state;
+    const { formValues: { first_name, last_name, email, group, allergies, exceptions, admin, file }, } = this.state;
     const { auth: { user, updateUser, }, } = this.props;
-    updateUser(user.id, { first_name, last_name, email, group, allergies, exceptions, admin, image });
+    updateUser(user.id, { first_name, last_name, email, group, allergies, exceptions, admin, file });
     this.setState({
       editing: false,
       formValues: {
         ...this.state.formValues,
-        image: "",
+        file: "",
       },
     });
   }
@@ -84,7 +84,7 @@ class MyProfile extends Component {
 
   editView = () => {
     //const { auth: { user }, } = this.props;
-    const { formValues: { first_name, last_name, email, group, allergies, exceptions, image, } } = this.state;
+    const { formValues: { first_name, last_name, email, group, allergies, exceptions, file, } } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Dropzone
