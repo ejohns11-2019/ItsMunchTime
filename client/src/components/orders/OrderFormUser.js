@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon } from "semantic-ui-react";
+import { Form, } from "semantic-ui-react";
 //import axios from 'axios';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
@@ -16,11 +16,10 @@ class OrderFormUser extends Component {
     ticket: "",
     id: "",
     current: false,
-    ticket: ""
   };
 
 componentDidMount() {
-  const { id, current, ticket, order_date, restaurant_id, user_id } = this.props;
+  //const { order_date, restaurant_id, user_id } = this.props;
   this.setState({...this.props });
 }
 
@@ -54,7 +53,7 @@ handleSubmit = (e) => {
             required
           />
           <Form.Button type="submit" color="blue">Save</Form.Button>
-          
+          <br />
         </Form>
       )
   }

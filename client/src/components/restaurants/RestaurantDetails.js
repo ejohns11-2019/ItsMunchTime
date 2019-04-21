@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Item, Header,  Statistic, List, Icon} from 'semantic-ui-react';
+import {Item, Header,  Statistic, Icon} from 'semantic-ui-react';
 
 
 class RestaurantDetails extends Component {
 
   state = {
-    address: '', 
+    address: '',
     name: '',
-    phone: '', 
-    menu: '', 
+    phone: '',
+    menu: '',
     visitCounter: ''
   }
 
@@ -23,17 +23,17 @@ class RestaurantDetails extends Component {
       .catch(err => {
         console.log(err)
       });
-      this.setState({ 
+      this.setState({
         name: name,
-        address: address, 
-        phone: phone, 
-        menu: menu,  
+        address: address,
+        phone: phone,
+        menu: menu,
       })
   }
 
   render() {
     const { name, address, phone, menu, visitCounter} = this.state
-    return(  
+    return(
     <>
     <Header size='huge'>{name}</Header>
 
@@ -48,7 +48,7 @@ class RestaurantDetails extends Component {
         <Item.Content verticalAlign='middle'>Phone: {phone}</Item.Content>
       </Item>
     </Item.Group>
- 
+
     <Statistic>
       <Statistic.Label>ordered: </Statistic.Label>
       <Statistic.Value>{ visitCounter }</Statistic.Value>

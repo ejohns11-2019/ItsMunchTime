@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button, Icon, } from "semantic-ui-react";
 import RestaurantForm from './RestaurantForm'
-import RestaurantHistory from "./RestaurantHistory";
+//import RestaurantHistory from "./RestaurantHistory";
 import {Link } from 'react-router-dom';
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
