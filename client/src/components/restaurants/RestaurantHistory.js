@@ -43,6 +43,8 @@ class RestaurantHistory extends Component {
   render() {
 
     return (
+      <>
+      <br />
       <Table celled>
         <Table.Header>
           <Table.Row>
@@ -57,6 +59,8 @@ class RestaurantHistory extends Component {
           {this.printOrders()}
         </Table.Body>
       </Table>
+      <br />
+      </>
     )
   }
 }

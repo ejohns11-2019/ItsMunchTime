@@ -6,13 +6,13 @@ import axios from 'axios';
 
 class OrderFormAdin extends Component {
 
-  state = { 
-    current: true, 
-    orderDate: '', 
-    ticket: '', 
-    restaurants: [], 
-    restaurantData: [], 
-    restaurant: '', 
+  state = {
+    current: true,
+    orderDate: '',
+    ticket: '',
+    restaurants: [],
+    restaurantData: [],
+    restaurant: '',
     r_id: ''
   };
 
@@ -23,10 +23,10 @@ class OrderFormAdin extends Component {
       alert('Order in Progress')
     } else {
       const { current, orderDate, ticket, r_id }  = this.state
-  
+
       const order_date = orderDate
       const restaurant_id = r_id
-  
+
       axios.post('/api/orders', {current, order_date, ticket, restaurant_id})
         .then(res => {
           this.props.history.push("/")
@@ -37,18 +37,18 @@ class OrderFormAdin extends Component {
           console.log(err);
         })
       this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '' })
-    }  
+    }
   }
 
   handleChange = (e, {name, value}) => {
     this.setState({ [name]: value, });
   }
 
-  handleSelect = (e, data) => { 
-   
+  handleSelect = (e, data) => {
+
     this.setState({ restaurant: data.value, r_id: data.key });
     this.state.restaurantData.map(rd => {
-      if (rd.value == data.value) 
+      if (rd.value === data.value)
         this.setState({r_id: rd.key})
     })
   }
@@ -74,6 +74,8 @@ class OrderFormAdin extends Component {
     const {restaurantData, orderDate, restaurant} = this.state
 
     return (
+      <>
+      <br />
       <Form onSubmit={this.handleSubmit}>
         <Form.Group widths="equal">
           <Form.Dropdown
@@ -99,6 +101,8 @@ class OrderFormAdin extends Component {
           <Form.Button color="blue">Create Order</Form.Button>
         </Form.Group>
       </Form>
+      <br />
+      </>
     )
   }
 }
@@ -116,4 +120,3 @@ export class ConnectedOrderFormAdin extends React.Component {
 }
 
 export default ConnectedOrderFormAdin;
-

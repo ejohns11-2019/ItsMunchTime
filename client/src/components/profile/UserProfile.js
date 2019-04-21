@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { Grid, Image, Container, Divider, Header, Button, Icon, } from 'semantic-ui-react';
-import Dropzone from 'react-dropzone';
+//import Dropzone from 'react-dropzone';
 import EditProfile from './EditProfile';
 import { AuthConsumer, } from '../../providers/AuthProvider';
 
@@ -8,7 +8,7 @@ const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class UserProfile extends Component {
   state = { editing: false, };
-  
+
   toggleEdit = () => {
     this.setState( state => {
       return { editing: !state.editing, };
