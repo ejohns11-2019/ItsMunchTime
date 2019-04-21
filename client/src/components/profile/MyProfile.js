@@ -84,7 +84,7 @@ class MyProfile extends Component {
 
   editView = () => {
     //const { auth: { user }, } = this.props;
-    const { formValues: { first_name, last_name, email, group, allergies, exceptions, image, } } = this.state;
+    const { formValues: { first_name, last_name, email, group, allergies, exceptions, } } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Dropzone

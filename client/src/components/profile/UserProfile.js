@@ -8,7 +8,7 @@ const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class UserProfile extends Component {
   state = { editing: false, };
-  
+
   toggleEdit = () => {
     this.setState( state => {
       return { editing: !state.editing, };

@@ -4,17 +4,17 @@ import Dropzone from 'react-dropzone';
 import { AuthConsumer, } from '../../providers/AuthProvider';
 
 class EditProfile extends React.Component {
-  state = { 
-    first_name: '', 
-    last_Name: '', 
-    email: '', 
-    group: '', 
-    allergies: '', 
-    exceptions: '', 
-    admin: '', 
+  state = {
+    first_name: '',
+    last_Name: '',
+    email: '',
+    group: '',
+    allergies: '',
+    exceptions: '',
+    admin: '',
     image: '',
     profile: [],
-    profileData: [], 
+    profileData: [],
     p_id: '',}
 
   componentDidMount() {
@@ -27,25 +27,28 @@ class EditProfile extends React.Component {
       this.setState({profileData: temp})
     })
   }
-  
+
+  onDrop = (files) => {
+    this.setState( { ...this.props, image: files[0] })
+  }
+
   handleChange = (e, {name, value}) => {
     this.setState({
         ...this.state,
         [name]: value,
     })
   }
- 
+
   handleSubmit = (e) => {
     e.preventDefault();
     const {  first_name, last_name, email, group, allergies, exceptions, admin, image  } = this.state;
     const { auth: { updateUser, }, } = this.props;
     updateUser(this.props.id, { first_name, last_name, email, group, allergies, exceptions, admin, image });
     this.setState({
-      formValues: {
-        ...this.state.formValues,
+        ...this.state,
         image: "",
       },
-    });
+    );
     this.props.toggleEdit();
   }
 
@@ -68,18 +71,18 @@ class EditProfile extends React.Component {
       key: 'f',
       text: 'Full-Time Crew',
       value: 'Full-Time Crew',
-  
+
     },
-  
+
     {
       key: 'a',
       text: 'After-Hours Crew',
       value: 'After-Hours Crew',
-  
+
     },
-  
+
   ]
-  
+
   const adminOptions = [
     {
       key: 't',
