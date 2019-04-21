@@ -18,8 +18,8 @@ class EditProfile extends React.Component {
     p_id: '',}
 
   componentDidMount() {
-    const { first_name, last_name, email, group, allergies, exceptions, admin } = this.props;
-    this.setState({ first_name, last_name, email, group, allergies, exceptions, admin, profile: {...this.props} });
+    const { first_name, last_name, email, group, allergies, exceptions, admin, image } = this.props;
+    this.setState({ first_name, last_name, email, group, allergies, exceptions, admin, image, profile: {...this.props} });
     const {profile, profileData} = this.state
     profile.map( p => {
       var temp = profileData;
@@ -54,7 +54,7 @@ class EditProfile extends React.Component {
 
 
   render() {
-  const { first_name, last_name, email, group, allergies, exceptions, image, admin } = this.state;
+  const { first_name, last_name, email, group, allergies, exceptions, admin } = this.state;
   const styles={
     dropzone: {
       height: "150px",
@@ -107,7 +107,7 @@ class EditProfile extends React.Component {
               {...getRootProps()}
               style={styles.dropzone}
             >
-              <input {...getInputProps()}/>
+              <input type="file" {...getInputProps()}/>
               {
                 isDragActive ?
                   <p>Drop Profile Picture here...</p>

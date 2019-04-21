@@ -9,16 +9,18 @@ const Footer = () => (
     <Grid divided inverted stackable>
       <Grid.Row>
         <Grid.Column width={3}>
+          <Link to='/about'>
           <Header inverted as='h4' content='About' />
-          <List link inverted>
-            <List.Item as='a'>Sitemap</List.Item>
-            <List.Item as='a'>Contact Us</List.Item>
-            <List.Item as='a'></List.Item>
-            <List.Item as='a'></List.Item>
-          </List>
+            <List link inverted>
+              <Link to='/contact'>
+              <List.Item as='a'>Contact Us</List.Item>
+              <List.Item as='a'></List.Item>
+              </Link>
+            </List>
+          </Link>
         </Grid.Column>
         <Grid.Column width={3}>
-          <Header inverted as='h4' content='Services' />
+          <Header inverted as='h4' content='' />
           <List link inverted>
             <List.Item as='a'></List.Item>
             <List.Item as='a'></List.Item>
@@ -28,10 +30,9 @@ const Footer = () => (
         </Grid.Column>
         <Grid.Column width={7}>
           <Header as='h4' inverted>
-            Footer Header
+            ItsMunchTime!
           </Header>
           <p>
-            Extra space for a call to action inside the footer that could help re-engage users.
           </p>
         </Grid.Column>
       </Grid.Row>

@@ -19,17 +19,17 @@ class Api::UsersController < ApplicationController
     user.exceptions = params[:exceptions] ? params[:exceptions] : user.exceptions
     user.admin = params[:admin] ? params[:admin] : user.admin
 
-    #image = params[:image]
+    file = params[:file]
 
-    # if image
-    #   begin
-    #     ext = Image.extname(image.tempfile)
-    #     cloud_image = Cloudinary::Uploader.upload(image, public_id: image.original_filename, secure: true)
-    #     user.image = cloud_image['secure_url']
-    #   rescue => e
-    #     render json: {errors: e}, status: 422
-    #   end
-    # end
+    if file
+      begin
+        ext = File.extname(file.tempfile)
+        cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
+        user.image = cloud_image['secure_url']
+      rescue => e
+        render json: {errors: e}, status: 422
+      end
+    end
 
     if user.save
       render json: user

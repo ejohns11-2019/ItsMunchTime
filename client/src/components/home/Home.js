@@ -1,34 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { AuthConsumer, } from "../../providers/AuthProvider";
-import { Container, Button } from 'semantic-ui-react';
+import { Container, } from 'semantic-ui-react';
 import OrderList from '../orders/OrderGroupList';
 import OrderHistory from '../orders/OrderHistory';
-import Order from '../orders/Order';
+//import Order from '../orders/Order';
 
 
 
 class Home extends React.Component {
 
   adminHome = () => {
-    const { auth: { user, }, location, } = this.props;
+    const { auth: { user, }, } = this.props;
 
-    if (user.admin == true) {
+    if (user.admin === true) {
       return (
         <Container>
+        <br />
           <OrderList />
-          <OrderHistory />
+          <OrderHistory userId = {this.props.auth.user.id} />
         </Container>
       )
     } else {
       return (
         <Container>
+        <br />
           <OrderList />
           <OrderHistory />
         </Container>
       )
     }
-  } 
+  }
 
   render() {
     return (
@@ -41,7 +43,7 @@ export class ConnectedHome extends React.Component {
   render () {
     return (
       <AuthConsumer>
-        { auth => 
+        { auth =>
           <Home { ...this.props } auth={auth} />
         }
       </AuthConsumer>

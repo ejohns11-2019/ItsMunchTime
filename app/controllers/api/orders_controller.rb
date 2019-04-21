@@ -50,8 +50,11 @@ class Api::OrdersController < ApplicationController
     end
 
     def user_history
-      id = current_user.id 
-      render json: Order.user_history(id)
+      render json: Order.user_history(params[:user_id])
+    end
+
+    def user_history_last_five
+      render json: Order.user_history_last_five(params[:user_id])
     end
 
     private

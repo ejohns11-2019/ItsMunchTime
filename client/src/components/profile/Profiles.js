@@ -1,11 +1,12 @@
-import React, { Fragment, Component } from 'react';
-import { AuthConsumer, } from '../../providers/AuthProvider';
-import { Form, Grid, Image, Container, Header, Button, Segment } from 'semantic-ui-react';
+import React, { Component } from 'react';
+//import { AuthConsumer, } from '../../providers/AuthProvider';
+import { Header, Divider } from 'semantic-ui-react';
 // import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import UserProfile from './UserProfile';
+import OrderHistory from '../orders/OrderHistory';
 
-const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
+//const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class Profiles extends Component {
   state = { users: [] };
@@ -19,7 +20,7 @@ class Profiles extends Component {
         console.log(err)
       })
   }
-  
+
   render() {
     const { users, } = this.state
     const user_count = users.length
@@ -38,11 +39,13 @@ class Profiles extends Component {
                   {...u}
                   {...this.state.users}
                 />
+                <OrderHistory userId = {u.id}/>
+                <Divider />
               </>
               )
             })
           }
-    
+
         </div>
     )
   }

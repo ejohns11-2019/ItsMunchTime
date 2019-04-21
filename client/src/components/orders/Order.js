@@ -10,7 +10,7 @@ class Order extends Component {
 
   componentDidMount(){
     this.setState({order: {...this.props}, ticket: this.props.ticket})
-  } 
+  }
 
   // deleteOrder = (id) => {
   //   axios.delete(`/api/orders/${id}`)
@@ -51,7 +51,7 @@ class Order extends Component {
     return(
     <>
       <h2>Submit your order below:</h2>
-      <OrderFormUser id={this.props.id} user_id={this.props.user_id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} toggleEdit={this.toggleEdit} />  
+      <OrderFormUser id={this.props.id} user_id={this.props.user_id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} toggleEdit={this.toggleEdit} />
     </>
     )
   }
@@ -59,18 +59,19 @@ class Order extends Component {
   render() {
     const { auth: { user, } } = this.props
     const { order } = this.state
-    if (order.user_id == user.id){
+    if (order.user_id === user.id){
+      this.props.setCurrentUserOrderId(order)
     return (
       <>
         <h2>Order Number: {order.id}</h2>
         <h2>Restaurant: {order.rest_name}</h2>
-        <a href={order.menu} target="_blank"><h2>View Menu</h2> </a> 
+        <a href={order.menu} target="_blank"><h2>View Menu</h2> </a>
         <iframe src={order.menu} width="500" height="400">
-          <a href={order.menu} target="_blank"><h2>View Menu</h2> </a> 
+          <a href={order.menu} target="_blank"><h2>View Menu</h2> </a>
         </iframe>
         <h2>Current Order Ticket: {this.props.ticket}</h2>
-        <Form>
         { this.state.editing ? this.orderForm() : <div></div> }
+        <Form>
         <Button
           icon
           color="blue"
@@ -81,7 +82,7 @@ class Order extends Component {
           :
           <div>Edit &#160; <Icon name='pencil' /></div>
           }
-          
+
         </Button>
         <Button
           icon
@@ -102,14 +103,14 @@ class Order extends Component {
           Mark absent <Icon name ="calendar times" />
         </Button>
         </Form>
-            
+
       </>
     )}else{
       return(
         <div>
           {/* No Match */}
         </div>
-        
+
       )
     }
   }

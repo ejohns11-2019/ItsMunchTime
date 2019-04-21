@@ -9,7 +9,7 @@ import {Grid, Table, Button } from 'semantic-ui-react';
 
 class OrderList extends React.Component {
 
-  state = { orders: [], user: { id: '' }, order: { current: '', ticket: '', order_date: '', user_id: '', restaurtant_id: '' } }
+  state = { orders: [], unqiueTicket: '', currentUserOrderId: '',  user: { id: '' }, order: { current: '', ticket: '', order_date: '', user_id: '', restaurtant_id: '' } }
 
   componentDidMount() {
     axios.get('/api/current_orders')
@@ -22,54 +22,66 @@ class OrderList extends React.Component {
       })
   }
 
-  toggleEdit = () => {
-    this.setState(state => {
-      return { editing: !state.editing, };
-    })
-  }
+  // toggleEdit = () => {
+  //   this.setState(state => {
+  //     return { editing: !state.editing, };
+  //   })
+  // }
 
   toggleReset = () => {
     const { auth: { clearRestaurant }, } = this.props;
     axios.put('/api/current_to_false', { current: false })
       .then(res => {
-        this.componentDidMount() 
-        
+        this.componentDidMount()
+
       })
       clearRestaurant()
   }
 
   updateTicket = (updatedTicket, id, user_id) => {
     const { orders, } = this.state
-    
+
     orders.map((o) => {
-      if (o.user_id == user_id){
+      if (o.user_id === user_id){
         return(
         this.setState({orders: [ {...o}, {ticket: updatedTicket}],})
-       
+
         )
       }
     })
-   
+
     axios.put(`/api/orders/${id}`, {ticket: updatedTicket})
       .then(res => {
         this.componentDidMount()
       })
   }
 
- getOtherOrder = (id) => {
-   return axios.get(`/api/orders/${id}`)
- }
+//  getOtherOrder = (id) => {
+//    return axios.get(`/api/orders/${id}`)
+//  }
 
- getUserOrder = (id) => {
-    return axios.get(`/api/users/${id}/orders`)
- }
+//  getUserOrder = (id) => {
+//     return axios.get(`/api/users/${id}/orders`)
+//  }
 
- copyOrder = (a,b) => {
- axios.all([this.getOtherOrder(a), this.getUserOrder(b)])
-    .then(axios.spread(function (otherOrder, userOrder) {
-      axios.put(`/api/orders/${userOrder.data.id}?ticket=${otherOrder.data.ticket}`)
-    }))}
+//  copyOrder = (a,b) => {
+//  axios.all([this.getOtherOrder(a), this.getUserOrder(b)])
+//     .then(axios.spread(function (otherOrder, userOrder) {
+//       axios.put(`/api/orders/${userOrder.data.id}?ticket=${otherOrder.data.ticket}`)
+//     }))}
 
+duplicateOrder = (unqiueTicket) => {
+  const { auth: { user, } } = this.props
+
+  this.updateTicket(unqiueTicket, this.state.currentUserOrderId, user.id)
+
+}
+
+setCurrentUserOrderId = (currentUserorder) => {
+  if(this.state.currentUserOrderId === ""){
+    this.setState({currentUserOrderId: currentUserorder.id})
+  }
+}
 
   render() {
     const { orders, } = this.state
@@ -83,7 +95,7 @@ class OrderList extends React.Component {
               {
                 orders.map((o) => {
                   return (
-                    <Order key={o.id} {...o} user_id={o.user_id} ticket={o.ticket} updateTicket={this.updateTicket} />
+                    <Order key={o.id} {...o} unqiueTicket={this.state.unqiueTicket} user_id={o.user_id} ticket={o.ticket} updateTicket={this.updateTicket} setCurrentUserOrderId={this.setCurrentUserOrderId} />
                   )
                 })
               }
@@ -102,9 +114,9 @@ class OrderList extends React.Component {
                     return (
                       <Table.Body>
                         <Table.Row>
-                          <Table.Cell>{o.last_name} </Table.Cell>
+                          <Table.Cell>{o.first_name}{o.last_name} </Table.Cell>
                           <Table.Cell>{o.ticket}</Table.Cell>
-                          <Table.Cell><Button onClick={() => this.copyOrder(o.id, user.id)}>Click Here</Button></Table.Cell>
+                          <Table.Cell><Button unqiueticket={o.ticket} onClick={() => this.duplicateOrder(o.ticket)}>Click Here</Button></Table.Cell>
                         </Table.Row>
                       </Table.Body>
                     )
@@ -112,9 +124,9 @@ class OrderList extends React.Component {
                 }
               </Table>
               {user.admin && <Button size="medium" color="red" onClick={this.toggleReset}>Done</Button>}
-              <Link to='/new_order'>
+              {user.admin && <Link to='/new_order'>
                 <Button size='medium' color='blue'>New Order</Button>
-              </Link> 
+              </Link> }
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -136,5 +148,3 @@ export class ConnectedOrderList extends React.Component {
 }
 
 export default withRouter(ConnectedOrderList);
-
-

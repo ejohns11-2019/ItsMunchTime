@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button, Icon, } from "semantic-ui-react";
 import RestaurantForm from './RestaurantForm'
-import RestaurantHistory from "./RestaurantHistory";
+//import RestaurantHistory from "./RestaurantHistory";
 import {Link } from 'react-router-dom';
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
@@ -21,15 +21,15 @@ class Restaurant extends React.Component {
       <>
         <Card>
           <Card.Content>
-            <Card.Header> 
-            <Link 
+            <Card.Header>
+            <Link
               to={{
                 pathname: "/restaurant_details",
-                state: {restId: this.props.id, 
+                state: {restId: this.props.id,
                   name:  this.props.name,
-                  address: this.props.address, 
-                  phone: this.props.phone, 
-                  menu: this.props.menu 
+                  address: this.props.address,
+                  phone: this.props.phone,
+                  menu: this.props.menu
                 }
               }}
             >
@@ -85,41 +85,21 @@ class Restaurant extends React.Component {
           >
             <Icon name ="trash" />
           </Button>
+          <Link
+            color="red"
+            style={{ marginLeft: "15px", }}
+            to={{
+              pathname: "/restaurant_history",
+              state: {restId: this.props.id}
+            }}
+          >History</Link>
         </>
       )
     } else {
       return(
-        this.restaurantView()
-      )
-    }
-  }
-
-  render() {
-    return (
       <>
-        { this.state.editing ? this.restaurantEdit() : this.restaurantView() }
-        <Button
-          icon
-          color="blue"
-          size="tiny"
-          onClick={() => this.toggleEdit(this.props.id)}
-        >
-          { this.state.editing ? 'Cancel'
-          :
-          <Icon name="pencil" />
-          }
-        </Button>
-        <Button
-          icon
-          color="red"
-          size="tiny"
-          onClick={ () => this.props.deleteRestaurant(this.props.id) }
-          style={{ marginLeft: "15px", }}
-        >
-          <Icon name ="trash" />
-        </Button>
+        {this.restaurantView()}
         <Link
-
           color="red"
           style={{ marginLeft: "15px", }}
           to={{
@@ -128,14 +108,14 @@ class Restaurant extends React.Component {
           }}
         >History</Link>
       </>
-    )
-    return(
-      <div>
-        { this.adminCheck() }
-      </div>
-
-    )
+      )
+    }
   }
+
+    render() {
+      return(
+      this.adminCheck()
+    )}
 }
 
 export class ConnectedRestaurant extends React.Component {

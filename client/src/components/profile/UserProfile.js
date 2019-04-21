@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { Grid, Image, Container, Divider, Header, Button, Icon, } from 'semantic-ui-react';
-import Dropzone from 'react-dropzone';
+//import Dropzone from 'react-dropzone';
 import EditProfile from './EditProfile';
 import { AuthConsumer, } from '../../providers/AuthProvider';
 
