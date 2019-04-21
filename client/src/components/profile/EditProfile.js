@@ -28,6 +28,10 @@ class EditProfile extends React.Component {
     })
   }
 
+  onDrop = (files) => {
+    this.setState( { ...this.props, image: files[0] })
+  }
+
   handleChange = (e, {name, value}) => {
     this.setState({
         ...this.state,
@@ -41,11 +45,10 @@ class EditProfile extends React.Component {
     const { auth: { updateUser, }, } = this.props;
     updateUser(this.props.id, { first_name, last_name, email, group, allergies, exceptions, admin, image });
     this.setState({
-      formValues: {
-        ...this.state.formValues,
+        ...this.state,
         image: "",
       },
-    });
+    );
     this.props.toggleEdit();
   }
 
