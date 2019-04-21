@@ -124,9 +124,9 @@ setCurrentUserOrderId = (currentUserorder) => {
                 }
               </Table>
               {user.admin && <Button size="medium" color="red" onClick={this.toggleReset}>Done</Button>}
-              <Link to='/new_order'>
+              {user.admin && <Link to='/new_order'>
                 <Button size='medium' color='blue'>New Order</Button>
-              </Link> 
+              </Link> }
             </Grid.Column>
           </Grid.Row>
         </Grid>

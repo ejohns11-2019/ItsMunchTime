@@ -1,25 +1,56 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Table} from 'semantic-ui-react';
+import {Table, Button} from 'semantic-ui-react';
 import Order from './Order'
 
 //Logical component that will handle order history
 
 class OrderHistory extends Component {
 
-  state = {orders: [], orders: [] }
+  state = {orders: [], lastFiveOrders: [], all: false}
 
   componentDidMount() {
+    
     axios.get('/api/user_history')
       .then(res => {
         this.setState({orders: res.data,})
+        this.getLastFiveOrders();
       })
       .catch(err => {
         console.log(err)
       })
   }
 
-  printLastFiveeOrders = () => {
+  getLastFiveOrders = () => {
+    axios.get('/api/user_history_last_five')
+      .then(res => {
+        this.setState({lastFiveOrders: res.data,})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  printLastFiveOrders = () => { 
+    const {lastFiveOrders} = this.state
+    return lastFiveOrders.map(l => {
+       return(
+        <Table.Row>
+          <Table.Cell>
+            {l.rest_name}
+          </Table.Cell>
+          <Table.Cell>
+            {l.ticket}
+          </Table.Cell>
+          <Table.Cell>
+            {l.order_date}
+          </Table.Cell>
+        </Table.Row>
+        )
+      })
+  }
+
+  printAllOrders = () => {
     const {orders} = this.state
     return orders.map(o => {
        return(
@@ -38,6 +69,12 @@ class OrderHistory extends Component {
     })
   }
 
+  switchLogic = () => {
+    this.setState(state => ({
+      all: !state.all
+    }));
+  }
+
   render() {
     return (
       <>
@@ -51,9 +88,12 @@ class OrderHistory extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {this.printLastFiveeOrders()}
+          {this.state.all ? this.printAllOrders() : this.printLastFiveOrders() }
         </Table.Body>
       </Table>
+      <Button onClick={this.switchLogic}> 
+        {this.state.all ? 'View Five' : `View All`}
+      </Button>
       </>
     )
   }
