@@ -16,7 +16,6 @@ class OrderFormUser extends Component {
     ticket: "",
     id: "",
     current: false,
-    ticket: "",
     user_id: "",
     users: [],
     userData: [],
@@ -24,7 +23,7 @@ class OrderFormUser extends Component {
   };
 
 componentDidMount() {
-  const { id, current, ticket, order_date, restaurant_id, user_id } = this.props;
+  //const { order_date, restaurant_id, user_id } = this.props;
   this.setState({...this.props });
   this.getUsers();
   this.getOrders();
@@ -125,7 +124,7 @@ handleSubmit = (e) => {
             required
           />
           <Form.Button type="submit" color="blue">Save</Form.Button>
-          
+          <br />
         </Form>
       )
     }

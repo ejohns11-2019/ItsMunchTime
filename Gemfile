@@ -30,7 +30,7 @@ gem 'will_paginate'
 
 gem 'api-pagination'
 
-#gem 'cloudinary'
+gem 'cloudinary'
 
 group :development, :test do
   gem 'dotenv-rails'

@@ -12,20 +12,24 @@ class EditProfile extends React.Component {
     allergies: '',
     exceptions: '',
     admin: '',
-    image: '',
+    file: '',
     profile: [],
     profileData: [],
     p_id: '',}
 
   componentDidMount() {
-    const { first_name, last_name, email, group, allergies, exceptions, admin, image } = this.props;
-    this.setState({ first_name, last_name, email, group, allergies, exceptions, admin, image, profile: {...this.props} });
+    const { first_name, last_name, email, group, allergies, exceptions, admin} = this.props;
+    this.setState({ first_name, last_name, email, group, allergies, exceptions, admin, profile: {...this.props} });
     const {profile, profileData} = this.state
     profile.map( p => {
       var temp = profileData;
       temp.push({ key: p.id, text: p.name, value: p.name})
       this.setState({profileData: temp})
     })
+  }
+
+  onDrop = (files) => {
+    this.setState( { ...this.props, file: files[0] })
   }
 
   handleChange = (e, {name, value}) => {
@@ -37,15 +41,14 @@ class EditProfile extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {  first_name, last_name, email, group, allergies, exceptions, admin, image  } = this.state;
+    const {  first_name, last_name, email, group, allergies, exceptions, admin, file  } = this.state;
     const { auth: { updateUser, }, } = this.props;
-    updateUser(this.props.id, { first_name, last_name, email, group, allergies, exceptions, admin, image });
+    updateUser(this.props.id, { first_name, last_name, email, group, allergies, exceptions, admin, file });
     this.setState({
-      formValues: {
-        ...this.state.formValues,
-        image: "",
+        ...this.state,
+        file: "",
       },
-    });
+    );
     this.props.toggleEdit();
   }
 
