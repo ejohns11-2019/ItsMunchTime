@@ -101,6 +101,8 @@ export class AuthProvider extends React.Component {
     this.setState({restaurant: null})
   }
 
+  
+
   render() {
     return (
       <AuthContext.Provider value={{
@@ -115,7 +117,7 @@ export class AuthProvider extends React.Component {
         setRestaurant: this.setRestaurant,
         deleteUser: this.deleteUser,
         clearRestaurant: this.clearRestaurant
-      }}>
+        }}>
         { this.props.children }
       </AuthContext.Provider>
     )

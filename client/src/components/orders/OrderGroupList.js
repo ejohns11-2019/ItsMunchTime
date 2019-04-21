@@ -60,9 +60,9 @@ class OrderList extends React.Component {
 //    return axios.get(`/api/orders/${id}`)
 //  }
 
-//  getUserOrder = (id) => {
+// //  getUserOrder = (id) => {
 //     return axios.get(`/api/users/${id}/orders`)
-//  }
+// //  }
 
 //  copyOrder = (a,b) => {
 //  axios.all([this.getOtherOrder(a), this.getUserOrder(b)])
