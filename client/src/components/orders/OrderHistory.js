@@ -37,6 +37,9 @@ class OrderHistory extends Component {
        return(
         <Table.Row>
           <Table.Cell>
+             {l.first_name}{l.last_name}
+          </Table.Cell>
+          <Table.Cell>
             {l.rest_name}
           </Table.Cell>
           <Table.Cell>
@@ -55,6 +58,9 @@ class OrderHistory extends Component {
     return orders.map(o => {
        return(
         <Table.Row>
+           <Table.Cell>
+           {o.first_name}{o.last_name}
+          </Table.Cell>
           <Table.Cell>
             {o.rest_name}
           </Table.Cell>
@@ -82,6 +88,7 @@ class OrderHistory extends Component {
       <Table celled>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell>User</Table.HeaderCell>
             <Table.HeaderCell>Restaurant</Table.HeaderCell>
             <Table.HeaderCell>Food</Table.HeaderCell>
             <Table.HeaderCell>Order Date</Table.HeaderCell>
