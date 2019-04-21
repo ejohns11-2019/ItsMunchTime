@@ -11,7 +11,7 @@ class OrderHistory extends Component {
 
   componentDidMount() {
     
-    axios.get('/api/user_history')
+    axios.get('/api/user_history', { params: {  user_id: this.props.userId } })
       .then(res => {
         this.setState({orders: res.data,})
         this.getLastFiveOrders();
@@ -22,7 +22,7 @@ class OrderHistory extends Component {
   }
 
   getLastFiveOrders = () => {
-    axios.get('/api/user_history_last_five')
+    axios.get('/api/user_history_last_five', { params: { user_id: this.props.userId } })
       .then(res => {
         this.setState({lastFiveOrders: res.data,})
       })
@@ -36,6 +36,9 @@ class OrderHistory extends Component {
     return lastFiveOrders.map(l => {
        return(
         <Table.Row>
+          <Table.Cell>
+             {l.first_name}{l.last_name}
+          </Table.Cell>
           <Table.Cell>
             {l.rest_name}
           </Table.Cell>
@@ -55,6 +58,9 @@ class OrderHistory extends Component {
     return orders.map(o => {
        return(
         <Table.Row>
+           <Table.Cell>
+           {o.first_name}{o.last_name}
+          </Table.Cell>
           <Table.Cell>
             {o.rest_name}
           </Table.Cell>
@@ -82,6 +88,7 @@ class OrderHistory extends Component {
       <Table celled>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell>User</Table.HeaderCell>
             <Table.HeaderCell>Restaurant</Table.HeaderCell>
             <Table.HeaderCell>Food</Table.HeaderCell>
             <Table.HeaderCell>Order Date</Table.HeaderCell>

@@ -43,9 +43,10 @@ class Order < ApplicationRecord
 
   def self.user_history(id)
     Order.find_by_sql("
-      SELECT orders.*, restaurants.name AS rest_name
+      SELECT orders.*, restaurants.name AS rest_name, users.first_name, users.last_name
       FROM orders 
       JOIN restaurants ON restaurants.id = orders.restaurant_id
+      JOIN users ON users.id = orders.user_id
       WHERE orders.current = false
       AND orders.user_id = #{id}
       ORDER BY order_date DESC;
@@ -54,9 +55,10 @@ class Order < ApplicationRecord
 
   def self.user_history_last_five(id)
     Order.find_by_sql("
-      SELECT orders.*, restaurants.name AS rest_name
+      SELECT orders.*, restaurants.name AS rest_name, users.first_name, users.last_name
       FROM orders 
       JOIN restaurants ON restaurants.id = orders.restaurant_id
+      JOIN users ON users.id = orders.user_id
       WHERE orders.current = false
       AND orders.user_id = #{id}
       ORDER BY order_date DESC
