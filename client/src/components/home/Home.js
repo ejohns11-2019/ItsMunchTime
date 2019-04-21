@@ -17,7 +17,7 @@ class Home extends React.Component {
       return (
         <Container>
           <OrderList />
-          <OrderHistory />
+          <OrderHistory userId = {this.props.auth.user.id} />
         </Container>
       )
     } else {

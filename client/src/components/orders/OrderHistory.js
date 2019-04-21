@@ -11,7 +11,7 @@ class OrderHistory extends Component {
 
   componentDidMount() {
     
-    axios.get('/api/user_history')
+    axios.get('/api/user_history', { params: {  user_id: this.props.userId } })
       .then(res => {
         this.setState({orders: res.data,})
         this.getLastFiveOrders();
@@ -22,7 +22,7 @@ class OrderHistory extends Component {
   }
 
   getLastFiveOrders = () => {
-    axios.get('/api/user_history_last_five')
+    axios.get('/api/user_history_last_five', { params: { user_id: this.props.userId } })
       .then(res => {
         this.setState({lastFiveOrders: res.data,})
       })
