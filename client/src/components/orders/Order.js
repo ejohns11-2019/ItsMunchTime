@@ -60,6 +60,7 @@ class Order extends Component {
     const { auth: { user, } } = this.props
     const { order } = this.state
     if (order.user_id == user.id){
+      this.props.setCurrentUserOrderId(order)
     return (
       <>
         <h2>Order Number: {order.id}</h2>
@@ -69,8 +70,8 @@ class Order extends Component {
           <a href={order.menu} target="_blank"><h2>View Menu</h2> </a> 
         </iframe>
         <h2>Current Order Ticket: {this.props.ticket}</h2>
-        <Form>
         { this.state.editing ? this.orderForm() : <div></div> }
+        <Form>
         <Button
           icon
           color="blue"
