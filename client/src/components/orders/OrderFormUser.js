@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon } from "semantic-ui-react";
+import { Form, } from "semantic-ui-react";
 import axios from 'axios';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
@@ -54,7 +54,7 @@ getOrders = () => {
 setOrderValue = () => {
   const { user_id, orders } = this.state
   return orders.find( r =>
-    r.user_id == user_id
+    r.user_id === user_id
   )
   }
 
@@ -84,7 +84,7 @@ handleSubmit = (e) => {
     //const { order, auth: { user, }, } = this.props
     const { ticket, users, userData } = this.state;
     const { user } = this.props.auth
-    
+
     if(user.admin === true) {
       return (
         <Form onSubmit={this.handleSubmit}>
@@ -109,7 +109,7 @@ handleSubmit = (e) => {
             required
           />
           <Form.Button type="submit" color="blue">Save</Form.Button>
-          
+          <br />
         </Form>
       )
     } else {
