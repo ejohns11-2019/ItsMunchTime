@@ -5,8 +5,8 @@ import './footer.css';
 
 const Footer = () => (
 
-  <footer>
-    <Segment inverted vertical style={{ padding: '5em 0em' }}>
+  <footer style={{ padding: '5em 0em', backgroundColor: '#42ebf4' }}> 
+    <Segment inverted vertical >
     <Container>
       <Grid divided inverted stackable>
         <Grid.Row>
@@ -40,9 +40,9 @@ const Footer = () => (
         </Grid.Row>
       </Grid>
     </Container>
-  </Segment>
-</footer>
+    </Segment>
+  </footer>
 
 )
 
-export default Footer
+export default Footer;
