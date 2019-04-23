@@ -3,7 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import Order from './Order'
 import axios from 'axios';
 import { AuthConsumer, } from "../../providers/AuthProvider";
-import {Grid, Table, Button } from 'semantic-ui-react';
+import {Grid, Table, Button, Icon } from 'semantic-ui-react';
 
 //Logical component that will handle order display, and all order CRUD actions
 
@@ -116,7 +116,7 @@ setCurrentUserOrderId = (currentUserorder) => {
                         <Table.Row>
                           <Table.Cell>{o.first_name}{o.last_name} </Table.Cell>
                           <Table.Cell>{o.ticket}</Table.Cell>
-                          <Table.Cell><Button unqiueticket={o.ticket} onClick={() => this.duplicateOrder(o.ticket)}>Click Here</Button></Table.Cell>
+                          <Table.Cell textAlign='center'><Button unqiueticket={o.ticket} onClick={() => this.duplicateOrder(o.ticket)}><Icon name='food' fitted color='red'/></Button></Table.Cell>
                         </Table.Row>
                       </Table.Body>
                     )
