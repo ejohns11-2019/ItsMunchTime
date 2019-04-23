@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import Order from './Order'
 import axios from 'axios';
+import './orderGroupList.css';
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import {Grid, Table, Button } from 'semantic-ui-react';
 
@@ -88,8 +89,8 @@ setCurrentUserOrderId = (currentUserorder) => {
     const { auth: { user } } = this.props
 
     return (
-      <>
-        <Grid>
+      <div className='orders'>
+        <Grid> 
           <Grid.Row>
             <Grid.Column width={8}>
               {
@@ -130,7 +131,7 @@ setCurrentUserOrderId = (currentUserorder) => {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </>
+      </div>
     )
   }
 }
