@@ -30,11 +30,10 @@ class Api::OrdersController < ApplicationController
         render json: Order.all
     end
 
-    def destroy
-      if current_user.adimn == true
-        User.each { |user|  user.ordres.find(params[:id]).destroy}
-        render json: { message: 'Order was deleted' }
-      end
+    def delete_orders
+      orders = Order.where(current: true)
+      orders.each {|o| o.destroy}
+      render json: { message: 'Order was deleted'}
     end
 
     def restaurant_history
@@ -55,6 +54,10 @@ class Api::OrdersController < ApplicationController
 
     def user_history_last_five
       render json: Order.user_history_last_five(params[:user_id])
+    end
+
+    def check_current_order
+      render json: Order.check_current_order()
     end
 
     private
