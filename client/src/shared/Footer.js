@@ -1,19 +1,19 @@
 import React from 'react';
 import {Segment, Container, Grid, Header, List} from 'semantic-ui-react';
 import {Link, withRouter} from 'react-router-dom';
-import './footer.css';
+
 
 const Footer = () => (
 
-  <footer style={{ padding: '5em 0em', backgroundColor: '#42ebf4' }}> 
-    <Segment inverted vertical >
+  <footer style={{ padding: '5em 0em', backgroundColor: '#16b9ce' }}> 
+    <Segment vertical>
     <Container>
-      <Grid divided inverted stackable>
+      <Grid divided stackable>
         <Grid.Row>
           <Grid.Column width={3}>
             <Link to='/about'>
-            <Header inverted as='h4' content='About' />
-              <List link inverted>
+            <Header as='h4' content='About' />
+              <List link>
                 <Link to='/contact'>
                 <List.Item as='a'>Contact Us</List.Item>
                 <List.Item as='a'></List.Item>
@@ -22,8 +22,8 @@ const Footer = () => (
             </Link>
           </Grid.Column>
           <Grid.Column width={3}>
-            <Header inverted as='h4' content='' />
-            <List link inverted>
+            <Header as='h4' content='' />
+            <List link>
               <List.Item as='a'></List.Item>
               <List.Item as='a'></List.Item>
               <List.Item as='a'></List.Item>
@@ -31,7 +31,7 @@ const Footer = () => (
             </List>
           </Grid.Column>
           <Grid.Column width={7}>
-            <Header as='h4' inverted>
+            <Header as='h4'>
               ItsMunchTime!
             </Header>
             <p>
