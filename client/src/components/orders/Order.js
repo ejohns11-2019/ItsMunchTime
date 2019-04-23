@@ -63,7 +63,7 @@ class Order extends Component {
       this.props.setCurrentUserOrderId(order)
     return (
       <>
-        <h2>Order Number: {order.id}</h2>
+        {/* <h2>Order Number: {order.id}</h2> */}
         <h2>Restaurant: {order.rest_name}</h2>
         <a href={order.menu} target="_blank"><h2>View Menu</h2> </a>
         <iframe src={order.menu} width="500" height="400">
@@ -89,7 +89,7 @@ class Order extends Component {
           color="yellow"
           size="tiny"
           onClick={ () => this.clearOrder() }
-          style={{ marginLeft: "15px", }}
+          style={{ margin: "15px", }}
         >
           Clear Order <Icon name ="eraser" />
         </Button>
@@ -98,7 +98,7 @@ class Order extends Component {
           color="red"
           size="tiny"
           onClick={ () => this.absentOrder() }
-          style={{ marginLeft: "15px", }}
+          style={{ margin: "15px", }}
         >
           Mark absent <Icon name ="calendar times" />
         </Button>

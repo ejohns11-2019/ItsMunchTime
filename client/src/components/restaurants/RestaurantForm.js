@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, } from "semantic-ui-react";
+import { Form, Header } from "semantic-ui-react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
 
@@ -41,10 +41,10 @@ class RestaurantForm extends React.Component {
     if (user.admin === true) {
       return (
       <>
-        <h1>Add a New Restaurant</h1>
+        <Header as='h1'>Add a New Restaurant:</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
-            label="Name"
+            placeholder="Name"
             type="text"
             name="name"
             value={name}
@@ -52,7 +52,7 @@ class RestaurantForm extends React.Component {
             required
           />
           <Form.Input
-            label="Address"
+            placeholder="Address"
             type="text"
             name="address"
             value={address}
@@ -60,7 +60,7 @@ class RestaurantForm extends React.Component {
             required
           />
           <Form.Input
-            label="Phone"
+            placeholder="Phone"
             type="text"
             name="phone"
             value={phone}
@@ -68,7 +68,7 @@ class RestaurantForm extends React.Component {
             required
           />
           <Form.Input
-            label="Menu"
+            placeholder="Menu"
             type="text"
             name="menu"
             value={menu}
