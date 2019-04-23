@@ -66,4 +66,13 @@ class Order < ApplicationRecord
       LIMIT 5;
     ")
   end
+
+  def self.check_current_order
+    Order.find_by_sql("
+      SELECT DISTINCT (orders.restaurant_id), orders.order_date, restaurants.name AS rest_name
+      FROM orders
+      JOIN restaurants ON restaurants.id = orders.restaurant_id
+      WHERE orders.current = true
+    ")
+  end
 end
