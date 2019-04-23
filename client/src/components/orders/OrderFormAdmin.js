@@ -38,7 +38,7 @@ class OrderFormAdin extends Component {
         .catch(err => {
           console.log(err);
         })
-      this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: ''})
+      this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '', current_exists: ''})
     }
   }
 
@@ -58,7 +58,6 @@ class OrderFormAdin extends Component {
   check_order_exists() {
     axios.get('api/check_current_order')
       .then(res => {
-        // debugger
         if (res.data.length == 0)
           this.setState({ current_exists: false, current_rest: '', current_order_date: '', })
         else
@@ -76,7 +75,6 @@ class OrderFormAdin extends Component {
           var temp = restaurantData;
           temp.push({ key: r.id, text: r.name, value: r.name })
           this.setState({ restaurantData: temp })
-          // debugger
         })
       })
       .catch(err => {
@@ -87,13 +85,14 @@ class OrderFormAdin extends Component {
   deleteOrder() {
     axios.delete('/api/delete_orders')
     .then(res => {
-      debugger
       alert(res.data.message)
-      this.componentDidMount()
+      window.location.reload()
+      this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '', current_exists: ''})
     })
     .catch( err => {
       alert(err.response.data.message)
     })
+    
   }
 
   render() {
