@@ -1,0 +1,15 @@
+
+{
+  "name": "ItsMunchTime",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ejohns11-2019/ItsMunchTime.git",
+  "author": "Katelyn Williamson <katelynrwilliamson@gmail.com>",
+  "license": "MIT",
+
+"scripts": {
+  "build": "cd client && npm install --only=dev && npm install && npm run build && cd ..",
+  "deploy": "cp -a client/build/. public/",
+  "heroku-postbuild": "npm run build && npm run deploy && echo 'Client Built'"
+}
+}

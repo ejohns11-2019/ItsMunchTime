@@ -16,4 +16,7 @@ Rails.application.routes.draw do
     get 'check_current_order', to: 'orders#check_current_order'
     delete 'delete_orders', to: 'orders#delete_orders'
   end
+
+  get '*other', to: 'static#index'
+  
 end
