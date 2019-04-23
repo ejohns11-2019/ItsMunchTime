@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Table, Button} from 'semantic-ui-react';
 
-
 //Logical component that will handle order history
 
 class OrderHistory extends Component {
@@ -10,7 +9,7 @@ class OrderHistory extends Component {
   state = {orders: [], lastFiveOrders: [], all: false}
 
   componentDidMount() {
-    
+
     axios.get('/api/user_history', { params: {  user_id: this.props.userId } })
       .then(res => {
         this.setState({orders: res.data,})
@@ -31,7 +30,7 @@ class OrderHistory extends Component {
       })
   }
 
-  printLastFiveOrders = () => { 
+  printLastFiveOrders = () => {
     const {lastFiveOrders} = this.state
     return lastFiveOrders.map(l => {
        return(
@@ -84,6 +83,8 @@ class OrderHistory extends Component {
   render() {
     return (
       <>
+      <br />
+      <hr />
       <h2>Order History</h2>
       <Table celled>
         <Table.Header>
@@ -98,9 +99,10 @@ class OrderHistory extends Component {
           {this.state.all ? this.printAllOrders() : this.printLastFiveOrders() }
         </Table.Body>
       </Table>
-      <Button onClick={this.switchLogic}> 
+      <Button onClick={this.switchLogic}>
         {this.state.all ? 'View Five' : `View All`}
       </Button>
+      <hr />
       </>
     )
   }

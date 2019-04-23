@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Icon } from "semantic-ui-react";
-//import axios from 'axios';
+import { Form, } from "semantic-ui-react";
+import axios from 'axios';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
 
@@ -16,23 +16,64 @@ class OrderFormUser extends Component {
     ticket: "",
     id: "",
     current: false,
-    ticket: ""
+    user_id: "",
+    users: [],
+    userData: [],
+    orders: []
   };
 
 componentDidMount() {
-  const { id, current, ticket, order_date, restaurant_id, user_id } = this.props;
+  //const { order_date, restaurant_id, user_id } = this.props;
   this.setState({...this.props });
+  this.getUsers();
+  this.getOrders();
 }
 
-handleChange = (e) => {
-  const { name, value } = e.target
-  this.setState({ [name]: value })
+getUsers = () => {
+  axios.get('/api/users')
+       .then( res => {
+         this.setState({ users: res.data })
+         const { users, userData} = this.state
+         users.map( r => {
+           var temp = userData;
+           temp.push({ key: r.id, text: r.first_name + r.last_name, value: r.id})
+           this.setState({userData: temp})
+       })})
+      .catch( err => {
+        console.log(err)
+      })
+    }
+
+getOrders = () => {
+  axios.get('/api/current_orders')
+  .then( res => {
+    this.setState({orders: res.data })
+  })
+}
+
+setOrderValue = () => {
+  const { user_id, orders } = this.state
+  return orders.find( r =>
+    r.user_id === user_id
+  )
+  }
+
+
+handleChange = (e, {name, value}) => {
+  // const { name, value } = e.target
+  this.setState({ [name]: value, })
 }
 
 handleSubmit = (e) => {
+  const { user } = this.props.auth
   e.preventDefault()
+  if(user.admin === true) {
+    const response = this.setOrderValue()
+    this.props.updateTicket(this.state.ticket, response.id, this.state.user_id)
+  } else {
   this.props.updateTicket(this.state.ticket, this.props.id, this.props.user_id)
-  this.setState({ ticket: '', })
+}
+  this.setState({ ticket: '', id: '', user_id: ''})
   this.props.toggleEdit()
 }
 
@@ -41,8 +82,37 @@ handleSubmit = (e) => {
 
   editView = () => {
     //const { order, auth: { user, }, } = this.props
-    const { ticket, } = this.state;
+    const { ticket, users, userData } = this.state;
+    const { user } = this.props.auth
 
+    if(user.admin === true) {
+      return (
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Dropdown
+            label='User:'
+            placeholder='Select a User'
+            required
+            fluid
+            search
+            selection
+            name='user_id'
+            value={users.id}
+            options={userData}
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            label="Ticket"
+            type="text"
+            name="ticket"
+            value={ticket}
+            onChange={this.handleChange}
+            required
+          />
+          <Form.Button type="submit" color="blue">Save</Form.Button>
+          <br />
+        </Form>
+      )
+    } else {
     return (
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
@@ -54,9 +124,10 @@ handleSubmit = (e) => {
             required
           />
           <Form.Button type="submit" color="blue">Save</Form.Button>
-          
+          <br />
         </Form>
       )
+    }
   }
 
   render() {

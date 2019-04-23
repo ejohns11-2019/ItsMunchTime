@@ -33,24 +33,24 @@ class OrderList extends React.Component {
     const { auth: { clearRestaurant }, } = this.props;
     axios.put('/api/current_to_false', { current: false })
       .then(res => {
-        this.componentDidMount() 
-        
+        this.componentDidMount()
+
       })
       clearRestaurant()
   }
 
   updateTicket = (updatedTicket, id, user_id) => {
     const { orders, } = this.state
-    
+
     orders.map((o) => {
-      if (o.user_id == user_id){
+      if (o.user_id === user_id){
         return(
         this.setState({orders: [ {...o}, {ticket: updatedTicket}],})
-       
+
         )
       }
     })
-   
+
     axios.put(`/api/orders/${id}`, {ticket: updatedTicket})
       .then(res => {
         this.componentDidMount()
@@ -61,9 +61,9 @@ class OrderList extends React.Component {
 //    return axios.get(`/api/orders/${id}`)
 //  }
 
-//  getUserOrder = (id) => {
+// //  getUserOrder = (id) => {
 //     return axios.get(`/api/users/${id}/orders`)
-//  }
+// //  }
 
 //  copyOrder = (a,b) => {
 //  axios.all([this.getOtherOrder(a), this.getUserOrder(b)])
@@ -75,11 +75,11 @@ duplicateOrder = (unqiueTicket) => {
   const { auth: { user, } } = this.props
 
   this.updateTicket(unqiueTicket, this.state.currentUserOrderId, user.id)
-  
+
 }
 
 setCurrentUserOrderId = (currentUserorder) => {
-  if(this.state.currentUserOrderId == ""){
+  if(this.state.currentUserOrderId === ""){
     this.setState({currentUserOrderId: currentUserorder.id})
   }
 }
@@ -149,5 +149,3 @@ export class ConnectedOrderList extends React.Component {
 }
 
 export default withRouter(ConnectedOrderList);
-
-

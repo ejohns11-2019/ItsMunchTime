@@ -84,7 +84,7 @@ class MyProfile extends Component {
 
   editView = () => {
     //const { auth: { user }, } = this.props;
-    const { formValues: { first_name, last_name, email, group, allergies, exceptions, file, } } = this.state;
+    const { formValues: { first_name, last_name, email, group, allergies, exceptions, file } } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Dropzone
@@ -214,6 +214,7 @@ class MyProfile extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        <br />
       </Container>
     )
   }

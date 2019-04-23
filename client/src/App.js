@@ -18,6 +18,8 @@ import Profiles from './components/profile/Profiles';
 import Order from './components/orders/Order';
 import Footer from './shared/Footer';
 import OrderFormUser from './components/orders/OrderFormUser';
+import About from './components/about/About';
+import Contact from './components/about/Contact';
 
 const App = () => (
   <Fragment>
@@ -35,6 +37,8 @@ const App = () => (
         <ProtectedRoute exact path="/restaurant_history" component={RestaurantHistory} />
         <ProtectedRoute exact path="/restaurant_details" component={RestaurantDetails} />
         {/* <ProtectedRoute exact path="/order" component={Order} /> */}
+        <Route exact path="/about" component={About} />
+        <Route exact path="/contact" component={Contact} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route component={NoMatch} />

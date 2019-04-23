@@ -7,7 +7,7 @@ class Navbar extends React.Component {
 
   rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = this.props;
-    
+
     if (user !== null) {
       if (user.admin === true) {
         return (
@@ -40,7 +40,7 @@ class Navbar extends React.Component {
               name='logout'
               onClick={ () => handleLogout(this.props.history) }
             />
-            
+
           </Menu.Menu>
         )
       } else if (user) {
@@ -61,10 +61,10 @@ class Navbar extends React.Component {
           <Menu.Item
             name='logout'
             onClick={ () => handleLogout(this.props.history) }
-          />        
+          />
         </Menu.Menu>
         )
-      } 
+      }
     } else {
       return (
         <Menu.Menu position='right'>

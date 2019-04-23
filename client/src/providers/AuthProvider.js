@@ -49,7 +49,11 @@ export class AuthProvider extends React.Component {
       axios.get('/api/users')
       .then( res => {
         this.setState({ users: res.data })
+        { user.admin ?
         window.location.href = '/profiles'
+        :
+        window.location.href = '/profile'
+        }
       })
      .catch( err => {
        console.log(err)
@@ -101,6 +105,8 @@ export class AuthProvider extends React.Component {
     this.setState({restaurant: null})
   }
 
+
+
   render() {
     return (
       <AuthContext.Provider value={{
@@ -115,7 +121,7 @@ export class AuthProvider extends React.Component {
         setRestaurant: this.setRestaurant,
         deleteUser: this.deleteUser,
         clearRestaurant: this.clearRestaurant
-      }}>
+        }}>
         { this.props.children }
       </AuthContext.Provider>
     )
