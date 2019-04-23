@@ -60,7 +60,6 @@ setOrderValue = () => {
 
 
 handleChange = (e, {name, value}) => {
-  // const { name, value } = e.target
   this.setState({ [name]: value, })
 }
 
@@ -77,11 +76,8 @@ handleSubmit = (e) => {
   this.props.toggleEdit()
 }
 
-//create restriction so edit toggle option where this component displays
-  //only appears if user === user.id or user.admin == true.
 
   editView = () => {
-    //const { order, auth: { user, }, } = this.props
     const { ticket, users, userData } = this.state;
     const { user } = this.props.auth
 
@@ -101,7 +97,7 @@ handleSubmit = (e) => {
             onChange={this.handleChange}
           />
           <Form.Input
-            label="Ticket"
+            placeholder="Your Order"
             type="text"
             name="ticket"
             value={ticket}
