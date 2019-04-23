@@ -1,4 +1,5 @@
 import React, { Fragment, } from 'react';
+import './App.css';
 import Home from './components/home/Home';
 import NoMatch from './noMatch/NoMatch';
 import Navbar from './shared/Navbar';
@@ -22,7 +23,7 @@ const App = () => (
   <Fragment>
     <Navbar />
     <FetchUser>
-    <Container>
+    <Container className='article'>
       <Switch>
         <ProtectedRoute exact path="/" component={Home} />
         <ProtectedRoute exact path="/profile" component={MyProfile} />

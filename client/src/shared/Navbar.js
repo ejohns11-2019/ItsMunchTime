@@ -9,7 +9,7 @@ class Navbar extends React.Component {
     const { auth: { user, handleLogout, }, location, } = this.props;
     
     if (user !== null) {
-      if (user.admin == true) {
+      if (user.admin === true) {
         return (
           <Menu.Menu position='right'>
             <Link to='/profile'>

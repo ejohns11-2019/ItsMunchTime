@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Table, Button} from 'semantic-ui-react';
-import Order from './Order'
+
 
 //Logical component that will handle order history
 

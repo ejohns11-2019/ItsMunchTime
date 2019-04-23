@@ -81,13 +81,13 @@ class Restaurant extends React.Component {
             color="red"
             size="tiny"
             onClick={ () => this.props.deleteRestaurant(this.props.id) }
-            style={{ marginLeft: "15px", }}
+            style={{ margin: "15px", }}
           >
             <Icon name ="trash" />
           </Button>
           <Link
             color="red"
-            style={{ marginLeft: "15px", }}
+            style={{ margin: "15px", }}
             to={{
               pathname: "/restaurant_history",
               state: {restId: this.props.id}

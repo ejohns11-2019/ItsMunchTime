@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { Header, } from 'semantic-ui-react';
+import { Header, Grid, } from 'semantic-ui-react';
 import Restaurant from './Restaurant';
 import RestaurantForm from "./RestaurantForm";
-//import { Link, } from 'react-router-dom';
+import './restaurants.css'
+
 
 class Restaurants extends React.Component {
   state = { restaurants: [], };
@@ -63,32 +64,35 @@ class Restaurants extends React.Component {
   render() {
     const { restaurants, } = this.state
     return (
-        <div>
-          <Header as='h1'>Restaurants</Header>
-
-        <ul>
-        <Header as='h1'>List of All Restaurants:</Header>
-          {
-            restaurants.map( (r, i) => {
-            return(
-              <>
-                <br />
-                <Restaurant
-                  key={r.id}
-                  {...r}
-                  deleteRestaurant={this.deleteRestaurant}
-                  editRestaurant={this.editRestaurant}
-                  addRestaurant={this.addRestaurant}
-                />
-              </>
-              )
-            })
-          }
-        </ul>
-          <hr/>
-          <RestaurantForm addRestaurant={this.addRestaurant} />
-          <hr />
-        </div>
+       <div className='restaurants'>
+        <Grid>
+          <Grid.Row columns={2}>
+            <Grid.Column>
+            <Header as='h1'>All Restaurants:</Header>
+                <ul>
+                  {
+                    restaurants.map( (r, i) => {
+                    return(
+                      <>
+                        <Restaurant
+                          key={r.id}
+                          {...r}
+                          deleteRestaurant={this.deleteRestaurant}
+                          editRestaurant={this.editRestaurant}
+                          addRestaurant={this.addRestaurant}
+                        />
+                      </>
+                      )
+                    })
+                  }
+                </ul>
+              </Grid.Column>
+            <Grid.Column>
+              <RestaurantForm addRestaurant={this.addRestaurant} />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
     )
   }
 }
