@@ -4,7 +4,8 @@ import { AuthConsumer, } from "../../providers/AuthProvider";
 import { Container, } from 'semantic-ui-react';
 import OrderList from '../orders/OrderGroupList';
 import OrderHistory from '../orders/OrderHistory';
-//import Order from '../orders/Order';
+import './home.css';
+
 
 
 

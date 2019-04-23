@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, Button, Icon, } from "semantic-ui-react";
 import RestaurantForm from './RestaurantForm'
-//import RestaurantHistory from "./RestaurantHistory";
 import {Link } from 'react-router-dom';
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
+import './restaurants.css';
 
 class Restaurant extends React.Component {
   state = {restaurant: {editing: false, }, }
@@ -18,7 +18,7 @@ class Restaurant extends React.Component {
   restaurantView = () => {
     //const { restaurant, } = this.props
     return (
-      <>
+      <div className='restaurant'>
         <Card>
           <Card.Content>
             <Card.Header>
@@ -44,7 +44,7 @@ class Restaurant extends React.Component {
             </Card.Meta>
           </Card.Content>
         </Card>
-      </>
+      </div>
     )
   }
 
@@ -81,13 +81,13 @@ class Restaurant extends React.Component {
             color="red"
             size="tiny"
             onClick={ () => this.props.deleteRestaurant(this.props.id) }
-            style={{ marginLeft: "15px", }}
+            style={{ margin: "15px", }}
           >
             <Icon name ="trash" />
           </Button>
           <Link
             color="red"
-            style={{ marginLeft: "15px", }}
+            style={{ margin: "15px", }}
             to={{
               pathname: "/restaurant_history",
               state: {restId: this.props.id}

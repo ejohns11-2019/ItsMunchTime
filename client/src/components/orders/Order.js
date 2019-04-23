@@ -12,24 +12,6 @@ class Order extends Component {
     this.setState({order: {...this.props}, ticket: this.props.ticket})
   }
 
-  // deleteOrder = (id) => {
-  //   axios.delete(`/api/orders/${id}`)
-  //     .then( res => {
-  //       const { orders } = this.state;
-  //       this.setState({ orders: orders.filter( o => o.id !== id ) })
-  //     })
-  //     .catch( err => {
-  //       alert(err.response.data.message)
-  //     })
-  // }
-
-  clearOrder = () => {
-    this.props.updateTicket('', this.props.id, this.props.user_id)
-  }
-  absentOrder = () => {
-    this.props.updateTicket('N/A', this.props.id, this.props.user_id)
-  }
-
   editOrder = (order) => {
     axios.put(`/api/orders/${order.id}`, order )
       .then( res => {
@@ -63,7 +45,7 @@ class Order extends Component {
       this.props.setCurrentUserOrderId(order)
     return (
       <>
-        <h2>Order Number: {order.id}</h2>
+        {/* <h2>Order Number: {order.id}</h2> */}
         <h2>Restaurant: {order.rest_name}</h2>
         <a href={order.menu} target="_blank"><h2>View Menu</h2> </a>
         <iframe src={order.menu} width="500" height="400">
@@ -83,24 +65,6 @@ class Order extends Component {
           <div>Edit &#160; <Icon name='pencil' /></div>
           }
 
-        </Button>
-        <Button
-          icon
-          color="yellow"
-          size="tiny"
-          onClick={ () => this.clearOrder() }
-          style={{ marginLeft: "15px", }}
-        >
-          Clear Order <Icon name ="eraser" />
-        </Button>
-        <Button
-          icon
-          color="red"
-          size="tiny"
-          onClick={ () => this.absentOrder() }
-          style={{ marginLeft: "15px", }}
-        >
-          Mark absent <Icon name ="calendar times" />
         </Button>
         </Form>
 

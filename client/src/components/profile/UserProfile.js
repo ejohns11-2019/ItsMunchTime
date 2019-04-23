@@ -4,6 +4,7 @@ import { Grid, Image, Container, Divider, Header, Button, Icon, } from 'semantic
 import EditProfile from './EditProfile';
 import { AuthConsumer, } from '../../providers/AuthProvider';
 
+
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class UserProfile extends Component {
@@ -20,7 +21,7 @@ class UserProfile extends Component {
     const is_admin = String(this.props.admin)
     const { auth: { deleteUser, }, } = this.props;
     return(
-      <Container>
+      <Container >
         <Grid>
           <Grid.Row>
       <Fragment>

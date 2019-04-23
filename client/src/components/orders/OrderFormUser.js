@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, } from "semantic-ui-react";
+import { Form, Button, Icon } from "semantic-ui-react";
 import axios from 'axios';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
@@ -58,9 +58,27 @@ setOrderValue = () => {
   )
   }
 
-
+  clearOrder = () => {
+    const { user } = this.props.auth
+    // this.props.updateTicket('', this.props.id, this.props.user_id)
+    if(user.admin === true) {
+      const response = this.setOrderValue()
+      this.props.updateTicket('', response.id, this.state.user_id)
+    } else {
+    this.props.updateTicket('', this.props.id, this.props.user_id)
+    }
+  }
+  absentOrder = () => {
+    const { user } = this.props.auth
+    // this.props.updateTicket('N/A', this.props.id, this.props.user_id)
+    if(user.admin === true) {
+      const response = this.setOrderValue()
+      this.props.updateTicket('N/A', response.id, this.state.user_id)
+    } else {
+    this.props.updateTicket('N/A', this.props.id, this.props.user_id)
+    }
+  }
 handleChange = (e, {name, value}) => {
-  // const { name, value } = e.target
   this.setState({ [name]: value, })
 }
 
@@ -77,12 +95,10 @@ handleSubmit = (e) => {
   this.props.toggleEdit()
 }
 
-//create restriction so edit toggle option where this component displays
-  //only appears if user === user.id or user.admin == true.
 
   editView = () => {
-    //const { order, auth: { user, }, } = this.props
     const { ticket, users, userData } = this.state;
+
     const { user } = this.props.auth
 
     if(user.admin === true) {
@@ -101,15 +117,31 @@ handleSubmit = (e) => {
             onChange={this.handleChange}
           />
           <Form.Input
-            label="Ticket"
+            placeholder="Your Order"
             type="text"
             name="ticket"
             value={ticket}
             onChange={this.handleChange}
-            required
           />
           <Form.Button type="submit" color="blue">Save</Form.Button>
-          <br />
+          <Button
+          icon
+          color="yellow"
+          size="tiny"
+          onClick={ () => this.clearOrder() }
+          style={{ margin: "15px", }}
+        >
+          Clear Order <Icon name ="eraser" />
+        </Button>
+        <Button
+          icon
+          color="red"
+          size="tiny"
+          onClick={ () => this.absentOrder() }
+          style={{ margin: "15px", }}
+        >
+          Mark absent <Icon name ="calendar times" />
+        </Button>
         </Form>
       )
     } else {
@@ -121,7 +153,6 @@ handleSubmit = (e) => {
             name="ticket"
             value={ticket}
             onChange={this.handleChange}
-            required
           />
           <Form.Button type="submit" color="blue">Save</Form.Button>
           <br />

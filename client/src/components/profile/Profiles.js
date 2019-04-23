@@ -5,6 +5,7 @@ import { Header, Divider } from 'semantic-ui-react';
 import axios from 'axios';
 import UserProfile from './UserProfile';
 import OrderHistory from '../orders/OrderHistory';
+import './profiles.css'
 
 //const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
@@ -25,7 +26,7 @@ class Profiles extends Component {
     const { users, } = this.state
     const user_count = users.length
     return (
-        <div>
+        <div className='profiles'> 
           <Header as='h1'>All Users</Header>
           <Header as='h2'>Viewing {user_count} users </Header>
           {

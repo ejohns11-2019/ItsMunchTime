@@ -12,6 +12,7 @@ export class AuthProvider extends React.Component {
       .then( res => {
         this.setState({ user: res.data, });
         history.push("/");
+        window.location.reload();
       })
     .catch( res => {
       console.log(res);
