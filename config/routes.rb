@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :users
     resources :restaurants
     resources :orders
+
     get 'users/:id/orders', to: 'users#userhistory'
     get 'restaurant_history', to: 'orders#restaurant_history'
     get 'restaurant_visit_counter', to: 'orders#restaurant_visit_counter'
@@ -12,5 +13,7 @@ Rails.application.routes.draw do
     get 'user_history', to: 'orders#user_history'
     get 'user_history_last_five', to: 'orders#user_history_last_five'
     put 'current_to_false', to: 'orders#current_to_false'
+    get 'check_current_order', to: 'orders#check_current_order'
+    delete 'delete_orders', to: 'orders#delete_orders'
   end
 end
