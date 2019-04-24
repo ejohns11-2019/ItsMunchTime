@@ -5,7 +5,7 @@ import {Link, withRouter} from 'react-router-dom';
 
 const Footer = () => (
 
-  <footer style={{ padding: '5em 0em', backgroundColor: '#16b9ce' }}> 
+  <footer style={{ padding: '5em 0em', backgroundColor: '#6fe3ff' }}> 
     <Segment vertical>
     <Container>
       <Grid divided stackable>
