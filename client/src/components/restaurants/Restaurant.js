@@ -1,13 +1,19 @@
 import React from "react";
-import { Card, Button, Icon, } from "semantic-ui-react";
+import { Card, Button, Icon, Image } from "semantic-ui-react";
 import RestaurantForm from './RestaurantForm'
 import {Link } from 'react-router-dom';
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
 import './restaurants.css';
+import Burger from '../../images/food/burger.jpg'; 
+import Healthy from '../../images/food/healthy.jpg'; 
+import Pizza from '../../images/food/pizza.jpg'; 
+import Salad from '../../images/food/salad.jpg'; 
+import Veggies from '../../images/food/veggies.jpg'; 
+import Wrap from '../../images/food/wrap.jpg'; 
 
 class Restaurant extends React.Component {
-  state = {restaurant: {editing: false, }, }
+  state = {restaurant: {editing: false, }, randomImage: '' }
 //const Restaurant = ({ id, name, address, phone, menu, editRestaurant, deleteRestaurant }) => (
   toggleEdit = () => {
     this.setState( state => {
@@ -15,11 +21,20 @@ class Restaurant extends React.Component {
     })
   }
 
+  componentDidMount() {
+    const imageArray = [Burger,Healthy,Pizza,Salad,Veggies,Wrap];
+    const randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
+    
+    this.setState({randomImage: randomImage});
+    
+  }
+
   restaurantView = () => {
     //const { restaurant, } = this.props
     return (
       <div className='restaurant'>
         <Card>
+        <Image src={this.state.randomImage}/>
           <Card.Content>
             <Card.Header>
             <Link
