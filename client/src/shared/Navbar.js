@@ -12,7 +12,7 @@ class Navbar extends React.Component {
     if (user !== null) {
       if (user.admin === true) {
         return (
-          <Menu.Menu position='right' style={{backgroundColor: '#16b9ce'}}>
+          <Menu.Menu position='right' style={{backgroundColor: '#6fe3ff'}}>
             <Link to='/profile'>
             <Menu.Item
               name='My Profile'
@@ -46,7 +46,7 @@ class Navbar extends React.Component {
         )
       } else if (user) {
         return (
-          <Menu.Menu position='right' style={{backgroundColor: '#16b9ce'}}>
+          <Menu.Menu position='right' style={{backgroundColor: '#6fe3ff'}}>
           <Link to='/profile'>
           <Menu.Item
             name='My Profile'
@@ -68,7 +68,7 @@ class Navbar extends React.Component {
       }
     } else {
       return (
-        <Menu.Menu position='right' style={{backgroundColor: '#16b9ce'}}>
+        <Menu.Menu position='right' style={{backgroundColor: '#6fe3ff'}}>
         <Link to='/login'>
           <Menu.Item
             id='login'
@@ -91,7 +91,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <div>
-        <Menu pointing secondary style={{backgroundColor: '#16b9ce'}}>
+        <Menu pointing secondary style={{backgroundColor: '#6fe3ff'}}>
           <Link to='/'>
             <Menu.Item
               name='home'
