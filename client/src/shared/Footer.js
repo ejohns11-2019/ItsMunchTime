@@ -1,6 +1,6 @@
 import React from 'react';
 import {Segment, Container, Grid, Header, List} from 'semantic-ui-react';
-import {Link, withRouter} from 'react-router-dom';
+import {Link,} from 'react-router-dom';
 
 
 const Footer = () => (
@@ -12,14 +12,13 @@ const Footer = () => (
         <Grid.Row>
           <Grid.Column width={3}>
             <Link to='/about'>
-            <Header as='h4' content='About' inverted />
-              <List link>
-                <Link to='/contact'>
-                <Header as='h4' inverted >Contact Us</Header>
-                <List.Item as='a'></List.Item>
-                </Link>
-              </List>
+              <Header as='h4' content='About' inverted />
             </Link>
+            <List link>
+              <Link to='/contact'>
+              <Header as='h4' inverted >Contact Us</Header>
+              </Link>
+            </List>
           </Grid.Column>
           <Grid.Column width={3}>
             <Header as='h4' content='' />

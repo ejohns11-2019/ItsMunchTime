@@ -15,7 +15,6 @@ import RestaurantHistory from './components/restaurants/RestaurantHistory';
 import RestaurantDetails from './components/restaurants/RestaurantDetails';
 import MyProfile from './components/profile/MyProfile';
 import Profiles from './components/profile/Profiles';
-import Order from './components/orders/Order';
 import Footer from './shared/Footer';
 import OrderFormUser from './components/orders/OrderFormUser';
 import About from './components/about/About';
