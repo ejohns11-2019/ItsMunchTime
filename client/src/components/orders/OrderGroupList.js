@@ -124,6 +124,7 @@ setCurrentUserOrderId = (currentUserorder) => {
                   })
                 }
               </Table>
+              <p><strong>Directions:</strong> Once all orders have been placed, administrator can copy & paste orders table in a Word doc. to print orders or screenshot the table to place order directly with restaurant. Once “Archive" is clicked admin will only be able to view orders in [Restaurants > History] (per restaurant) OR [All Users > History] (per user). </p>
               {user.admin && <Button size="medium" color="red" onClick={this.toggleReset}>Done</Button>}
               {user.admin && <Link to='/new_order'>
                 <Button size='medium' color='blue'>New Order</Button>
