@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button, Icon } from "semantic-ui-react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import axios from 'axios';
-import Order from './Order';
-import OrderList from './OrderGroupList';
+
 
 class OrderFormAdin extends Component {
 
