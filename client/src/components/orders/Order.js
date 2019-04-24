@@ -56,8 +56,7 @@ class Order extends Component {
         <Form>
         <Button
           icon
-          color="blue"
-          size="tiny"
+          style={{backgroundColor: "#0f4c5c", color: "white" }}
           onClick={() => this.toggleEdit()}
         >
           { this.state.editing ? 'Cancel'
