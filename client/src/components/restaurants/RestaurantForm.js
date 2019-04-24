@@ -3,6 +3,7 @@ import { Form, Header, Segment, Image, Icon} from "semantic-ui-react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
 import Pic from '../../images/mae-mu-1509601-unsplash.jpg';
+import './restaurants.css';
 
 class RestaurantForm extends React.Component {
   state = {
@@ -71,13 +72,14 @@ class RestaurantForm extends React.Component {
             required
           />
           <Form.Input
-            placeholder="Menu"
+            placeholder="Menu Link"
             type="text"
             name="menu"
             value={menu}
             onChange={this.handleChange}
             required
           />
+          <i><p class="form-disclaimer">(*Please include full url with https://)</p></i>
           <Form.Button type="submit" color="blue"><Icon name='save outline' centered/>Save</Form.Button>
         </Form>
         </Segment>

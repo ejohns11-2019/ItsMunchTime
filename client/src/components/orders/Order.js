@@ -47,7 +47,7 @@ class Order extends Component {
       <>
         {/* <h2>Order Number: {order.id}</h2> */}
         <h2 className='restaurant'>Restaurant: {order.rest_name}</h2>
-        <a href={order.menu} target="_blank"><h2>View Menu</h2> </a>
+        <a href={order.menu} target="_blank"><Button>View Menu</Button></a><br/><br/>
         <iframe src={order.menu} width="500" height="400">
           <a href={order.menu} target="_blank"><h2>View Menu</h2> </a>
         </iframe>

@@ -5,3 +5,7 @@
 .restaurants ul {
   padding-left: 0;
 }
+.form-disclaimer {
+  margin-bottom: 10px !important;
+  text-align: right;
+}
