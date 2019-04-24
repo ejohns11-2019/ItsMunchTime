@@ -115,7 +115,7 @@ setCurrentUserOrderId = (currentUserorder) => {
                     return (
                       <Table.Body>
                         <Table.Row>
-                          <Table.Cell>{o.first_name}{o.last_name} </Table.Cell>
+                          <Table.Cell>{o.first_name} {o.last_name} </Table.Cell>
                           <Table.Cell>{o.ticket}</Table.Cell>
                           <Table.Cell textAlign='center'><Button unqiueticket={o.ticket} onClick={() => this.duplicateOrder(o.ticket)}><Icon name='food' fitted color='red'/></Button></Table.Cell>
                         </Table.Row>
