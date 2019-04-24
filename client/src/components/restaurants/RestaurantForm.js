@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Header } from "semantic-ui-react";
+import { Form, Header, Segment, Image, Icon} from "semantic-ui-react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
+import Pic from '../../images/mae-mu-1509601-unsplash.jpg';
 
 class RestaurantForm extends React.Component {
   state = {
@@ -41,6 +42,8 @@ class RestaurantForm extends React.Component {
     if (user.admin === true) {
       return (
       <>
+        <Segment image={Image} raised >
+        <Image src={Pic} size='medium' centered fluid />
         <Header as='h1'>Add a New Restaurant:</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
@@ -75,8 +78,9 @@ class RestaurantForm extends React.Component {
             onChange={this.handleChange}
             required
           />
-          <Form.Button type="submit" color="blue">Save</Form.Button>
+          <Form.Button type="submit" color="blue"><Icon name='save outline' centered/>Save</Form.Button>
         </Form>
+        </Segment>
       </>
       )
     } else {
