@@ -124,9 +124,9 @@ setCurrentUserOrderId = (currentUserorder) => {
                   })
                 }
               </Table>
-              {user.admin && <Button size="medium" color="red" onClick={this.toggleReset}>Done</Button>}
+              {user.admin && <Button size="medium" style={{color:"#ff6e00"}} onClick={this.toggleReset}>Archive <Icon name='archive' fitted color='white'/></Button>}
               {user.admin && <Link to='/new_order'>
-                <Button size='medium' color='blue'>New Order</Button>
+                <Button size='medium' style={{backgroundColor: "#0f4c5c", color: "white" }}>New Order <Icon name='plus'/></Button>
               </Link> }
             </Grid.Column>
           </Grid.Row>
