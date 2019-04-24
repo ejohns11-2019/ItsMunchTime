@@ -5,17 +5,17 @@ import {Link, withRouter} from 'react-router-dom';
 
 const Footer = () => (
 
-  <footer style={{ padding: '5em 0em', backgroundColor: '#16b9ce' }}> 
+  <footer style={{ padding: '5em 0em', backgroundColor: '#0f4c5c' }}> 
     <Segment vertical>
     <Container>
       <Grid divided stackable>
         <Grid.Row>
           <Grid.Column width={3}>
             <Link to='/about'>
-            <Header as='h4' content='About' />
+            <Header as='h4' content='About' inverted />
               <List link>
                 <Link to='/contact'>
-                <List.Item as='a'>Contact Us</List.Item>
+                <Header as='h4' inverted >Contact Us</Header>
                 <List.Item as='a'></List.Item>
                 </Link>
               </List>
@@ -31,8 +31,8 @@ const Footer = () => (
             </List>
           </Grid.Column>
           <Grid.Column width={7}>
-            <Header as='h4'>
-              ItsMunchTime!
+            <Header as='h4' inverted>
+              Munch Time
             </Header>
             <p>
             </p>

@@ -123,11 +123,10 @@ handleSubmit = (e) => {
             value={ticket}
             onChange={this.handleChange}
           />
-          <Form.Button type="submit" color="blue">Save</Form.Button>
+          <Form.Button type="submit" style={{backgroundColor: "#0f4c5c", color: "white" }}>Save</Form.Button>
           <Button
           icon
-          color="yellow"
-          size="tiny"
+          color= "#ff6e00"
           onClick={ () => this.clearOrder() }
           style={{ margin: "15px", }}
         >
@@ -154,7 +153,7 @@ handleSubmit = (e) => {
             value={ticket}
             onChange={this.handleChange}
           />
-          <Form.Button type="submit" color="blue">Save</Form.Button>
+          <Form.Button type="submit" style={{backgroundColor: "#0f4c5c", color: "white" }}>Save</Form.Button>
           <br />
         </Form>
       )
