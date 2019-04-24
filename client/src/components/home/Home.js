@@ -5,7 +5,7 @@ import { Container, } from 'semantic-ui-react';
 import OrderList from '../orders/OrderGroupList';
 import OrderHistory from '../orders/OrderHistory';
 import './home.css';
-
+import Image from '../../images/Screen Shot 2019-04-23 at 6.29.27 PM.png'
 
 
 
@@ -16,11 +16,14 @@ class Home extends React.Component {
 
     if (user.admin === true) {
       return (
+        <>
+       <center> <img src={Image} alt='Logo' width="300px"/> </center>
         <Container>
         <br />
           <OrderList />
           <OrderHistory userId = {this.props.auth.user.id} />
         </Container>
+        </>
       )
     } else {
       return (
