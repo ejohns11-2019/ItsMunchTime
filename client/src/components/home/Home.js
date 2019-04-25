@@ -17,7 +17,6 @@ class Home extends React.Component {
     if (user.admin === true) {
       return (
         <>
-       <center> <img src={Image} alt='Logo' width="300px"/> </center>
         <Container>
         <br />
           <OrderList />

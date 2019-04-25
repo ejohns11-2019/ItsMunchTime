@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Icon } from "semantic-ui-react";
+import { Form, Button, Icon, Container} from "semantic-ui-react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import axios from 'axios';
 
@@ -133,6 +133,8 @@ class OrderFormAdin extends Component {
     } else {
       return (
         <>
+        <Container style={{padding: '40px' }}>
+          <p>Order currently in progress, please archive order to set new resturant.</p>
           <h1>Current Order: </h1>
           <p>Restaurant: {this.state.current_rest}</p>
           <p>Order Date: {this.state.current_order_date}</p>
@@ -145,6 +147,7 @@ class OrderFormAdin extends Component {
           >
             Delete  <Icon name="trash" />
           </Button>
+        </Container>
         </>
       )
     }

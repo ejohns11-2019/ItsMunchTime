@@ -1,16 +1,32 @@
-.navbar .ui.menu.navbar {
-  background-color: #42ebf4;
+.ui.inverted.menu #home.active.item {
+  color: #ff6e00 !important;
 }
 
-.homenav .ui.menu.homenav {
-  background-color: #42ebf4;
+.ui.inverted.menu #register.active.item {
+  color: #ff6e00 !important;
 }
 
-.userNavbar .ui.menu.userNavbar {
-  background-color: #42ebf4;
+.ui.inverted.menu #login.active.item {
+  color: #ff6e00 !important;
 }
 
-.unregistered .ui.menu.unregistered {
-  background-color: #42ebf4;
+.ui.inverted.menu #profile.active.item {
+  color: #ff6e00 !important;
+}
+
+.ui.inverted.menu #profiles.active.item {
+  color: #ff6e00 !important;
+}
+
+.ui.inverted.menu #restaurants.active.item {
+  color: #ff6e00 !important;
+}
+
+.ui.inverted.menu #order.active.item {
+  color: #ff6e00 !important;
+}
+
+.ui.inverted.menu #logout.active.item {
+  color: #ff6e00 !important;
 }
 
