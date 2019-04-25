@@ -60,6 +60,20 @@ class Api::OrdersController < ApplicationController
       render json: Order.check_current_order()
     end
 
+    def add_person_to_order
+      current_order_date = Order.where(current: true).first.order_date
+      current_order_rest = Order.where(current: true).first.restaurant_id
+      user = User.find(params[:params][:user_id])
+
+      order = user.orders.create(current: true, order_date:current_order_date, restaurant_id: current_order_rest )
+
+      if order.save
+        render json: order
+      else
+        render json: { errors: order.errors }, status: :unprocessable_entity 
+      end
+    end
+
     private
       def order_params
         params.require(:order).permit(:user_id, :ticket, :restaurant_id, :current, :order_date)
