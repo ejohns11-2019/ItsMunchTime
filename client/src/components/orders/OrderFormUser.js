@@ -3,6 +3,7 @@ import { Form, Button, Icon } from "semantic-ui-react";
 import axios from 'axios';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
+import './OrderFormUser.css'
 
 //orders: current, ticket, order_date, restaurant_id, user_id
 //the order_date and restaurant_id are set by the admin- that maps through all the users creating
@@ -125,21 +126,24 @@ handleSubmit = (e) => {
           />
           <Form.Button type="submit" style={{backgroundColor: "#0f4c5c", color: "white" }}>Save</Form.Button>
           <Button
+
           icon
-          color= "#ff6e00"
           onClick={ () => this.clearOrder() }
-          style={{ margin: "15px", }}
+          animated='vertical'
+          style={{ margin: "15px", backgroundColor: "lightgrey", color:"#ff6e00" }}
         >
-          Clear Order <Icon name ="eraser" />
+        <Button.Content  hidden>Clear</Button.Content>
+        <Button.Content class="buttoncenter" visible><Icon name ="eraser" /></Button.Content>
         </Button>
         <Button
           icon
           color="red"
-          size="tiny"
           onClick={ () => this.absentOrder() }
-          style={{ margin: "15px", }}
+          animated='vertical'
+          style={{ margin: "5px", leftMargin: '0px' }}
         >
-          Mark absent <Icon name ="calendar times" />
+        <Button.Content hidden>Absent</Button.Content>
+        <Button.Content visible><Icon name ="calendar times" textalign="center" /></Button.Content>
         </Button>
         </Form>
       )

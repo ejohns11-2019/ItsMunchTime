@@ -5,12 +5,12 @@ import {Link } from 'react-router-dom';
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
 import './restaurants.css';
-import Burger from '../../images/food/burger.jpg'; 
-import Healthy from '../../images/food/healthy.jpg'; 
-import Pizza from '../../images/food/pizza.jpg'; 
-import Salad from '../../images/food/salad.jpg'; 
-import Veggies from '../../images/food/veggies.jpg'; 
-import Wrap from '../../images/food/wrap.jpg'; 
+import Burger from '../../images/food/burger.jpg';
+import Healthy from '../../images/food/healthy.jpg';
+import Pizza from '../../images/food/pizza.jpg';
+import Salad from '../../images/food/salad.jpg';
+import Veggies from '../../images/food/veggies.jpg';
+import Wrap from '../../images/food/wrap.jpg';
 
 class Restaurant extends React.Component {
   state = {restaurant: {editing: false, }, randomImage: '' }
@@ -24,9 +24,9 @@ class Restaurant extends React.Component {
   componentDidMount() {
     const imageArray = [Burger,Healthy,Pizza,Salad,Veggies,Wrap];
     const randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
-    
+
     this.setState({randomImage: randomImage});
-    
+
   }
 
   restaurantView = () => {
@@ -82,13 +82,13 @@ class Restaurant extends React.Component {
           { this.state.editing ? this.restaurantEdit() : this.restaurantView() }
           <Button
             icon
-            color="blue"
+            style={{backgroundColor: "#0f4c5c", color: "white" }}
             size="tiny"
             onClick={() => this.toggleEdit(this.props.id)}
           >
             { this.state.editing ? 'Cancel'
             :
-            <Icon name="pencil" />
+            <Icon name="pencil" color= "#ff6e00" />
             }
           </Button>
           <Button
@@ -115,8 +115,7 @@ class Restaurant extends React.Component {
       <>
         {this.restaurantView()}
         <Link
-          color="red"
-          style={{ marginLeft: "15px", }}
+          style={{ marginLeft: "15px", color: "#0f4c5c", }}
           to={{
             pathname: "/restaurant_history",
             state: {restId: this.props.id}
