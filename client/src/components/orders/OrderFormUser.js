@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Icon } from "semantic-ui-react";
+import { Form, Button, Icon, Grid } from "semantic-ui-react";
 import axios from 'axios';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
@@ -104,6 +104,7 @@ handleSubmit = (e) => {
 
     if(user.admin === true) {
       return (
+        <>
         <Form onSubmit={this.handleSubmit}>
           <Form.Dropdown
             label='User:'
@@ -124,28 +125,34 @@ handleSubmit = (e) => {
             value={ticket}
             onChange={this.handleChange}
           />
-          <Form.Button type="submit" style={{backgroundColor: "#0f4c5c", color: "white" }}>Save</Form.Button>
+          <Form.Button type="submit" style={{backgroundColor: "#0f4c5c", color: "white", width: "100%" }}>Submit Order</Form.Button>
+          <Grid>
+            <Grid.Column width={8}>
+              <Button
+              icon
+              onClick={ () => this.clearOrder() }
+              animated='vertical'
+              style={{ width: "100%", backgroundColor: "lightgrey", color:"#ff6e00" }}
+            >
+            <Button.Content  hidden>Clear</Button.Content>
+            <Button.Content class="buttoncenter" visible><Icon name ="eraser" /></Button.Content>
+            </Button>
+        </Grid.Column>
+        <Grid.Column width={8}>
           <Button
-
-          icon
-          onClick={ () => this.clearOrder() }
-          animated='vertical'
-          style={{ margin: "15px", backgroundColor: "lightgrey", color:"#ff6e00" }}
-        >
-        <Button.Content  hidden>Clear</Button.Content>
-        <Button.Content class="buttoncenter" visible><Icon name ="eraser" /></Button.Content>
-        </Button>
-        <Button
-          icon
-          color="red"
-          onClick={ () => this.absentOrder() }
-          animated='vertical'
-          style={{ margin: "5px", leftMargin: '0px' }}
-        >
-        <Button.Content hidden>Absent</Button.Content>
-        <Button.Content visible><Icon name ="calendar times" textalign="center" /></Button.Content>
-        </Button>
+            icon
+            color="red"
+            onClick={ () => this.absentOrder() }
+            animated='vertical'
+            style={{  width: "100%",}}
+          >
+            <Button.Content hidden>Absent</Button.Content>
+            <Button.Content visible><Icon name ="calendar times" /></Button.Content>
+          </Button>
+        </Grid.Column>
+        </Grid>
         </Form>
+        </>
       )
     } else {
     return (
@@ -157,7 +164,7 @@ handleSubmit = (e) => {
             value={ticket}
             onChange={this.handleChange}
           />
-          <Form.Button type="submit" style={{backgroundColor: "#0f4c5c", color: "white" }}>Save</Form.Button>
+          <Form.Button type="submit" style={{backgroundColor: "#0f4c5c", color: "white" }}>Submit Order</Form.Button>
           <br />
         </Form>
       )

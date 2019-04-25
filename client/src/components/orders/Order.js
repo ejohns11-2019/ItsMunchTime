@@ -4,7 +4,7 @@ import { AuthConsumer } from '../../providers/AuthProvider';
 import axios from 'axios';
 import OrderFormUser from './OrderFormUser';
 import { withRouter } from 'react-router-dom';
-
+import './order.css'
 class Order extends Component {
   state = { order: [], editing: true, ticket: '' }
 
@@ -32,7 +32,6 @@ class Order extends Component {
   orderForm = () =>{
     return(
     <>
-      <h2>Submit your order below:</h2>
       <OrderFormUser id={this.props.id} user_id={this.props.user_id} editOrder={this.editOrder} updateTicket={this.props.updateTicket} toggleEdit={this.toggleEdit} />
     </>
     )
@@ -45,27 +44,37 @@ class Order extends Component {
       this.props.setCurrentUserOrderId(order)
     return (
    
-        <Grid width={8}>
-        {/* <h2>Order Number: {order.id}</h2> */}
-        <h2 className='restaurant'>Restaurant: {order.rest_name}</h2>
-        <a href={order.menu} target="_blank"><Button>View Menu</Button></a><br/><br/>
-        <iframe src={order.menu} width="500" height="400">
+        <Grid width={16} id="menu">
+        <Grid.Column width={16}>
+        <h2 className='restaurant'>Today's lunch will be from: {order.rest_name}</h2>
+        <a href={order.menu} target="_blank"><Button>View Menu</Button></a><br/>
+        </Grid.Column>
+        <Grid.Column width={16}>
+        <iframe src={order.menu} width="100%" height="400">
           <a href={order.menu} target="_blank"><h2>View Menu</h2> </a>
         </iframe>
+        </Grid.Column>
+        <Grid.Column width={16}>
         <h2>Current Order Ticket: {this.props.ticket}</h2>
+        </Grid.Column>
+        <Grid.Column width={16}>
+        <h2>Submit your order here:</h2>
         { this.state.editing ? this.orderForm() : <div></div> }
+        </Grid.Column>
         <Form>
+        <Grid.Column width={16}>
         <Button
           icon
-          style={{backgroundColor: "#0f4c5c", color: "white" }}
+          style={{backgroundColor: "#0f4c5c", color: "white", width: "400px" }}
           onClick={() => this.toggleEdit()}
-        >
+          >
           { this.state.editing ? 'Cancel'
           :
           <div>Edit &#160; <Icon name='pencil' /></div>
           }
 
         </Button>
+        </Grid.Column>
         </Form>
         </Grid>
     )

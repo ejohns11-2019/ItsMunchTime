@@ -6,8 +6,6 @@ import './orderGroupList.css';
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import {Grid, Table, Button, Icon } from 'semantic-ui-react';
 
-//Logical component that will handle order display, and all order CRUD actions
-
 class OrderList extends React.Component {
 
   state = { orders: [], unqiueTicket: '', currentUserOrderId: '',  user: { id: '' }, order: { current: '', ticket: '', order_date: '', user_id: '', restaurtant_id: '' } }
@@ -22,12 +20,6 @@ class OrderList extends React.Component {
         console.log(err)
       })
   }
-
-  // toggleEdit = () => {
-  //   this.setState(state => {
-  //     return { editing: !state.editing, };
-  //   })
-  // }
 
   toggleReset = () => {
     const { auth: { clearRestaurant }, } = this.props;
@@ -56,20 +48,6 @@ class OrderList extends React.Component {
         this.componentDidMount()
       })
   }
-
-//  getOtherOrder = (id) => {
-//    return axios.get(`/api/orders/${id}`)
-//  }
-
-// //  getUserOrder = (id) => {
-//     return axios.get(`/api/users/${id}/orders`)
-// //  }
-
-//  copyOrder = (a,b) => {
-//  axios.all([this.getOtherOrder(a), this.getUserOrder(b)])
-//     .then(axios.spread(function (otherOrder, userOrder) {
-//       axios.put(`/api/orders/${userOrder.data.id}?ticket=${otherOrder.data.ticket}`)
-//     }))}
 
 duplicateOrder = (unqiueTicket) => {
   const { auth: { user, } } = this.props
