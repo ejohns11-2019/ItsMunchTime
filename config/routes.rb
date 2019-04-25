@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     put 'current_to_false', to: 'orders#current_to_false'
     get 'check_current_order', to: 'orders#check_current_order'
     delete 'delete_orders', to: 'orders#delete_orders'
+    post 'add_person_to_order', to: 'orders#add_person_to_order'
+    get 'users_not_in_order', to: 'users#users_not_in_order'
   end
 
   get '*other', to: 'static#index'

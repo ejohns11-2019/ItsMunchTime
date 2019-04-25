@@ -175,7 +175,7 @@ GEM
 
 PLATFORMS
   ruby
-
+  
 DEPENDENCIES
   api-pagination
   bootsnap (>= 1.1.0)

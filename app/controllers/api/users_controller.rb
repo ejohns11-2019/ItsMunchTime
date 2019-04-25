@@ -56,4 +56,17 @@ class Api::UsersController < ApplicationController
       render json: { errors: @user.errors.full_message }, status: 422
     end
   end
+
+  def users_not_in_order
+    all_users_ids = []
+    User.all.each {|u| all_users_ids << u.id }
+
+    in_order_users_ids = []
+    Order.where(current: true).each {|o| in_order_users_ids << o.user_id}
+
+    not_in_order_users_ids = all_users_ids - in_order_users_ids
+    not_in_order_users = []
+    not_in_order_users_ids.each { |id| not_in_order_users << User.find(id) }
+    render json: not_in_order_users
+  end
 end
