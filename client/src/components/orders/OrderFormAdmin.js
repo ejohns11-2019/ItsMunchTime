@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button, Icon, Container} from "semantic-ui-react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import axios from 'axios';
-
+import './orderFormAdmin.css'
 
 class OrderFormAdin extends Component {
 
@@ -187,7 +187,7 @@ class OrderFormAdin extends Component {
         </Container>
 
           <Form onSubmit={this.addPersonToOrder}>
-            <Form.Group widths="equal">
+            <Form.Group id="add-user" widths="equal">
               <Form.Dropdown
                 label='Select User To Add'
                 placeholder="Users"

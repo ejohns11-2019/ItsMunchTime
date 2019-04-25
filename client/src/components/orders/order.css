@@ -1,0 +1,10 @@
+#menu{
+  border: 2px solid #e3e4e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border-radius: 5px;
+  border-top-color: #db2727;
+  padding: 1em;
+}

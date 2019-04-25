@@ -2,3 +2,15 @@
    display: flex;
    justify-content: center;
 }
+.ui.animated.button .visible.content {
+  margin-right: 0.5em !important;
+}
+#submit-order-btn{
+  background-color: rgb(15, 76, 92);
+  color: white;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
