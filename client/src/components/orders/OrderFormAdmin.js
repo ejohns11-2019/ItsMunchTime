@@ -17,6 +17,9 @@ class OrderFormAdin extends Component {
     current_exists: '',
     current_rest: '',
     current_order_date: '',
+    users_not_included: [],
+    usersOptions: [],
+    added_user: ''
   };
 
   handleSubmit = (e) => {
@@ -79,6 +82,31 @@ class OrderFormAdin extends Component {
       .catch(err => {
         console.log(err)
       });
+      this.getPeopleNotInOrder()
+  }
+
+  getPeopleNotInOrder() {
+    axios.get('api/users_not_in_order')
+      .then(res=> {
+      this.setState({users_not_included: res.data})
+      const { users_not_included, usersOptions } = this.state
+      users_not_included.map(u => {
+        var temp = usersOptions;
+        temp.push({ key: u.id, text: u.first_name + ' ' + u.last_name, value: u.id })
+        this.setState({ usersOptions: temp })
+        })
+      })
+  }
+
+  addPersonToOrder = (e) => {
+    e.preventDefault();
+    axios.post('api/add_person_to_order', {params: {user_id: this.state.added_user}})
+      .then(res => {
+        if (res.data.length != 0)
+        alert("User has been added to order");
+        this.setState({ added_user: '', usersOptions: [], users_not_included: []})
+        this.componentDidMount() 
+      })
   }
 
   deleteOrder() {
@@ -91,15 +119,24 @@ class OrderFormAdin extends Component {
     .catch( err => {
       alert(err.response.data.message)
     })
-    
   }
 
   render() {
 
-    const { restaurantData, orderDate, restaurant, current_exists } = this.state
+    const { 
+      restaurantData, 
+      orderDate, 
+      restaurant, 
+      current_exists,
+      current_rest,
+      current_order_date,
+      added_user,
+      usersOptions
+      } = this.state
 
     if (current_exists == false) {
       return (
+        
         <>
           <br />
           <Form onSubmit={this.handleSubmit}>
@@ -136,8 +173,8 @@ class OrderFormAdin extends Component {
         <Container style={{padding: '40px' }}>
           <p>Order currently in progress, please archive order to set new resturant.</p>
           <h1>Current Order: </h1>
-          <p>Restaurant: {this.state.current_rest}</p>
-          <p>Order Date: {this.state.current_order_date}</p>
+          <p>Restaurant: {current_rest}</p>
+          <p>Order Date: {current_order_date}</p>
           <Button
             icon
             color="red"
@@ -148,6 +185,24 @@ class OrderFormAdin extends Component {
             Delete  <Icon name="trash" />
           </Button>
         </Container>
+
+          <Form onSubmit={this.addPersonToOrder}>
+            <Form.Group widths="equal">
+              <Form.Dropdown
+                label='Select User To Add'
+                placeholder="Users"
+                required
+                fluid
+                search
+                selection
+                name='added_user'
+                value={added_user}
+                options={usersOptions}
+                onChange={this.handleChange}
+              />
+            <Form.Button color="green">Add User</Form.Button>
+            </Form.Group>
+          </Form>
         </>
       )
     }

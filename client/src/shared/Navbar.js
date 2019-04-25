@@ -100,8 +100,10 @@ class Navbar extends React.Component {
 
   render() {
     return (
+
       <div className='navbar'> 
         <Menu pointing secondary inverted style={{backgroundColor: '#0f4c5c'}}>
+
           <Link to='/'>
             <Menu.Item
               name='Munch Time'

@@ -90,7 +90,7 @@ setCurrentUserOrderId = (currentUserorder) => {
 
     return (
       <div className='orders'>
-        <Grid> 
+        <Grid stackable> 
           <Grid.Row>
             <Grid.Column width={8}>
               {
@@ -102,8 +102,7 @@ setCurrentUserOrderId = (currentUserorder) => {
               }
             </Grid.Column>
             <Grid.Column width={8}>
-            {user.admin && <p><strong>Directions:</strong> Once all orders have been placed, press archive to clear order form and set a new resturant. </p>}
-              <Table celled color="#ff6e00">
+              <Table stackable celled color="red">
                 <Table.Header>
                   <Table.Row textAlign="center">
                     <Table.HeaderCell>Name</Table.HeaderCell>
@@ -115,10 +114,10 @@ setCurrentUserOrderId = (currentUserorder) => {
                   orders.map((o) => {
                     return (
                       <Table.Body>
-                        <Table.Row>
+                        <Table.Row textAlign='center'>
                           <Table.Cell>{o.first_name} {o.last_name} </Table.Cell>
                           <Table.Cell>{o.ticket}</Table.Cell>
-                          <Table.Cell textAlign='center'><Button unqiueticket={o.ticket} onClick={() => this.duplicateOrder(o.ticket)}><Icon name='food' fitted color='red'/></Button></Table.Cell>
+                          <Table.Cell textAlign='center'><Button style={{color:"#ff6e00"}} unqiueticket={o.ticket} onClick={() => this.duplicateOrder(o.ticket)}>Order This <Icon name='food' fitted color="white"/></Button></Table.Cell>
                         </Table.Row>
                       </Table.Body>
                     )

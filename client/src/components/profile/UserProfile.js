@@ -54,13 +54,13 @@ class UserProfile extends Component {
         <Grid.Column>
           <Button
           icon
-          color="blue"
+          style={{backgroundColor: "#0f4c5c", color: "white" }}
           size="tiny"
           onClick={this.toggleEdit}
         >
           { this.state.editing ? 'Cancel'
           :
-          <Icon name="pencil" />
+          <Icon name="pencil"  />
           }
         </Button>
         <Button

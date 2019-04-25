@@ -65,7 +65,7 @@ class Restaurants extends React.Component {
     const { restaurants, } = this.state
     return (
        <div className='restaurants'>
-        <Grid>
+        <Grid stackable>
           <Grid.Row columns={2}>
             <Grid.Column>
             <Header as='h1'>All Restaurants:</Header>

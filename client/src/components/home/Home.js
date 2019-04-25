@@ -26,11 +26,14 @@ class Home extends React.Component {
       )
     } else {
       return (
+        <>
+        <center> <img src={Image} alt='Logo' width="300px"/> </center>
         <Container>
         <br />
           <OrderList />
           <OrderHistory />
         </Container>
+        </>
       )
     }
   }
