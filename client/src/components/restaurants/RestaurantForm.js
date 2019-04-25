@@ -80,7 +80,7 @@ class RestaurantForm extends React.Component {
             required
           />
           <i><p class="form-disclaimer">(*Please include full url with https://)</p></i>
-          <Form.Button type="submit" color="blue"><Icon name='save outline' centered/>Save</Form.Button>
+          <Form.Button type="submit" style={{backgroundColor: "#0f4c5c", color: "white" }}><Icon name='save outline' color= "#ff6e00" centered/>Save</Form.Button>
         </Form>
         </Segment>
       </>

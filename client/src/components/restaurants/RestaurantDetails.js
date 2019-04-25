@@ -35,6 +35,7 @@ class RestaurantDetails extends Component {
     const { name, address, phone, menu, visitCounter} = this.state
     return(
     <>
+    <br />
     <Header size='huge'>{name}</Header>
 
     <Header size='medium'> Contact Info: </Header>
@@ -50,7 +51,7 @@ class RestaurantDetails extends Component {
     </Item.Group>
 
     <Statistic>
-      <Statistic.Label>ordered: </Statistic.Label>
+      <Statistic.Label>Times Ordered: </Statistic.Label>
       <Statistic.Value>{ visitCounter }</Statistic.Value>
     </Statistic>
 
@@ -60,7 +61,7 @@ class RestaurantDetails extends Component {
         <Item.Content verticalAlign='middle'> {menu}</Item.Content>
       </Item>
     </Item.Group>
-
+    <br />
     </>
     )
   }
