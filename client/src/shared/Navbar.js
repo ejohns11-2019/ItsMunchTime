@@ -92,7 +92,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <div>
-        <Menu pointing secondary inverted style={{backgroundColor: '#0f4c5c'}}>
+        <Menu stackable pointing secondary inverted style={{backgroundColor: '#0f4c5c'}}>
           <Link to='/'>
             <Menu.Item
               name='home'
