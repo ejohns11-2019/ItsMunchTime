@@ -65,7 +65,7 @@ class Order extends Component {
         <Grid.Column width={16}>
         <Button
           icon
-          style={{backgroundColor: "#0f4c5c", color: "white", width: "400px" }}
+          style={{backgroundColor: "#0f4c5c", color: "white", width: "100%" }}
           onClick={() => this.toggleEdit()}
           >
           { this.state.editing ? 'Cancel'
