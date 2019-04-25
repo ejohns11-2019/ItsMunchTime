@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Icon, Button, Form } from 'semantic-ui-react';
+import { Icon, Button, Form, Grid } from 'semantic-ui-react';
 import { AuthConsumer } from '../../providers/AuthProvider';
 import axios from 'axios';
 import OrderFormUser from './OrderFormUser';
@@ -44,7 +44,8 @@ class Order extends Component {
     if (order.user_id === user.id){
       this.props.setCurrentUserOrderId(order)
     return (
-      <>
+   
+        <Grid width={8}>
         {/* <h2>Order Number: {order.id}</h2> */}
         <h2 className='restaurant'>Restaurant: {order.rest_name}</h2>
         <a href={order.menu} target="_blank"><Button>View Menu</Button></a><br/><br/>
@@ -66,9 +67,9 @@ class Order extends Component {
 
         </Button>
         </Form>
-
-      </>
-    )}else{
+        </Grid>
+    )
+  } else{
       return(
         <div>
           {/* No Match */}
