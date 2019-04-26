@@ -8,3 +8,12 @@
   border-top-color: #db2727;
   padding: 1em;
 }
+.edit-button{
+  width: 400px;
+}
+
+@media only screen and (max-width: 992px) {
+  .edit-button{
+    width: 268px;
+  }
+}

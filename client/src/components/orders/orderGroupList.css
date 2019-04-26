@@ -5,3 +5,15 @@
 .restaurant {
   margin-top: 0;
 }
+#new-btn, #archive-btn {
+  width: 100px;
+  padding-right: 17px !important;
+}
+
+@media only screen and (max-width: 550px) {
+  #new-btn, #archive-btn {
+      width: 328px;
+      padding-right: 17px !important;
+      margin: .5rem;
+  }
+}

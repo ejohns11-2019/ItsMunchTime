@@ -102,12 +102,19 @@ setCurrentUserOrderId = (currentUserorder) => {
                   })
                 }
               </Table>
-              {user.admin && <Button size='large' animated='vertical' style={{color:"#ff6e00"}} onClick={this.toggleReset}><Button.Content hidden>Archive</Button.Content><Button.Content visible> <Icon name='archive' fitted color='white'/></Button.Content></Button>}
+              
+              {user.admin && <Button id="archive-btn" size='large' animated='vertical' style={{color:"#ff6e00"}} onClick={this.toggleReset}><Button.Content hidden>Archive</Button.Content>
+              
+              <Button.Content visible> <Icon name='archive' fitted color='white'/></Button.Content></Button>}
+
               {user.admin && <Link to='/new_order'>
-                <Button size='large' animated='horizontal' style={{backgroundColor: "#0f4c5c", color: "white" }}><Button.Content hidden>New</Button.Content><Button.Content visible><Icon name='plus'/></Button.Content></Button>
+                <Button size='large' id="new-btn" animated='horizontal' style={{backgroundColor: "#0f4c5c", color: "white" }}><Button.Content hidden>New</Button.Content>
+                
+                <Button.Content visible><Icon name='plus'/></Button.Content></Button>
               </Link> }
+              
             </Grid.Column>
-          </Grid.Row>
+            </Grid.Row>
         </Grid>
       </div>
     )
