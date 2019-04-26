@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Icon, Container} from "semantic-ui-react";
+import { Form, Button, Icon, Container, Grid, Divider } from "semantic-ui-react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import axios from 'axios';
 import './orderFormAdmin.css'
@@ -28,7 +28,7 @@ class OrderFormAdin extends Component {
     if (restaurant !== null) {
       alert('Order in Progress')
     } else {
-      const { current, orderDate, ticket, r_id  } = this.state
+      const { current, orderDate, ticket, r_id } = this.state
       const order_date = orderDate
       const restaurant_id = r_id
 
@@ -40,7 +40,7 @@ class OrderFormAdin extends Component {
         .catch(err => {
           console.log(err);
         })
-      this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '', current_exists: ''})
+      this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '', current_exists: '' })
     }
   }
 
@@ -82,65 +82,65 @@ class OrderFormAdin extends Component {
       .catch(err => {
         console.log(err)
       });
-      this.getPeopleNotInOrder()
+    this.getPeopleNotInOrder()
   }
 
   getPeopleNotInOrder() {
     axios.get('api/users_not_in_order')
-      .then(res=> {
-      this.setState({users_not_included: res.data})
-      const { users_not_included, usersOptions } = this.state
-      users_not_included.map(u => {
-        var temp = usersOptions;
-        temp.push({ key: u.id, text: u.first_name + ' ' + u.last_name, value: u.id })
-        this.setState({ usersOptions: temp })
+      .then(res => {
+        this.setState({ users_not_included: res.data })
+        const { users_not_included, usersOptions } = this.state
+        users_not_included.map(u => {
+          var temp = usersOptions;
+          temp.push({ key: u.id, text: u.first_name + ' ' + u.last_name, value: u.id })
+          this.setState({ usersOptions: temp })
         })
       })
   }
 
   addPersonToOrder = (e) => {
     e.preventDefault();
-    axios.post('api/add_person_to_order', {params: {user_id: this.state.added_user}})
+    axios.post('api/add_person_to_order', { params: { user_id: this.state.added_user } })
       .then(res => {
         if (res.data.length != 0)
-        alert("User has been added to order");
-        this.setState({ added_user: '', usersOptions: [], users_not_included: []})
-        this.componentDidMount() 
+          alert("User has been added to order");
+        this.setState({ added_user: '', usersOptions: [], users_not_included: [] })
+        this.componentDidMount()
       })
   }
 
   deleteOrder() {
     axios.delete('/api/delete_orders')
-    .then(res => {
-      alert(res.data.message)
-      window.location.reload()
-      this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '', current_exists: ''})
-    })
-    .catch( err => {
-      alert(err.response.data.message)
-    })
+      .then(res => {
+        alert(res.data.message)
+        window.location.reload()
+        this.setState({ orderDate: '', restaurant: '', restaurants: [], restaurantData: [], r_id: '', current_exists: '' })
+      })
+      .catch(err => {
+        alert(err.response.data.message)
+      })
   }
 
   render() {
 
-    const { 
-      restaurantData, 
-      orderDate, 
-      restaurant, 
+    const {
+      restaurantData,
+      orderDate,
+      restaurant,
       current_exists,
       current_rest,
       current_order_date,
       added_user,
       usersOptions
-      } = this.state
+    } = this.state
 
     if (current_exists == false) {
       return (
-        
+
         <>
           <br />
           <Form onSubmit={this.handleSubmit}>
-            <Form.Group widths="equal">
+            <Form.Group id='create-order' widths="equal">
               <Form.Dropdown
                 label='Select Restaurant'
                 placeholder="Restaurants"
@@ -161,7 +161,7 @@ class OrderFormAdin extends Component {
                 value={orderDate}
                 required
               />
-              <Form.Button color="blue">Create Order</Form.Button>
+              <Form.Button style={{backgroundColor: "#0f4c5c", color: "white" }}>Create Order</Form.Button>
             </Form.Group>
           </Form>
           <br />
@@ -170,39 +170,51 @@ class OrderFormAdin extends Component {
     } else {
       return (
         <>
-        <Container style={{padding: '40px' }}>
-          <p>Order currently in progress, please archive order to set new resturant.</p>
-          <h1>Current Order: </h1>
-          <p>Restaurant: {current_rest}</p>
-          <p>Order Date: {current_order_date}</p>
-          <Button
-            icon
-            color="red"
-            size="medium"
-            style={{ marginBottom: "15px", }}
-            onClick = {() => this.deleteOrder()}
-          >
-            Delete  <Icon name="trash" />
-          </Button>
-        </Container>
-
-          <Form onSubmit={this.addPersonToOrder}>
-            <Form.Group id="add-user" widths="equal">
-              <Form.Dropdown
-                label='Select User To Add'
-                placeholder="Users"
-                required
-                fluid
-                search
-                selection
-                name='added_user'
-                value={added_user}
-                options={usersOptions}
-                onChange={this.handleChange}
-              />
-            <Form.Button color="green">Add User</Form.Button>
-            </Form.Group>
-          </Form>
+          <Grid stackable>
+            <Grid.Row stretched>
+              <Grid.Column width={10}>
+                <Container style={{ paddingTop: '30px' }}>
+                  <p>Order currently in progress. You can archive or delete order and create a new one.</p>
+                  <h3>Current Order: </h3>
+                  <p>Restaurant: {current_rest}</p>
+                  <p>Order Date: {current_order_date}</p>
+                  <Button
+                    icon
+                    color="red"
+                    size="medium"
+                    onClick={() => this.deleteOrder()}
+                  >
+                    Delete  <Icon name="trash" />
+                  </Button>
+                </Container>
+              </Grid.Column>
+            </Grid.Row>
+            <Divider />
+            <Grid.Row>
+              <Grid.Column width={10}>
+                <Container>
+                  <p>To add a new user to a current order, you can select a user from the drop down picker and click 'Add User' button.</p>
+                  <Form onSubmit={this.addPersonToOrder} style={{marginBottom: '30px'}}>
+                    <Form.Group id="add-user" widths="equal">
+                      <Form.Dropdown
+                        label='Select User:'
+                        placeholder="Users"
+                        required
+                        fluid
+                        search
+                        selection
+                        name='added_user'
+                        value={added_user}
+                        options={usersOptions}
+                        onChange={this.handleChange}
+                      />
+                      <Form.Button size="medium" style={{backgroundColor: "#0f4c5c", color: "white" }}>Add User</Form.Button>
+                    </Form.Group>
+                  </Form>
+                </Container>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </>
       )
     }
