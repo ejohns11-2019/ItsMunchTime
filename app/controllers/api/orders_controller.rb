@@ -37,7 +37,8 @@ class Api::OrdersController < ApplicationController
     end
 
     def restaurant_history
-      render json: Order.restaurant_history(params[:restaurant_id])
+      render json: Order.restaurant_history(params[:restaurant_id], params[:column], params[:direction])
+      # binding.pry
     end
 
     def restaurant_visit_counter
