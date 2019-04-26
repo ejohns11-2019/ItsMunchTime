@@ -5,6 +5,7 @@ import {Link } from 'react-router-dom';
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { withRouter, } from 'react-router-dom';
 import './restaurants.css';
+import './restaurant.css';
 import Burger from '../../images/food/burger.jpg';
 import Healthy from '../../images/food/healthy.jpg';
 import Pizza from '../../images/food/pizza.jpg';
@@ -80,6 +81,7 @@ class Restaurant extends React.Component {
       return (
         <>
           { this.state.editing ? this.restaurantEdit() : this.restaurantView() }
+          <div class="btn-wrap">
           <Button
             icon
             style={{backgroundColor: "#0f4c5c", color: "white" }}
@@ -101,13 +103,14 @@ class Restaurant extends React.Component {
             <Icon name ="trash" />
           </Button>
           <Link
-            color="red"
+            className="history-btn"
             style={{ margin: "15px", }}
             to={{
               pathname: "/restaurant_history",
               state: {restId: this.props.id}
             }}
           >History</Link>
+          </div>
         </>
       )
     } else {

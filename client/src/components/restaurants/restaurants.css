@@ -1,5 +1,6 @@
 .restaurants {
   margin-top: 40px;
+  margin-bottom: 25px;
 }
 
 .restaurants ul {
@@ -8,4 +9,10 @@
 .form-disclaimer {
   margin-bottom: 10px !important;
   text-align: right;
+}
+#restaurant-list {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }

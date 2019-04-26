@@ -1,3 +1,6 @@
 .profiles {
   margin-top: 40px;
 }
+#profile-submit-btn, #profile-submit-btn-2{
+  background-color: #104c5c;
+}

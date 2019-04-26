@@ -37,7 +37,7 @@ getUsers = () => {
          const { users, userData} = this.state
          users.map( r => {
            var temp = userData;
-           temp.push({ key: r.id, text: r.first_name + r.last_name, value: r.id})
+           temp.push({ key: r.id, text: r.first_name + " " + r.last_name, value: r.id})
            this.setState({userData: temp})
        })})
       .catch( err => {

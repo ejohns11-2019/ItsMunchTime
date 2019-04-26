@@ -1,0 +1,16 @@
+a.history-btn {
+  color: #104c5c;
+  border: 1px solid #104c5c;
+  padding: .5em;
+  border-radius: 5px;
+}
+a.history-btn:hover {
+color: #ff6e00;
+border: 1px solid #ff6e00;
+}
+.btn-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

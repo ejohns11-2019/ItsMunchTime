@@ -179,7 +179,7 @@ class EditProfile extends React.Component {
             options={adminOptions}
             />
         <Segment textAlign='center' basic>
-          <Button primary type='submit'>Submit</Button>
+          <Button primary type='submit' id="profile-submit-btn-2">Submit</Button>
         </Segment>
       </Form>
   )

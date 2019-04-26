@@ -160,7 +160,7 @@ class MyProfile extends Component {
 
 
           <Segment textAlign='center' basic>
-            <Button primary type='submit'>Submit</Button>
+            <Button primary type='submit' id="profile-submit-btn">Submit</Button>
           </Segment>
         </Form>
     )
