@@ -117,13 +117,16 @@ class Restaurant extends React.Component {
       return(
       <>
         {this.restaurantView()}
+        <div id="historybtn">
         <Link
-          style={{ marginLeft: "15px", color: "#0f4c5c", }}
+          className="history-btn"
+          style={{ marginLeft: "15px" }}
           to={{
             pathname: "/restaurant_history",
             state: {restId: this.props.id}
           }}
         >History</Link>
+        </div>
       </>
       )
     }

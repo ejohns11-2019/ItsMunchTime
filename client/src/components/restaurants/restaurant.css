@@ -13,4 +13,13 @@ border: 1px solid #ff6e00;
   justify-content: center;
   align-items: center;
 }
+#historybtn{
+  margin: 1rem;
+  text-align: center;
+}
 
+.history-btn{
+  margin-left: 0px !important ;
+  text-transform: uppercase;
+  text-align: center;
+}
