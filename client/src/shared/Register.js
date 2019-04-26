@@ -112,7 +112,7 @@ class Register extends React.Component {
 
 
           <Segment textAlign='center' basic>
-            <Button primary type='submit'>Submit</Button>
+            <Button primary type='submit'style={{backgroundColor: "#0f4c5c", color: "white", width: "100%" }}>Submit</Button>
           </Segment>
         </Form>
       </Segment>

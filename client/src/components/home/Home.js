@@ -5,7 +5,7 @@ import { Container, } from 'semantic-ui-react';
 import OrderList from '../orders/OrderGroupList';
 import OrderHistory from '../orders/OrderHistory';
 import './home.css';
-import Image from '../../images/Screen Shot 2019-04-23 at 6.29.27 PM.png'
+
 
 
 
