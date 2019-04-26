@@ -188,7 +188,7 @@ class MyProfile extends Component {
              />
           </Form>
           <Segment textAlign='center' basic>
-            <Button type='submit' color='yellow'>Change Administrator Status</Button>
+            <Button type='submit' style={{color: "#ff6e00"}}>Change Administrator Status</Button>
           </Segment>
         </>
       )
@@ -206,7 +206,7 @@ class MyProfile extends Component {
     return (
       <Container>
         <Divider hidden />
-        <Grid>
+        <Grid stackable>
           <Grid.Row>
             { editing ? this.adminCheck() : this.profileView()}
             <Grid.Column>

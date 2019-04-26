@@ -22,7 +22,7 @@ class UserProfile extends Component {
     const { auth: { deleteUser, }, } = this.props;
     return(
       <Container >
-        <Grid>
+        <Grid stackable>
           <Grid.Row>
       <Fragment>
         <Grid.Column width={4}>
