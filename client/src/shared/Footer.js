@@ -8,9 +8,9 @@ const Footer = () => (
   <footer style={{ padding: '5em 0em', backgroundColor: '#0f4c5c' }}> 
     <Segment vertical>
     <Container>
-      <Grid divided stackable>
+      <Grid divided>
         <Grid.Row>
-          <Grid.Column width={3}>
+          <Grid.Column width={4}>
             <Link to='/about'>
               <Header as='h4' content='About' inverted />
             </Link>
@@ -20,7 +20,7 @@ const Footer = () => (
               </Link>
             </List>
           </Grid.Column>
-          <Grid.Column width={3}>
+          <Grid.Column width={4}>
             <Header as='h4' content='' />
             <List link>
               <List.Item as='a'></List.Item>
@@ -29,7 +29,7 @@ const Footer = () => (
               <List.Item as='a'></List.Item>
             </List>
           </Grid.Column>
-          <Grid.Column width={7}>
+          <Grid.Column width={8}>
             <Header as='h4' inverted>
               Munch Time
             </Header>
