@@ -11,9 +11,25 @@
 .edit-button{
   width: 400px;
 }
+#menu-link button{
+  color: rgb(255, 110, 0);
+}
 
 @media only screen and (max-width: 992px) {
   .edit-button{
     width: 268px;
   }
+}
+@media only screen and (max-width: 550px) {
+  #iframe-wrap{
+    display: none;
+  }
+  #menu-link{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
 }

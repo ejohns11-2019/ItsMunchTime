@@ -45,14 +45,14 @@ class Order extends Component {
     return (
    
         <Grid width={16} id="menu">
-        <Grid.Column width={16}>
-        <h2 className='restaurant'>Today's lunch will be from: {order.rest_name}</h2>
+        <Grid.Column width={16} id="menu-link">
+        <h2 className='restaurant'>Today's lunch will be from:<br/> {order.rest_name}</h2>
         <a href={order.menu} target="_blank"><Button>View Menu</Button></a><br/>
         </Grid.Column>
-        <Grid.Column width={16}>
-        <iframe src={order.menu} width="100%" height="400">
-          <a href={order.menu} target="_blank"><h2>View Menu</h2> </a>
-        </iframe>
+        <Grid.Column width={16} id="iframe-wrap">
+          <iframe src={order.menu} width="100%" height="400">
+            <a href={order.menu} target="_blank"><h2>View Menu</h2> </a>
+          </iframe>
         </Grid.Column>
         <Grid.Column width={16}>
         <h2>Current Order Ticket: {this.props.ticket}</h2>
